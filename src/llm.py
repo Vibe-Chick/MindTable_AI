@@ -220,6 +220,10 @@ def _stub_value(spec, seed):
         return round(rnd.uniform(lo, hi), 2)
     if t == "boolean":
         return rnd.random() < 0.5
+    if t == "object":
+        return {k: _stub_value(v, seed + i)
+                for i, (k, v) in enumerate(sorted(
+                    spec.get("properties", {}).items()))}
     if t == "array":
         n = spec.get("minItems", 3)
         item = spec.get("items", {})

@@ -51,17 +51,33 @@ def extract_one(row, uid):
     out = llm.call(build_prompt(row), EXTRACTION_SCHEMA,
                    system=prompts.EXTRACT_SYSTEM, temp=0.0,
                    tag="extract:" + uid)
+    scores, evidence, unsupported = {}, {}, []
+    for long, ax in LONG_TO_AXIS.items():
+        node = out[long]
+        quote = (node.get("evidence") or "").strip()
+        sc = int(node["score"])
+        if not quote:
+            # 근거 인용이 없으면 점수를 믿지 않는다. 프롬프트로 부탁하지 않고
+            # 코드에서 강제한다 — 모델은 다른 축 근거를 끌어다 쓰는 경향이 있다.
+            if sc != 3:
+                unsupported.append("%s:%d→3" % (ax, sc))
+            sc = 3
+        scores[ax] = sc
+        evidence[ax] = quote
+
     p = new_profile(
         user_id=uid,
         school=row[COLMAP["school"]].strip(),
         major=row[COLMAP["major"]].strip(),
         college=row[COLMAP["college"]].strip(),
         year=int(row[COLMAP["year"]] or 1),
-        self_report={ax: int(out[long]) for long, ax in LONG_TO_AXIS.items()},
-        interests=out["interests"])
+        self_report=scores,
+        interests=[k.strip() for k in out["interests"] if k.strip()])
     p["name"] = row[COLMAP["name"]].strip()
     p["confidence"] = float(out["confidence"])
-    p["evidence"] = out["evidence"]
+    p["evidence"] = evidence
+    if unsupported:
+        p["unsupported"] = unsupported
     return p
 
 
@@ -102,8 +118,16 @@ def main():
         json.dump(profiles, f, ensure_ascii=False, indent=2)
 
     low = [p["user_id"] for p in profiles if p["confidence"] < 0.5]
+    unsup = [(p["user_id"], p["unsupported"]) for p in profiles
+             if p.get("unsupported")]
+    nkw = [len(p["interests"]) for p in profiles]
     sys.stderr.write("추출 %d/%d 성공\n" % (len(profiles), len(rows)))
     sys.stderr.write("confidence<0.5: %d건 %r\n" % (len(low), low[:10]))
+    sys.stderr.write("관심사 개수 분포: %r\n"
+                     % {n: nkw.count(n) for n in sorted(set(nkw))})
+    if unsup:
+        sys.stderr.write("근거 없는 점수를 3으로 강제한 건 %d: %r\n"
+                         % (len(unsup), unsup[:5]))
     if failed:
         sys.stderr.write("실패 %d건: %r\n" % (len(failed), failed[:5]))
     sys.stderr.write("캐시: %r\n" % (llm.cache_stats(),))

@@ -125,25 +125,36 @@ def validate_profile(p):
 
 # --- LLM 구조화 출력 스키마 ---------------------------------------------
 
+_AXIS_NODE = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "score": {"type": "integer", "minimum": 1, "maximum": 5},
+        # 답변에서 그대로 인용. 근거가 없으면 빈 문자열.
+        # 빈 문자열이면 extract.py 가 점수를 3으로 강제한다 (모델을 믿지 않는다).
+        "evidence": {"type": "string"},
+    },
+    "required": ["score", "evidence"],
+}
+
 EXTRACTION_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
     "properties": {
-        "openness":          {"type": "integer", "minimum": 1, "maximum": 5},
-        "conscientiousness": {"type": "integer", "minimum": 1, "maximum": 5},
-        "extraversion":      {"type": "integer", "minimum": 1, "maximum": 5},
-        "agreeableness":     {"type": "integer", "minimum": 1, "maximum": 5},
-        "neuroticism":       {"type": "integer", "minimum": 1, "maximum": 5},
+        "openness": _AXIS_NODE,
+        "conscientiousness": _AXIS_NODE,
+        "extraversion": _AXIS_NODE,
+        "agreeableness": _AXIS_NODE,
+        "neuroticism": _AXIS_NODE,
+        # 1~4개. 3개 고정이면 근거가 둘뿐일 때 모델이 세 번째를 지어낸다.
         "interests": {
             "type": "array", "items": {"type": "string"},
-            "minItems": 3, "maxItems": 3,
+            "minItems": 1, "maxItems": 4,
         },
-        "evidence":   {"type": "string"},   # 근거 인용. 질의응답 대비
         "confidence": {"type": "number", "minimum": 0, "maximum": 1},
     },
     "required": ["openness", "conscientiousness", "extraversion",
-                 "agreeableness", "neuroticism", "interests",
-                 "evidence", "confidence"],
+                 "agreeableness", "neuroticism", "interests", "confidence"],
 }
 
 _DELTA = {"type": "number", "enum": [-1, -0.5, 0, 0.5, 1]}
