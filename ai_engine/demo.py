@@ -272,17 +272,28 @@ def _run_feedback_demo() -> None:
     # 통과시켜본다. EMA 특성상(매 회차 10% 감쇠) 무한 발산하지 않고 BEHAVIOR_CLIP=1.5
     # 근방에서 포화되는지도 함께 확인한다.
     drifted_profile = dict(profile)
-    drifted_profile["behavior_corrected_vector"] = dict(profile["self_report_vector"])
+    # behavior_corrected_vector 는 '0에서 시작하는 오프셋'이다(INTEGRATION_REPORT §3).
+    # self_report 절대값으로 초기화하면 1회차부터 BEHAVIOR_CLIP(±1.5)에 걸려
+    # 이미 포화된 상태에서 출발하므로, 이 케이스가 검증하려는 EMA 누적 궤적
+    # (0.5 → 0.95 → 1.355 → 1.5)이 전혀 드러나지 않는다.
+    drifted_profile["behavior_corrected_vector"] = {
+        axis: 0.0 for axis in profile["self_report_vector"]
+    }
     max_delta = {"openness": 1.0, "conscientiousness": 0.0, "extraversion": 0.0,
                 "agreeableness": 0.0, "neuroticism": 0.0, "confidence": 1.0,
                 "worked_topics": [], "dead_topics": []}
+    trace = []
     for _ in range(6):
         drifted_profile = apply_delta(drifted_profile, max_delta)
+        trace.append(round(drifted_profile["behavior_corrected_vector"]["openness"], 3))
 
     discrepancy = compute_discrepancy(drifted_profile["self_report_vector"], drifted_profile["behavior_corrected_vector"])
     shift_event = check_discrepancy_threshold(discrepancy)
     print("\n  [케이스 4] openness에 최대 델타를 여러 라운드 EMA 반영시켜 임계값(1.0) 초과 유도")
-    print(f"    누적 후 openness discrepancy: {discrepancy['openness']:.2f} (BEHAVIOR_CLIP=1.5에서 포화)")
+    print(f"    회차별 behavior 오프셋: {trace}")
+    print(f"    누적 후 openness discrepancy: {discrepancy['openness']:.2f} "
+          f"(오프셋은 BEHAVIOR_CLIP=1.5에서 포화하나, discrepancy 는 "
+          f"1~5 척도 상한 때문에 {discrepancy['openness']:.2f}로 보인다)")
     print(f"    profile_shift_event: {shift_event} (True여야 정상)")
 
 
