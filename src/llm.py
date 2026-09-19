@@ -285,13 +285,22 @@ def call(prompt, schema, system=None, temp=0.0, tag=""):
         try:
             result = parse(_post(url, body, headers))
             missing = [k for k in required if k not in result]
-            if missing:
-                # 게이트웨이가 스키마를 무시하면 여기서 걸린다.
-                # 조용히 이상한 값이 파이프라인에 들어가는 것보다 낫다.
+            if missing and len(missing) == len(required):
+                # 하나도 안 맞으면 게이트웨이가 스키마를 통째로 무시한 것.
+                # 재시도해도 같다.
                 raise ParseError(
-                    "스키마 미적용 의심 — 필수 키 누락 %r, 받은 키 %r. "
+                    "스키마 미적용 — 필수 키 전부 누락. 받은 키 %r. "
                     "LLM_STRUCTURED 설정을 확인하라 (probe.py)."
-                    % (missing, sorted(result)[:8]))
+                    % (sorted(result)[:8],))
+            if missing:
+                # 일부만 누락 = 모델 변덕. 한 번은 다시 물어본다.
+                if attempt < MAX_RETRY - 1:
+                    last = ParseError("키 누락 %r" % missing)
+                    time.sleep(1)
+                    continue
+                raise ParseError(
+                    "키 누락이 재시도 후에도 지속: %r (받은 키 %r)"
+                    % (missing, sorted(result)[:10]))
             with open(path, "w", encoding="utf-8") as f:
                 json.dump({"tag": tag, "model": MODEL, "prompt": prompt,
                            "result": result}, f, ensure_ascii=False, indent=2)

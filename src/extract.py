@@ -39,6 +39,15 @@ def load_rows(path):
     return rows
 
 
+def _norm(t):
+    """공백·줄바꿈을 지워서 인용 대조용으로 정규화."""
+    return "".join((t or "").split())
+
+
+def source_text(row):
+    return " ".join(row[COLMAP[k]] or "" for k in ("a1", "a2", "a3", "a4"))
+
+
 def build_prompt(row):
     return prompts.EXTRACT_USER.format(
         a1=row[COLMAP["a1"]].strip() or "(무응답)",
@@ -51,19 +60,35 @@ def extract_one(row, uid):
     out = llm.call(build_prompt(row), EXTRACTION_SCHEMA,
                    system=prompts.EXTRACT_SYSTEM, temp=0.0,
                    tag="extract:" + uid)
-    scores, evidence, unsupported = {}, {}, []
+    src = _norm(source_text(row))
+    scores, evidence, dropped = {}, {}, []
+
     for long, ax in LONG_TO_AXIS.items():
-        node = out[long]
-        quote = (node.get("evidence") or "").strip()
-        sc = int(node["score"])
-        if not quote:
-            # 근거 인용이 없으면 점수를 믿지 않는다. 프롬프트로 부탁하지 않고
-            # 코드에서 강제한다 — 모델은 다른 축 근거를 끌어다 쓰는 경향이 있다.
+        quote = (out.get(long + "_quote") or "").strip()
+        sc = int(out[long])
+        # 인용이 비었거나 답변 원문에 실제로 없으면 점수를 버린다.
+        # 모델은 요약을 인용이라고 내놓는 경향이 있는데, 그건 근거가 아니다.
+        grounded = bool(quote) and _norm(quote) in src
+        if not grounded:
             if sc != 3:
-                unsupported.append("%s:%d→3" % (ax, sc))
-            sc = 3
+                dropped.append("%s:%d→3%s" % (ax, sc, "" if not quote
+                                              else "(인용불일치)"))
+            sc, quote = 3, ""
         scores[ax] = sc
         evidence[ax] = quote
+
+    kws, kq = out.get("interests") or [], out.get("interest_quotes") or []
+    interests, kw_ev = [], {}
+    for i, k in enumerate(kws):
+        k = (k or "").strip()
+        q = (kq[i] if i < len(kq) else "").strip()
+        if not k:
+            continue
+        if not q or _norm(q) not in src:
+            dropped.append("관심사 '%s' 근거없음→제거" % k)
+            continue
+        interests.append(k)
+        kw_ev[k] = q
 
     p = new_profile(
         user_id=uid,
@@ -72,12 +97,13 @@ def extract_one(row, uid):
         college=row[COLMAP["college"]].strip(),
         year=int(row[COLMAP["year"]] or 1),
         self_report=scores,
-        interests=[k.strip() for k in out["interests"] if k.strip()])
+        interests=interests)
     p["name"] = row[COLMAP["name"]].strip()
     p["confidence"] = float(out["confidence"])
     p["evidence"] = evidence
-    if unsupported:
-        p["unsupported"] = unsupported
+    p["interest_evidence"] = kw_ev
+    if dropped:
+        p["dropped"] = dropped
     return p
 
 
@@ -118,16 +144,19 @@ def main():
         json.dump(profiles, f, ensure_ascii=False, indent=2)
 
     low = [p["user_id"] for p in profiles if p["confidence"] < 0.5]
-    unsup = [(p["user_id"], p["unsupported"]) for p in profiles
-             if p.get("unsupported")]
+    unsup = [(p["user_id"], p["dropped"]) for p in profiles
+             if p.get("dropped")]
     nkw = [len(p["interests"]) for p in profiles]
+    if any(n == 0 for n in nkw):
+        sys.stderr.write("!! 관심사 0개인 프로필 있음 — 유사도 계산 불가\n")
     sys.stderr.write("추출 %d/%d 성공\n" % (len(profiles), len(rows)))
     sys.stderr.write("confidence<0.5: %d건 %r\n" % (len(low), low[:10]))
     sys.stderr.write("관심사 개수 분포: %r\n"
                      % {n: nkw.count(n) for n in sorted(set(nkw))})
     if unsup:
-        sys.stderr.write("근거 없는 점수를 3으로 강제한 건 %d: %r\n"
-                         % (len(unsup), unsup[:5]))
+        sys.stderr.write("근거 미달로 버린 항목 %d건:\n" % len(unsup))
+        for uid, ds in unsup[:6]:
+            sys.stderr.write("  %s  %s\n" % (uid, ", ".join(ds)))
     if failed:
         sys.stderr.write("실패 %d건: %r\n" % (len(failed), failed[:5]))
     sys.stderr.write("캐시: %r\n" % (llm.cache_stats(),))

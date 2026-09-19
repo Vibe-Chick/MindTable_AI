@@ -125,36 +125,34 @@ def validate_profile(p):
 
 # --- LLM 구조화 출력 스키마 ---------------------------------------------
 
-_AXIS_NODE = {
-    "type": "object",
-    "additionalProperties": False,
-    "properties": {
-        "score": {"type": "integer", "minimum": 1, "maximum": 5},
-        # 답변에서 그대로 인용. 근거가 없으면 빈 문자열.
-        # 빈 문자열이면 extract.py 가 점수를 3으로 강제한다 (모델을 믿지 않는다).
-        "evidence": {"type": "string"},
-    },
-    "required": ["score", "evidence"],
-}
+_SC = {"type": "integer", "minimum": 1, "maximum": 5}
+_Q = {"type": "string"}
 
+# 평탄한 스키마. 중첩 object 는 haiku 급 모델에서 절반쯤 누락된다(실측).
+# 축마다 점수와 '원문 인용'을 쌍으로 받고, extract.py 가 인용이 실제 답변에
+# 들어있는지 대조한다. 인용이 없거나 원문에 없으면 점수를 3으로 강제한다.
 EXTRACTION_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
     "properties": {
-        "openness": _AXIS_NODE,
-        "conscientiousness": _AXIS_NODE,
-        "extraversion": _AXIS_NODE,
-        "agreeableness": _AXIS_NODE,
-        "neuroticism": _AXIS_NODE,
-        # 1~4개. 3개 고정이면 근거가 둘뿐일 때 모델이 세 번째를 지어낸다.
-        "interests": {
-            "type": "array", "items": {"type": "string"},
-            "minItems": 1, "maxItems": 4,
-        },
+        "openness": _SC,          "openness_quote": _Q,
+        "conscientiousness": _SC, "conscientiousness_quote": _Q,
+        "extraversion": _SC,      "extraversion_quote": _Q,
+        "agreeableness": _SC,     "agreeableness_quote": _Q,
+        "neuroticism": _SC,       "neuroticism_quote": _Q,
+        "interests": {"type": "array", "items": {"type": "string"},
+                      "minItems": 1, "maxItems": 4},
+        # interests 와 같은 길이. 각 키워드의 근거 인용.
+        "interest_quotes": {"type": "array", "items": {"type": "string"},
+                            "minItems": 1, "maxItems": 4},
         "confidence": {"type": "number", "minimum": 0, "maximum": 1},
     },
-    "required": ["openness", "conscientiousness", "extraversion",
-                 "agreeableness", "neuroticism", "interests", "confidence"],
+    "required": ["openness", "openness_quote",
+                 "conscientiousness", "conscientiousness_quote",
+                 "extraversion", "extraversion_quote",
+                 "agreeableness", "agreeableness_quote",
+                 "neuroticism", "neuroticism_quote",
+                 "interests", "interest_quotes", "confidence"],
 }
 
 _DELTA = {"type": "number", "enum": [-1, -0.5, 0, 0.5, 1]}
