@@ -78,6 +78,9 @@ class UserProfile(BaseModel):
     university: Optional[str] = None
     major: Optional[str] = None
     interest_tags: List[str] = Field(default_factory=list)
+    tags: List[str] = Field(default_factory=list)
+    interest_weights: Dict[str, float] = Field(default_factory=dict)
+    confidence: float = 0.0
 
     def to_dataclass(self) -> schemas.UserProfile:
         return schemas.UserProfile(**self.model_dump())
@@ -98,6 +101,8 @@ class MatchGroup(BaseModel):
     members: List[Dict[str, Any]]
     match_reason: Optional[str] = None
     icebreakers: List[str] = Field(default_factory=list)
+    icebreaker_targets: List[List[str]] = Field(default_factory=list)
+    overlap: List[str] = Field(default_factory=list)
 
     def to_dataclass(self) -> schemas.MatchGroup:
         return schemas.MatchGroup(**self.model_dump())
@@ -125,6 +130,13 @@ class MatchCandidate(BaseModel):
     self_report_vector: Dict[str, float]
     behavior_corrected_vector: Optional[Dict[str, float]] = None
     user_id: Optional[str] = None
+    # 통합 이후 추가: matching.py의 유사도 계산은 이제 tags(고정 12종)+interest_weights로
+    # 이루어진다(BRANCH_COMPARISON.md 3.3/schemas.py TAGS 참고). 비워서 보내면
+    # _candidate_to_matching_dict()가 interest_weights 없이 tags만으로 기본 가중 1.0을
+    # 채워 넣는다.
+    tags: List[str] = Field(default_factory=list)
+    interest_weights: Dict[str, float] = Field(default_factory=dict)
+    diversity_beta: float = 0.5
 
 
 class MatchRunRequest(BaseModel):

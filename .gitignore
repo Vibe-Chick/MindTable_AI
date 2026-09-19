@@ -10,6 +10,10 @@ __pycache__/
 *.egg-info/
 .eggs/
 
+# LLM 응답 디스크 캐시 (ai_engine/llm_client.py) - 실행할 때마다 생기는 런타임 산출물이라
+# 커밋하지 않는다. 프롬프트 원문/응답이 들어있어 실데이터 유출 방지 목적도 겸한다.
+cache/
+
 # 가상환경
 venv/
 .venv/

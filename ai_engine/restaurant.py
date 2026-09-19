@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import logging
 import math
+from collections import Counter
 from typing import Any, Dict, List, Optional, Tuple
 
 from .schemas import MatchGroup
@@ -148,9 +149,32 @@ def resolve_restaurant(
 
     chosen = candidates[0]
     return {
-        "restaurant": chosen,
+        "restaurant": _to_card_shape(chosen, members),
         "midpoint": midpoint,
         "budget_range": budget_range,
         "relaxed_steps": relaxed_steps,
         "message": f"{chosen.get('name', '식당')}(으)로 확정되었습니다 (중간지점에서 {chosen['_distance_km']:.2f}km).",
+    }
+
+
+def _to_card_shape(restaurant: Dict[str, Any], members: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """
+    무엇을: jaebin의 좌표 기반 확정 결과(위경도/가격 원 단위 등)를, 김주환 브랜치와
+    프론트엔드가 이미 합의한 FRONTEND.md 카드 계약 {name, category, price, near}
+    형태로도 함께 내려준다.
+
+    왜: 이 좌표/예산 로직(resolve_restaurant)은 jaebin 쪽이 압도적으로 완성도가
+    높아 그대로 채택했지만(BRANCH_COMPARISON.md 3.5), 프론트엔드는 이미 김주환의
+    필드명을 기준으로 카드 UI를 준비하고 있을 수 있다. 로직은 안 바꾸고 출력
+    스키마만 어댑터로 맞춘다 - 기존 필드(lat/lng/price_per_person/_distance_km)는
+    그대로 남겨 두 계약을 동시에 만족시킨다.
+    """
+    near_counts = Counter(m.get("university") for m in members if m.get("university"))
+    near = near_counts.most_common(1)[0][0] if near_counts else None
+    price = restaurant.get("price_per_person")
+    return {
+        **restaurant,
+        "category": restaurant.get("category", "기타"),
+        "price": f"{price / 10000:.1f}만" if price is not None else None,
+        "near": near,
     }

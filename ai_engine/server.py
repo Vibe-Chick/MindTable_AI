@@ -23,7 +23,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from . import api_models, feedback, matching, profile as profile_module, restaurant, schemas, store
+from . import api_models, feedback, llm_client, matching, profile as profile_module, restaurant, schemas, store
 
 logger = logging.getLogger("ai_engine.server")
 
@@ -42,9 +42,35 @@ app.add_middleware(
 
 
 @app.get("/health")
-def health() -> Dict[str, str]:
-    """헬스체크: 서버 프로세스가 떠 있고 요청을 받을 수 있는지만 빠르게 확인한다."""
-    return {"status": "ok"}
+def health() -> Dict[str, Any]:
+    """헬스체크 + 현재 LLM 캐시 모드 상태. 무대 시연 직전 /admin/cache-only로 전환한
+    상태가 실제로 적용됐는지 이 엔드포인트로 바로 확인할 수 있다."""
+    return {
+        "status": "ok",
+        "llm_cache_only": llm_client.CACHE_ONLY,
+        "llm_provider": llm_client.PROVIDER,
+        "llm_configured": llm_client.is_configured(),
+        "cache_entries": llm_client.cache_stats()["entries"],
+    }
+
+
+class CacheOnlyRequest(BaseModel):
+    enabled: bool
+
+
+@app.post("/admin/cache-only")
+def set_cache_only(request: CacheOnlyRequest) -> Dict[str, Any]:
+    """
+    무엇을: 서버를 재시작하지 않고 LLM_CACHE_ONLY 모드를 켜고 끈다.
+
+    왜: 무대 시연 직전 "이제부터 네트워크 요청 절대 금지"로 안전하게 전환하려면
+    프로세스를 내렸다 올리는 것보다 이 스위치 하나로 즉시 전환하는 편이 리스크가
+    적다. 캐시에 없는 프롬프트가 들어오면 llm_client가 LLMError를 던지고, 각
+    엔드포인트는 이를 500으로 응답하되 서버 자체는 죽지 않는다.
+    """
+    llm_client.CACHE_ONLY = request.enabled
+    logger.warning("[/admin/cache-only] LLM_CACHE_ONLY = %s로 전환됨", request.enabled)
+    return {"llm_cache_only": llm_client.CACHE_ONLY}
 
 
 # =====================================================================
@@ -85,6 +111,8 @@ class MatchGroupResult(BaseModel):
     members: List[Dict[str, Any]]
     match_reason: str
     icebreakers: List[str]
+    icebreaker_targets: List[List[str]] = Field(default_factory=list)
+    overlap: List[str] = Field(default_factory=list)
 
 
 class MatchRunResponse(BaseModel):
@@ -95,32 +123,37 @@ class MatchRunResponse(BaseModel):
 def _candidate_to_matching_dict(candidate: api_models.MatchCandidate) -> Dict[str, Any]:
     """
     무엇을: API로 받은 MatchCandidate(자기보고/행동보정 벡터가 분리된 UserProfile 스타일
-    구조)를, matching.py의 personality_similarity/diversity_score/pair_score가 그대로
-    기대하는 "평탄한" dict(openness/conscientiousness/.../neuroticism이 최상위 키)로
-    변환한다.
+    구조)를, matching.py가 그대로 기대하는 "평탄한" dict(openness/.../neuroticism이
+    최상위 키 + tags/interest_weights/diversity_beta)로 변환한다.
 
-    왜 여기서 변환하는가: matching.py는 이미 실제 게이트웨이로 검증이 끝난 로직이라 절대
-    수정하지 않기로 했다. 대신 API 계층에서 UserProfile 스타일 중첩 구조를 matching.py가
-    기대하는 평탄한 구조로 변환해주는 어댑터 역할을 이 함수가 맡는다.
+    왜 여기서 변환하는가: matching.py는 김주환 브랜치 이식으로 이미 검증이 끝난 로직이라
+    API 계층에서 UserProfile 스타일 중첩 구조를 matching.py가 기대하는 평탄한 구조로
+    변환해주는 어댑터 역할을 이 함수가 맡는다.
 
-    왜 behavior_corrected_vector를 우선하는가: 리뷰 피드백으로 보정된 벡터가 있다면
-    그게 "실제 식사 자리에서 드러나는 성향"에 더 가깝다(feedback.py 참고). 있으면 그것을
-    매칭 기준으로 쓰고, 없으면(아직 리뷰가 없는 신규 유저) self_report_vector로 폴백한다.
+    왜 self_report + behavior를 더해서 clamp하는가 (통합 이후 수정): behavior_corrected_
+    vector는 절대값이 아니라 self_report_vector에 가산되는 **오프셋**이다(schemas.py
+    UserProfile 참고, ±BEHAVIOR_CLIP=1.5). 리뷰가 없는 신규 유저는 오프셋이 전부 0이라
+    self_report와 동일한 값이 나오고, 리뷰가 쌓인 유저는 "실제 식사 자리에서 드러나는
+    성향"이 반영된 값이 나온다 - 둘 다 이 한 공식으로 자연스럽게 처리된다.
     """
-    vector = candidate.behavior_corrected_vector or candidate.self_report_vector
+    self_report = candidate.self_report_vector
+    behavior = candidate.behavior_corrected_vector or {t: 0.0 for t in schemas.BIG_FIVE_TRAITS}
     flat: Dict[str, Any] = {
         "name": candidate.name,
         "university": candidate.university,
         "major": candidate.major,
         "interest_tags": list(candidate.interest_tags),
+        "tags": list(candidate.tags),
+        "interest_weights": dict(candidate.interest_weights) or {t: 1.0 for t in candidate.tags},
+        "diversity_beta": candidate.diversity_beta,
     }
     if candidate.user_id:
         flat["user_id"] = candidate.user_id
 
     for trait in schemas.BIG_FIVE_TRAITS:
-        if trait not in vector:
-            raise ValueError(f"'{candidate.name}'의 성격 벡터에 '{trait}' 축이 없습니다.")
-        flat[trait] = vector[trait]
+        if trait not in self_report:
+            raise ValueError(f"'{candidate.name}'의 self_report_vector에 '{trait}' 축이 없습니다.")
+        flat[trait] = max(1.0, min(5.0, float(self_report[trait]) + float(behavior.get(trait, 0.0))))
     return flat
 
 
@@ -167,6 +200,8 @@ def run_match_endpoint(request: api_models.MatchRunRequest) -> MatchRunResponse:
             members=[_strip_internal_keys(m) for m in g["members"]],
             match_reason=g["match_reason"],
             icebreakers=g["icebreakers"],
+            icebreaker_targets=g.get("icebreaker_targets", []),
+            overlap=g.get("overlap", []),
         )
         for g in results
     ]

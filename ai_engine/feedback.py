@@ -3,369 +3,341 @@ ai_engine/feedback.py
 =======================
 리뷰 기반 프로필 보정 파이프라인.
 
-식사 후 남긴 리뷰(자유서술 3개 + 강제선택 1개)를 분석해, 온보딩 때 확정된
-self_report_vector는 건드리지 않고 별도의 behavior_corrected_vector와 diversity_beta만
-점진적으로 보정한다.
+통합 결정(INTEGRATION_REPORT.md)에 따라 김주환 브랜치의 `AI/src/review.py`를
+이식했다. jaebin 원안 대비 두 가지가 핵심적으로 다르다:
 
-파이프라인 개요:
-    1) parse_review              : 리뷰 원본 답변 -> 자유서술/강제선택 분리
-    2) extract_delta              : 자유서술 + 자기보고 벡터 -> 축별 델타(-1~1) + 근거 인용 (LLM)
-    3) clip_delta                 : 델타에 학습률을 곱하고 누적 상한으로 clip
-    4) update_behavior_vector     : behavior_corrected_vector에만 델타 누적 반영
-    5) update_diversity_beta      : 강제선택 답변으로 다양성 선호도 β 조정
-    6) compute_discrepancy        : self_report_vector와 behavior_corrected_vector의 축별 차이
-    7) check_discrepancy_threshold: 괴리가 임계값을 넘으면 "프로필 이동 이벤트" 트리거
-    8) handle_review_timeout      : 미제출/반복 실패 시 델타 0으로 안전하게 스킵
-    9) run_feedback_pipeline      : 위 전체를 순서대로 실행하는 오케스트레이션 함수
+1) EMA(지수이동평균) 감쇠 기반 보정. jaebin 원안은 "누적 + 상한 클립"이라 한 번
+   상한 근처까지 가면 반대 방향 신호가 없는 한 계속 그 근처에 머물렀다(일시적
+   노이즈가 영구 편향으로 남을 위험). 김주환 브랜치는 매 회차 기존 값을 10%씩
+   감쇠시킨 뒤 새 신호를 더해, 일관된 신호만 누적되고 1회성 잡음은 자연히
+   사라지게 한다. 이 감쇠율은 숨은 정답 시뮬레이션(AI/src/tune.py 그리드서치)으로
+   검증된 값이다.
+2) **관심사 가중치 학습 루프**. jaebin 원안은 리뷰가 Big Five와 diversity_beta만
+   갱신하고 interest_tags/관심사 유사도 계산 공간은 온보딩 이후 한 번도 갱신하지
+   않았다(BRANCH_COMPARISON.md 3.6에서 지적된 핵심 결함). 이번 이식으로 리뷰에서
+   "실제로 대화가 통한 주제/죽은 주제"를 추출해 profile["interest_weights"]를
+   직접 갱신하고, 이 값이 matching.py의 유사도 계산에 곧바로 반영된다 - 매칭이
+   참조하는 유사도 공간이 회차를 거듭할수록 실제 경험을 반영하도록 닫힌 루프를
+   완성한다.
 
-개인정보 최소 보관 원칙:
-    리뷰 자유서술 원문은 extract_delta 호출 한 번에만 쓰이고, update_behavior_vector 처리가
-    끝나면 폐기된다. 프로필에 영구히 남는 것은 원문에서 파생된 숫자(delta)뿐이며, 사용자가
-    실제로 작성한 문장 자체는 이 파이프라인을 통과한 뒤 어디에도 저장하지 않는다.
-
-profile dict 형태:
-    이 모듈의 함수들은 UserProfile(ai_engine.schemas)을 dataclasses.asdict()한 형태의
-    dict를 주고받는다:
-        {
-          "self_report_vector": {"openness": 4.0, ...},
-          "behavior_corrected_vector": {"openness": 4.0, ...},
-          "diversity_beta": 0.5,
-          ... (name/university/major/interest_tags 등 부가 필드는 그대로 보존)
-        }
+개인정보 최소 보관 원칙(jaebin 원안 유지): 리뷰 원문(자유서술 텍스트)은
+extract_delta 호출 한 번에만 쓰이고, apply_delta 처리가 끝나면 폐기된다.
+프로필에 영구히 남는 것은 원문에서 파생된 숫자(delta, 가중치)뿐이다.
 """
 
 from __future__ import annotations
 
-import json
 import logging
 from typing import Any, Dict, List, Optional
 
-from .json_utils import _extract_json_object
-from .llm_client import _call_llm, _get_chat_backend
-from .schemas import BIG_FIVE_TRAITS
+from . import llm_client
+from .schemas import BIG_FIVE_TRAITS, TAGS
 
 logger = logging.getLogger("ai_engine.feedback")
 
-MAX_DELTA_ATTEMPTS = 3  # 최초 시도 1회 + 재시도 2회 (스펙: "최대 2회까지 재요청")
 REVIEW_TIMEOUT_HOURS = 24.0
 MAX_REVIEW_FAILURES = 2
 
-DELTA_SYSTEM_PROMPT = """당신은 성격심리학 전문가입니다. 사용자가 방금 끝난 랜덤 식사 모임에 대해
-남긴 후기(자유서술 3개)를 보고, 이번 경험이 그 사람의 실제 행동 성향을 자기보고 점수 대비
-어느 방향으로, 얼마나 움직였는지를 추정합니다.
+# --- 보정 루프 튜닝 상수 (김주환 브랜치 AI/src/schema.py 그리드서치 결과 이식) ---
+LR = 0.5                # 델타 학습률
+BEHAVIOR_CLIP = 1.5     # 누적 보정 상한
+BEHAVIOR_DECAY = 0.10   # 회차마다 기존 보정을 이만큼 감쇠시킨다
+DIVERGENCE_THRESHOLD = 1.0
 
-이미 가지고 있는 자기보고 성격 점수(1~5, Big Five)를 참고하되, 그 값을 직접 바꾸지 말고
-"이번 경험이 시사하는 조정 방향과 크기"만 -1.0~+1.0 사이 델타로 추정하세요. 예를 들어
-자기보고 개방성이 2였는데 후기에서 "낯선 사람과 새로운 걸 시도해서 좋았다"는 내용이
-강하게 드러나면 openness delta는 양수(+)여야 합니다.
+BETA_STEP = 0.15
+BETA_MIN, BETA_MAX = 0.1, 0.9
 
-각 축마다 그 델타를 뒷받침하는 후기 원문에서 그대로 발췌한 인용구(quote)도 함께 제시하세요.
-근거가 될 만한 문장이 없으면 quote는 빈 문자열("")로 하고 delta는 0에 가깝게 잡으세요.
+INTEREST_UP = 0.45      # 대화가 터진 주제 가중 상승
+INTEREST_DOWN = 0.30    # 죽은 주제 가중 하락
+INTEREST_DECAY = 0.08   # 회차마다 1.0 쪽으로 수축
+INTEREST_NEW = 0.25     # 새 태그 초기 가중
+INTEREST_MIN, INTEREST_MAX = 0.0, 2.0
+INTEREST_DROP = 0.05    # 이 미만이면 목록에서 제거
 
-반드시 아래 JSON 형식으로만 응답하세요. 다른 텍스트는 절대 포함하지 마세요. 응답의 첫
-글자는 반드시 여는 중괄호로 시작하고 마지막 글자는 반드시 닫는 중괄호로 끝나야 합니다.
+Q4_MORE_SIMILAR = "더 비슷"
+Q4_SAME = "지금 정도"
+Q4_MORE_DIFFERENT = "더 달라도 됨"
 
-{
-  "openness": {"delta": -1.0~1.0 사이 숫자, "quote": "근거 문장 또는 빈 문자열"},
-  "conscientiousness": {"delta": ..., "quote": "..."},
-  "extraversion": {"delta": ..., "quote": "..."},
-  "agreeableness": {"delta": ..., "quote": "..."},
-  "neuroticism": {"delta": ..., "quote": "..."}
+
+def _clamp(v: float, lo: float, hi: float) -> float:
+    return max(lo, min(hi, v))
+
+
+# --- 델타 스키마/프롬프트 ----------------------------------------------------
+
+_DELTA_STEP = {"type": "number", "enum": [-1, -0.5, 0, 0.5, 1]}
+_TOPIC_LIST = {"type": "array", "items": {"type": "string", "enum": list(TAGS)},
+               "minItems": 0, "maxItems": 3}
+
+DELTA_SCHEMA: Dict[str, Any] = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "openness": _DELTA_STEP, "conscientiousness": _DELTA_STEP,
+        "extraversion": _DELTA_STEP, "agreeableness": _DELTA_STEP,
+        "neuroticism": _DELTA_STEP,
+        "worked_topics": _TOPIC_LIST,
+        "dead_topics": _TOPIC_LIST,
+        "evidence": {"type": "string"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    },
+    "required": ["openness", "conscientiousness", "extraversion", "agreeableness",
+                 "neuroticism", "worked_topics", "dead_topics", "evidence", "confidence"],
 }
 
-### 예시
-자기보고 성격 점수: {"openness": 2, "conscientiousness": 4, "extraversion": 2, "agreeableness": 4, "neuroticism": 3}
-후기:
-- r1: "낯선 전공 사람들이랑 얘기하는 게 생각보다 재밌었고, 다음엔 더 새로운 모임에도 나가보고 싶어요."
-- r2: "그래도 낯가림 때문에 처음엔 많이 긴장했어요."
-- r3: "다들 친절해서 편하게 얘기할 수 있었어요."
+REVIEW_SYSTEM_PROMPT = """\
+너는 식사 모임 후기를 읽고 참가자 '본인'의 프로필 보정값을 산출한다.
 
-출력:
-{"openness": {"delta": 0.4, "quote": "다음엔 더 새로운 모임에도 나가보고 싶어요"}, "conscientiousness": {"delta": 0.0, "quote": ""}, "extraversion": {"delta": 0.2, "quote": "다들 친절해서 편하게 얘기할 수 있었어요"}, "agreeableness": {"delta": 0.1, "quote": "다들 친절해서"}, "neuroticism": {"delta": -0.1, "quote": "처음엔 많이 긴장했어요"}}
+중요: 상대방을 평가하지 않는다. 후기를 쓴 사람 본인의 기존 프로필이 실제
+행동과 얼마나 어긋났는지만 판단한다.
+
+보정값 기준:
+- 0이 기본값이다. 후기에 근거가 없으면 0을 준다.
+- 기존 점수와 같은 방향의 행동이 확인되면 0 (이미 맞으므로 고칠 필요 없음).
+- 기존 점수와 다른 방향의 행동이 확인될 때만 그 방향으로 보정한다.
+- **기존 점수와 정면으로 어긋나는 행동이 후기에 적혀 있으면 ±1을 준다.**
+  예: 외향성 2점인 사람이 "제가 말을 제일 많이 했어요" -> extraversion +1
+  예: 외향성 5점인 사람이 "거의 듣기만 했어요" -> extraversion -1
+- ±0.5는 방향은 보이지만 약한 경우에만.
+- evidence에 근거가 된 후기 원문을 인용한다.
+
+confidence 척도 (이 값이 보정 크기를 그대로 곱한다):
+- 0.8~1.0: 후기에서 그대로 인용할 수 있는 행동 서술이 있다
+- 0.4~0.7: 암시는 되지만 해석이 필요하다
+- 0.0~0.3: "재밌었어요" 수준이라 읽을 게 거의 없다
+
+worked_topics/dead_topics:
+- worked_topics: 실제로 대화가 터진 주제를 정해진 태그 목록에서 최대 3개.
+  자리에서 실제로 오간 얘기만. 프로필의 기존 관심사를 베끼지 마라.
+- dead_topics: 말이 끊겼다고 언급된 주제를 태그로. 없으면 빈 배열.
+- 근거가 없으면 빈 배열을 준다. 추측해서 채우지 마라.
+
+반드시 위 스키마의 JSON으로만 응답하라.
+"""
+
+REVIEW_USER_TEMPLATE = """\
+[기존 프로필] 개방성 {openness} / 성실성 {conscientiousness} / 외향성 {extraversion} / \
+우호성 {agreeableness} / 신경성 {neuroticism}
+
+[r1] 대화가 제일 잘 풀린 순간과 그때 무슨 얘기 중이었는지
+{r1}
+
+[r2] 말이 끊기거나 어색했던 주제
+{r2}
+
+[r3] 본인은 주로 이끄는 쪽이었는지 듣는 쪽이었는지
+{r3}
 """
 
 
 def parse_review(raw_answers: Dict[str, Any]) -> Dict[str, Any]:
     """
-    무엇을: 식사 후 리뷰 설문 원본 답변(자유서술 3개 r1~r3 + 강제선택 1개 r4_choice)을
-    자유서술 텍스트 리스트와 강제선택 답변으로 분리해 반환한다.
-
-    왜: extract_delta는 자유서술 텍스트만 LLM에 넘겨 성격 델타를 추론하고, 강제선택 답변은
-    별도로 update_diversity_beta가 규칙 기반으로 처리한다. 두 흐름이 쓰는 재료가 다르므로
-    입력 단계에서 미리 분리해두면 이후 함수들의 인터페이스가 각자 필요한 데이터만 받도록
-    깔끔해진다.
+    무엇을: 리뷰 원본 답변(자유서술 3개 r1~r3 + 강제선택 1개 r4_choice)을 자유서술
+    텍스트 리스트와 강제선택 답변으로 분리한다.
+    왜: extract_delta는 자유서술 텍스트만 필요하고, 다양성 β 갱신은 강제선택
+    답변만 필요하다.
     """
-    free_text = [
-        str(raw_answers.get("r1", "")),
-        str(raw_answers.get("r2", "")),
-        str(raw_answers.get("r3", "")),
-    ]
+    free_text = [str(raw_answers.get("r1", "")), str(raw_answers.get("r2", "")),
+                str(raw_answers.get("r3", ""))]
     forced_choice = str(raw_answers.get("r4_choice", ""))
     return {"free_text": free_text, "forced_choice": forced_choice}
 
 
-def _build_delta_user_prompt(review_answers: Dict[str, Any], self_report_vector: Dict[str, Any]) -> str:
-    free_text: List[str] = review_answers.get("free_text", [])
-    lines = [f"- r{i + 1}: \"{text}\"" for i, text in enumerate(free_text)]
-    self_report_json = json.dumps(self_report_vector, ensure_ascii=False)
-    return (
-        f"자기보고 성격 점수: {self_report_json}\n"
-        "후기:\n" + "\n".join(lines) + "\n\n위 형식의 JSON으로만 응답해줘."
+def _effective(self_report: Dict[str, float], behavior: Dict[str, float]) -> Dict[str, float]:
+    """실제 매칭에 쓰이는 벡터 = 자기보고 + 행동 보정 (1~5로 clamp)."""
+    return {a: _clamp(self_report.get(a, 3.0) + behavior.get(a, 0.0), 1, 5) for a in BIG_FIVE_TRAITS}
+
+
+def extract_delta(review_answers: Dict[str, Any], self_report_vector: Dict[str, Any],
+                  behavior_corrected_vector: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    무엇을: 리뷰 자유서술 답변 + 현재 유효 벡터(자기보고+행동보정)를 LLM에 전달해
+    Big Five 5축 델타(이산 5단계: -1/-0.5/0/0.5/1) + worked_topics/dead_topics +
+    evidence + confidence를 구조화된 JSON으로 추출한다.
+
+    왜 이산 델타인가: jaebin 원안의 연속값(-1~1) 대신 김주환 브랜치의 5단계
+    이산값을 채택했다 - 모델이 애매한 실수값을 내놓는 것보다 "방향 있음/강하게
+    있음/없음"의 명확한 단계로 판단하게 하는 편이 재현성이 높다(시뮬레이션
+    검증 근거는 schema.py 튜닝 상수 주석 참고).
+    """
+    if not llm_client.is_configured():
+        return {t: 0.0 for t in BIG_FIVE_TRAITS} | {
+            "worked_topics": [], "dead_topics": [], "evidence": "", "confidence": 0.0}
+
+    eff = _effective(self_report_vector, behavior_corrected_vector or self_report_vector)
+    prompt = REVIEW_USER_TEMPLATE.format(
+        openness=round(eff["openness"], 1), conscientiousness=round(eff["conscientiousness"], 1),
+        extraversion=round(eff["extraversion"], 1), agreeableness=round(eff["agreeableness"], 1),
+        neuroticism=round(eff["neuroticism"], 1),
+        r1=review_answers.get("free_text", ["", "", ""])[0].strip() or "(무응답)",
+        r2=review_answers.get("free_text", ["", "", ""])[1].strip() or "(무응답)",
+        r3=review_answers.get("free_text", ["", "", ""])[2].strip() or "(무응답)",
     )
+    return llm_client.call(prompt, DELTA_SCHEMA, system=REVIEW_SYSTEM_PROMPT, temp=0.0,
+                           tag="review")
 
 
-def _validate_delta_response(data: Dict[str, Any]) -> None:
+def apply_delta(profile: Dict[str, Any], delta: Dict[str, Any], q4: Optional[str] = None) -> Dict[str, Any]:
     """
-    무엇을: extract_delta의 LLM 응답이 5축 모두 {delta, quote}를 갖추고, delta가 -1~1
-    범위인지 검증한다.
-    왜: extract_profile의 _validate_profile과 같은 이유 - LLM 출력은 확률적이므로 스키마
-    이탈이 드물게 생기고, 여기서 걸러야 update_behavior_vector가 잘못된 값으로 프로필을
-    오염시키는 걸 막을 수 있다.
-    """
-    for trait in BIG_FIVE_TRAITS:
-        if trait not in data:
-            raise ValueError(f"필수 필드 누락: {trait}")
-        entry = data[trait]
-        if not isinstance(entry, dict) or "delta" not in entry or "quote" not in entry:
-            raise ValueError(f"'{trait}' 항목 형식이 올바르지 않음: {entry!r}")
-        delta = entry["delta"]
-        if not isinstance(delta, (int, float)) or isinstance(delta, bool) or not (-1.0 <= delta <= 1.0):
-            raise ValueError(f"'{trait}'.delta가 -1~1 범위를 벗어남: {delta!r}")
+    무엇을: 델타를 EMA(지수이동평균) 방식으로 behavior_corrected_vector에 반영하고,
+    worked/dead topics로 interest_weights를 갱신하고, q4 강제선택으로
+    diversity_beta를 조정한다. self_report_vector는 절대 건드리지 않는다.
 
+        behavior <- behavior*(1-BEHAVIOR_DECAY) + LR*confidence*delta
 
-def extract_delta(review_answers: Dict[str, Any], self_report_vector: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    무엇을: 리뷰 자유서술 답변과 기존 자기보고 벡터를 LLM에 함께 전달해, Big Five 5축
-    각각에 대해 -1~+1 범위의 델타(보정값)와 그 근거가 된 인용구를 구조화된 JSON으로
-    추출한다. 반환 형태: {"openness": {"delta": 0.3, "quote": "..."}, ...} (5축 전부).
+    왜 감쇠가 핵심인가: 감쇠 없는 단순 누적은 리뷰 잡음이 랜덤워크로 쌓여
+    자기보고가 이미 정확했던 사람의 프로필까지 망가뜨린다(김주환 브랜치
+    시뮬레이션으로 확인된 실패 모드). 감쇠가 있으면 일관된 신호만 살아남는다.
+    confidence 가중도 같은 이유다 - "재밌었어요"뿐인 후기는 프로필을 거의
+    못 움직인다.
 
-    왜 자기보고 벡터를 함께 넘기는가: 같은 문장이라도 이미 개방성이 높은 사람에게는
-    "평소와 비슷한 경험"일 수 있고, 개방성이 낮은 사람에게는 "평소와 다른 도전"일 수
-    있다. 기존 점수를 기준점으로 줘야 LLM이 "이번 경험이 그 사람 기준으로 어느 방향으로
-    움직였는지"를 상대적으로 판단할 수 있다.
-
-    왜 인용구(quote)를 함께 요구하는가: delta 숫자만 받으면 왜 그렇게 나왔는지 검증할
-    방법이 없다. 원문 발췌를 강제하면 LLM이 실제로 텍스트에 근거해 판단했는지 확인할 수
-    있고(환각 방지에 도움), 필요하면 사용자에게 "이 문장 때문에 이렇게 조정됐다"고
-    설명할 수도 있다.
-
-    왜 재시도 로직이 필요한지: extract_profile과 동일한 이유로, LLM 출력이 스키마를
-    벗어나는 경우를 대비해 최대 2회까지 재요청하고 그래도 실패하면 예외를 던진다.
-
-    Raises:
-        RuntimeError: 최대 재시도 횟수를 넘겨도 유효한 델타를 얻지 못한 경우.
-    """
-    if _get_chat_backend() is None:
-        logger.warning("[extract_delta] 사용 가능한 LLM 백엔드가 없어 델타를 전부 0으로 처리합니다.")
-        return {trait: {"delta": 0.0, "quote": ""} for trait in BIG_FIVE_TRAITS}
-
-    user_prompt = _build_delta_user_prompt(review_answers, self_report_vector)
-    last_error: Optional[Exception] = None
-
-    for attempt in range(1, MAX_DELTA_ATTEMPTS + 1):
-        try:
-            raw_text = _call_llm(user_prompt, max_tokens=700, system_prompt=DELTA_SYSTEM_PROMPT)
-            json_text = _extract_json_object(raw_text)
-            data = json.loads(json_text)
-            _validate_delta_response(data)
-            return {
-                trait: {"delta": float(data[trait]["delta"]), "quote": str(data[trait]["quote"])}
-                for trait in BIG_FIVE_TRAITS
-            }
-        except Exception as exc:
-            last_error = exc
-            logger.warning(f"[extract_delta] 시도 {attempt}/{MAX_DELTA_ATTEMPTS} 실패: {exc}")
-
-    raise RuntimeError(f"extract_delta 실패: 최대 재시도({MAX_DELTA_ATTEMPTS}회) 초과. 마지막 오류: {last_error}")
-
-
-def clip_delta(
-    raw_delta: float,
-    learning_rate: float = 0.5,
-    accumulated_cap: float = 1.5,
-    current_accumulated: float = 0.0,
-) -> float:
-    """
-    무엇을: LLM이 추정한 원본 델타(raw_delta, -1~1)에 학습률을 곱해 완만하게 줄이고,
-    지금까지 누적된 보정값(current_accumulated, 이 축에서 self_report_vector로부터 이미
-    벌어진 절댓값 거리)과 합쳤을 때 상한(accumulated_cap)을 넘지 않도록 다시 자른다.
-
-    왜 학습률(learning_rate)이 필요한가: 리뷰 한 번은 표본 크기 1의 관찰치일 뿐이다.
-    한 번의 식사 경험(우연히 그날 컨디션이 좋았거나 나빴던 것일 수도 있음)만으로 성격
-    프로필 전체가 크게 흔들리면, 다음 매칭의 성격 유사도 계산이 노이즈에 휘둘리게 된다.
-    학습률(기본 0.5)을 곱해 "이번 리뷰가 시사하는 방향으로 절반만" 반영함으로써, 여러
-    번의 리뷰가 일관되게 쌓여야 프로필이 실제로 크게 이동하는 점진적(온라인) 학습 구조를
-    만든다.
-
-    왜 누적 상한(accumulated_cap)이 필요한가: 학습률로 매 회 반영폭을 줄여도, 계속 같은
-    방향의 리뷰가 쌓이면 behavior_corrected_vector가 self_report_vector에서 한없이
-    멀어질 수 있다. Big Five 척도 자체가 1~5(폭 4)이므로, 자기보고 대비 ±1.5 이상
-    벌어지는 것은 "완전히 다른 사람"이라고 볼 정도로 과도한 괴리다. 이 상한을 넘기지
-    않도록 클리핑해 극단적 드리프트를 방지한다.
-    """
-    scaled = raw_delta * learning_rate
-    remaining_room = max(0.0, accumulated_cap - current_accumulated)
-    if scaled > 0:
-        return float(min(scaled, remaining_room))
-    return float(max(scaled, -remaining_room))
-
-
-def update_behavior_vector(profile: Dict[str, Any], clipped_deltas: Dict[str, float]) -> Dict[str, Any]:
-    """
-    무엇을: self_report_vector는 절대 건드리지 않고, behavior_corrected_vector에만
-    clipped_deltas를 더해 누적 반영한 새 profile dict를 반환한다.
-
-    왜 self_report_vector를 불변으로 두는가: self_report_vector는 온보딩 시점에
-    extract_profile()이 만든 "이 사람이 스스로를 어떻게 인식하는가"의 기준점이다(profile.py
-    상단 docstring 참고). 매칭 시스템이 이 기준점 자체를 계속 덮어쓰면, 두 벡터를 비교해
-    "자기 인식과 실제 행동의 괴리"를 측정한다는 compute_discrepancy의 개념 자체가 성립하지
-    않는다. 따라서 behavior_corrected_vector라는 별도의 가변 벡터에만 보정치를 누적한다.
-
-    개인정보 최소 보관 원칙: 이 함수가 받는 clipped_deltas는 이미 리뷰 원문에서 파생된
-    숫자 값일 뿐이다. 리뷰 원문(자유서술 텍스트) 자체는 extract_delta 호출 이후로는
-    어디에도 저장하지 않고 이 함수 처리가 끝나면 완전히 폐기된다 - 프로필에 남는 것은
-    "얼마나 이동했는가"라는 파생값뿐, 사용자가 실제로 쓴 문장은 보관하지 않는다.
+    Returns:
+        갱신된 profile dict (self_report_vector는 원본과 동일한 값의 새 dict,
+        behavior_corrected_vector/diversity_beta/interest_weights/tags만 변경).
     """
     updated = dict(profile)
-    self_report_vector = dict(profile["self_report_vector"])  # 참조만 복사, 값은 그대로 유지(불변)
-    behavior_vector = dict(profile.get("behavior_corrected_vector") or self_report_vector)
+    self_report = dict(profile["self_report_vector"])
+    behavior = dict(profile.get("behavior_corrected_vector") or self_report)
 
+    conf = _clamp(float(delta.get("confidence", 1.0) or 0.0), 0.0, 1.0)
+    applied: Dict[str, float] = {}
     for trait in BIG_FIVE_TRAITS:
-        current = behavior_vector.get(trait, self_report_vector.get(trait, 0.0))
-        behavior_vector[trait] = current + clipped_deltas.get(trait, 0.0)
+        d = float(delta.get(trait, 0.0) or 0.0)
+        before = behavior.get(trait, 0.0)
+        after = _clamp(before * (1.0 - BEHAVIOR_DECAY) + LR * conf * d, -BEHAVIOR_CLIP, BEHAVIOR_CLIP)
+        behavior[trait] = after
+        applied[trait] = after - before
 
-    updated["self_report_vector"] = self_report_vector
-    updated["behavior_corrected_vector"] = behavior_vector
+    updated["self_report_vector"] = self_report
+    updated["behavior_corrected_vector"] = behavior
+
+    updated = _apply_topics(updated, delta.get("worked_topics") or [], delta.get("dead_topics") or [], conf)
+
+    beta = float(updated.get("diversity_beta", 0.5))
+    if q4 == Q4_MORE_SIMILAR:
+        beta = _clamp(beta - BETA_STEP, BETA_MIN, BETA_MAX)
+    elif q4 == Q4_MORE_DIFFERENT:
+        beta = _clamp(beta + BETA_STEP, BETA_MIN, BETA_MAX)
+    updated["diversity_beta"] = beta
+
+    updated["_last_deltas"] = applied  # run_feedback_pipeline이 응답에 실어 보낼 실제 반영량
+    return updated
+
+
+def _apply_topics(profile: Dict[str, Any], worked: List[str], dead: List[str], conf: float = 1.0) -> Dict[str, Any]:
+    """
+    무엇을: 리뷰에서 나온 "실제로 통한 주제/죽은 주제"로 profile["interest_weights"]를
+    갱신한다 - matching.py의 유사도 계산이 참조하는 그 공간이다.
+
+    왜: 설문에 쓴 관심사는 "자기가 생각하는 나"이고, 리뷰의 worked_topics는
+    "실제 자리에서 일어난 일"이다. 이 둘이 갈리는 게 자기보고 편향의 가장
+    눈에 보이는 형태이며, 이 함수가 matching.py에 실제로 영향을 주는
+    유일한 경로다(BRANCH_COMPARISON.md 3.6에서 jaebin 원안에 없던 것으로
+    지적된 핵심 기능).
+
+    왜 1.0 쪽으로 수축(INTEREST_DECAY)하는가: 없으면 한 번 언급된 주제가
+    영구히 프로필을 지배한다.
+    """
+    updated = dict(profile)
+    w = dict(updated.get("interest_weights") or {t: 1.0 for t in updated.get("tags", [])})
+
+    for k in list(w):
+        w[k] += (1.0 - w[k]) * INTEREST_DECAY
+
+    for t in worked:
+        t = (t or "").strip()
+        if not t:
+            continue
+        cur = w.get(t, INTEREST_NEW)
+        w[t] = _clamp(cur + INTEREST_UP * conf, INTEREST_MIN, INTEREST_MAX)
+
+    for t in dead:
+        t = (t or "").strip()
+        if t in w:
+            w[t] = _clamp(w[t] - INTEREST_DOWN * conf, INTEREST_MIN, INTEREST_MAX)
+
+    for k in [k for k, v in w.items() if v < INTEREST_DROP]:
+        del w[k]
+
+    updated["interest_weights"] = w
+    updated["tags"] = [k for k, _ in sorted(w.items(), key=lambda kv: -kv[1])]
     return updated
 
 
 def update_diversity_beta(profile: Dict[str, Any], forced_choice_answer: str) -> float:
     """
-    무엇을: 리뷰의 강제선택 문항("이번에 낯선 배경의 사람과 만난 게 어땠나요?" 류) 답변에
-    따라 다양성 선호도 β를 ±0.15 조정하고 0.1~0.9 범위로 클립해 반환한다.
-
-    왜 β를 별도로 두는가: pair_score의 diversity_score 가중치(w_diversity)는 서비스
-    전체에 고정된 값이지만, 실제로는 사람마다 "낯선 배경의 사람"을 만났을 때의 만족도가
-    다르다. 리뷰에서 다양성 경험에 대한 명시적 선호를 확인할 때마다 그 사람만의 β를
-    조금씩 조정해두면, 향후 개인화된 가중치(예: pair_score의 w_diversity를 사용자별 β로
-    대체)로 확장하기 쉬워진다.
-
-    왜 0.1~0.9로 클립하는가: β가 0이나 1처럼 극단으로 가면 "다양성을 아예 무시" 또는
-    "다양성만 본다"는 뜻이 되어 매칭이 성격/관심사 유사도를 완전히 무시하게 될 수 있다.
-    항상 최소한의 여지를 남겨두기 위해 양 끝을 잘라낸다.
+    무엇을: 강제선택 답변(Q4_MORE_SIMILAR/Q4_SAME/Q4_MORE_DIFFERENT)에 따라
+    diversity_beta를 ±0.15 조정하고 0.1~0.9로 클립한다.
+    (apply_delta 내부에서 이미 처리되지만, 단독 호출이 필요한 경우를 위해 노출한다.)
     """
-    current_beta = float(profile.get("diversity_beta", 0.5))
-
-    positive_markers = ["좋았", "재밌", "재미있", "새로웠", "신선", "만족", "또 만나고", "괜찮았"]
-    negative_markers = ["불편", "어색", "별로", "힘들", "피곤", "안 맞", "부담"]
-
-    answer = forced_choice_answer or ""
-    if any(marker in answer for marker in positive_markers):
-        current_beta += 0.15
-    elif any(marker in answer for marker in negative_markers):
-        current_beta -= 0.15
-
-    return float(max(0.1, min(0.9, current_beta)))
+    beta = float(profile.get("diversity_beta", 0.5))
+    if forced_choice_answer == Q4_MORE_SIMILAR:
+        return _clamp(beta - BETA_STEP, BETA_MIN, BETA_MAX)
+    if forced_choice_answer == Q4_MORE_DIFFERENT:
+        return _clamp(beta + BETA_STEP, BETA_MIN, BETA_MAX)
+    return beta
 
 
 def compute_discrepancy(self_report_vector: Dict[str, Any], behavior_corrected_vector: Dict[str, Any]) -> Dict[str, float]:
     """
-    무엇을: self_report_vector와 behavior_corrected_vector의 축별 차이(절댓값)를 계산해
-    반환한다.
-    왜: 이 차이가 "이 사람이 스스로 생각하는 성격"과 "실제 식사 모임에서 드러난 성향"이
-    얼마나 벌어졌는지를 나타내는 지표가 된다. 하나로 합산하지 않고 축별로 남겨두면 어떤
-    축에서 괴리가 발생했는지 원인을 파악하기 쉽다.
+    무엇을: "현재 값"(clamp(self_report+behavior, 1, 5))과 self_report의 축별
+    차이(절댓값).
+
+    왜 behavior 오프셋을 그대로 쓰지 않고 clamp를 다시 거치는가: self_report가
+    이미 5(최댓값)인데 behavior가 +1이면, 실제 "현재 값"은 5에서 더 못 올라가므로
+    괴리는 0이어야 한다. behavior 오프셋 값을 그대로 괴리로 쓰면 척도 경계에서
+    존재하지 않는 괴리를 만들어낸다.
     """
-    return {
-        trait: abs(float(behavior_corrected_vector.get(trait, 0.0)) - float(self_report_vector.get(trait, 0.0)))
-        for trait in BIG_FIVE_TRAITS
-    }
+    eff = _effective(self_report_vector, behavior_corrected_vector)
+    return {t: abs(eff[t] - float(self_report_vector.get(t, 3.0))) for t in BIG_FIVE_TRAITS}
 
 
-def check_discrepancy_threshold(discrepancy: Dict[str, float], threshold: float = 1.0) -> bool:
-    """
-    무엇을: 축별 괴리 중 하나라도 threshold(기본 1.0) 이상이면 True를 반환한다.
-    왜: 임계값을 넘는다는 것은 "이 사람의 실제 행동이 자기보고와 상당히 다르게 나타나고
-    있다"는 신호로, 매칭 알고리즘이 self_report_vector 대신 behavior_corrected_vector를
-    우선 사용하도록 전환하거나, 운영진에게 "프로필 이동 이벤트"를 알려 재검토를 유도하는
-    트리거로 쓰기 위함이다.
-    """
+def check_discrepancy_threshold(discrepancy: Dict[str, float], threshold: float = DIVERGENCE_THRESHOLD) -> bool:
+    """축별 괴리 중 하나라도 threshold 이상이면 True ("프로필 이동 이벤트" 트리거)."""
     return any(diff >= threshold for diff in discrepancy.values())
 
 
 def handle_review_timeout(profile: Dict[str, Any], hours_since_meal: float, failure_count: int) -> Dict[str, Any]:
-    """
-    무엇을: (1) 식사 후 24시간이 지나도록 리뷰 미제출, 또는 (2) 리뷰 제출 시도가 2회 이상
-    파싱/검증에 실패한 경우, 이번 회차의 델타를 0으로 처리(=behavior_corrected_vector를
-    바꾸지 않음)하고 profile을 그대로(복사본으로) 반환한다.
-
-    왜 그냥 실패시키지 않고 "델타 0"으로 처리하는가: 리뷰 미제출/반복 실패는 사용자
-    귀책일 수도, 시스템 문제일 수도 있다. 어느 쪽이든 이 한 번의 실패 때문에 프로필이
-    깨지거나 사용자가 다음 매칭에서 배제되면 안 되므로, "이번 회차는 그냥 스킵하고
-    다음 매칭부터 정상 참여"로 안전하게 되돌리는 것이 서비스 신뢰도에 유리하다.
-    """
+    """24시간 초과 미제출 또는 2회 이상 실패 시 델타 0으로 안전하게 스킵."""
     if hours_since_meal > REVIEW_TIMEOUT_HOURS:
-        logger.warning(
-            f"[handle_review_timeout] 리뷰 제출 기한({REVIEW_TIMEOUT_HOURS:.0f}시간) 초과"
-            f"({hours_since_meal:.1f}시간) - 이번 회차 델타 0 처리"
-        )
+        logger.warning("[handle_review_timeout] 리뷰 제출 기한(%.0f시간) 초과(%.1f시간) - 델타 0 처리",
+                       REVIEW_TIMEOUT_HOURS, hours_since_meal)
     if failure_count >= MAX_REVIEW_FAILURES:
-        logger.warning(f"[handle_review_timeout] 리뷰 제출 {failure_count}회 실패 - 이번 회차 델타 0 처리")
+        logger.warning("[handle_review_timeout] 리뷰 제출 %d회 실패 - 델타 0 처리", failure_count)
     return dict(profile)
 
 
-def run_feedback_pipeline(
-    raw_answers: Dict[str, Any],
-    profile: Dict[str, Any],
-    hours_since_meal: float,
-    failure_count: int = 0,
-) -> Dict[str, Any]:
+def run_feedback_pipeline(raw_answers: Dict[str, Any], profile: Dict[str, Any],
+                          hours_since_meal: float, failure_count: int = 0) -> Dict[str, Any]:
     """
-    무엇을: 리뷰 파싱 -> 델타 추출 -> 클리핑 -> 행동 벡터 갱신 -> 다양성 β 갱신 -> 괴리도 계산 ->
-    임계값 판정까지, 리뷰 기반 프로필 보정 파이프라인 전체를 순서대로 실행한다.
-
-    왜 오케스트레이션 함수를 분리했는가: 백엔드 API(예: POST /review/submit) 핸들러가
-    이 함수 하나만 호출하면 되도록 해서, 각 단계(파싱/LLM 호출/클리핑/누적)의 세부 구현이
-    API 계층으로 새어나가지 않게 한다.
+    무엇을: 리뷰 파싱 -> 델타 추출(LLM) -> EMA 반영(behavior_corrected_vector) ->
+    관심사 가중치 갱신(interest_weights) -> 다양성 β 갱신 -> 괴리 계산 -> 임계
+    판정까지 전체 파이프라인을 순서대로 실행한다.
 
     Returns:
-        {
-          "profile": 갱신된 profile dict,
-          "profile_shift_event": bool,  # 임계 초과로 "프로필 이동 이벤트"가 트리거됐는지
-          "deltas": {trait: clipped_delta, ...} 또는 타임아웃/실패로 스킵된 경우 None,
-        }
+        {"profile": 갱신된 profile dict,
+         "profile_shift_event": bool,
+         "deltas": {trait: 실제_반영량, ...} 또는 스킵된 경우 None}
     """
     should_skip = hours_since_meal > REVIEW_TIMEOUT_HOURS or failure_count >= MAX_REVIEW_FAILURES
     if should_skip:
-        updated_profile = handle_review_timeout(profile, hours_since_meal, failure_count)
-        return {"profile": updated_profile, "profile_shift_event": False, "deltas": None}
+        return {"profile": handle_review_timeout(profile, hours_since_meal, failure_count),
+                "profile_shift_event": False, "deltas": None}
 
     review_answers = parse_review(raw_answers)
     self_report_vector = profile["self_report_vector"]
     behavior_vector = profile.get("behavior_corrected_vector") or self_report_vector
 
     try:
-        raw_deltas = extract_delta(review_answers, self_report_vector)
+        delta = extract_delta(review_answers, self_report_vector, behavior_vector)
     except Exception as exc:
-        logger.error(f"[run_feedback_pipeline] 델타 추출 실패, 이번 회차 델타 0으로 처리: {exc}")
-        raw_deltas = {trait: {"delta": 0.0, "quote": ""} for trait in BIG_FIVE_TRAITS}
+        logger.error("[run_feedback_pipeline] 델타 추출 실패, 델타 0으로 처리: %s", exc)
+        delta = {t: 0.0 for t in BIG_FIVE_TRAITS} | {"worked_topics": [], "dead_topics": [], "confidence": 0.0}
 
-    # 각 축에서 이미 self_report_vector로부터 얼마나 벌어져 있는지(현재 누적량)를 구해
-    # clip_delta의 accumulated_cap 계산에 넘긴다.
-    current_accumulated = {
-        trait: abs(float(behavior_vector.get(trait, self_report_vector.get(trait, 0.0))) - float(self_report_vector.get(trait, 0.0)))
-        for trait in BIG_FIVE_TRAITS
-    }
-
-    clipped_deltas = {
-        trait: clip_delta(raw_deltas[trait]["delta"], current_accumulated=current_accumulated[trait])
-        for trait in BIG_FIVE_TRAITS
-    }
-
-    updated_profile = update_behavior_vector(profile, clipped_deltas)
-    updated_profile["diversity_beta"] = update_diversity_beta(updated_profile, review_answers.get("forced_choice", ""))
+    updated_profile = apply_delta(profile, delta, review_answers.get("forced_choice"))
+    applied_deltas = updated_profile.pop("_last_deltas", {})
 
     discrepancy = compute_discrepancy(updated_profile["self_report_vector"], updated_profile["behavior_corrected_vector"])
     profile_shift_event = check_discrepancy_threshold(discrepancy)
 
-    return {"profile": updated_profile, "profile_shift_event": profile_shift_event, "deltas": clipped_deltas}
+    return {"profile": updated_profile, "profile_shift_event": profile_shift_event, "deltas": applied_deltas}

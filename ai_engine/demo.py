@@ -19,11 +19,10 @@ import time
 from typing import Any, Dict, List
 
 from .feedback import (
+    apply_delta,
     check_discrepancy_threshold,
-    clip_delta,
     compute_discrepancy,
     run_feedback_pipeline,
-    update_behavior_vector,
 )
 from .matching import run_matching_pipeline
 from .restaurant import resolve_restaurant
@@ -52,57 +51,86 @@ def generate_mock_users(n: int = 8) -> List[Dict[str, Any]]:
     학교는 다양성 매칭(diversity_score)에 쓰이고, 물리적 위치는 다들 같은 행사장에 있다는
     전제로 식당 추천이 실제로 작동하도록 국민대학교 미래관(37.6103, 126.9974) 인근 반경
     1km 이내에 좌표를 ±0.003 정도씩만 흩어서 모아둔다. budget 필드는 restaurant.py 데모
-    (resolve_restaurant)를 위해 추가로 넣어둔 것으로, 기존 매칭 로직
-    (personality_similarity/diversity_score/pair_score)은 location/budget 키를 전혀
-    참조하지 않으므로 기존 동작에는 영향이 없다.
+    (resolve_restaurant)를 위해 추가로 넣어둔 것으로, 매칭 로직(personality_complement/
+    diversity/score_group)은 location/budget 키를 전혀 참조하지 않으므로 영향이 없다.
+
+    tags/interest_weights/diversity_beta 필드(통합 이후 추가): matching.py의 유사도
+    계산은 이제 interest_tags(자유 표시 키워드)가 아니라 TAGS(고정 12종) 공간의
+    interest_weights로 이루어진다. 각 사용자가 실제 extract_profile()을 거쳤다면
+    이 필드들이 자동으로 채워지지만, mock 데이터는 하드코딩이므로 여기서 직접 넣는다.
+    diversity_beta는 온보딩 기본값 0.5로 시작해 리뷰로 학습된다.
     """
     sample_pool = [
         {
             "name": "김하늘", "university": "국민대", "major": "소프트웨어학부",
             "openness": 4, "conscientiousness": 3, "extraversion": 4, "agreeableness": 4, "neuroticism": 2,
             "interest_tags": ["보드게임", "인공지능", "캠핑"],
+            "tags": ["게임", "기술", "여행"],
+            "interest_weights": {"게임": 1.0, "기술": 1.0, "여행": 1.0},
+            "diversity_beta": 0.5,
             "location": (37.6124, 126.9959), "budget": (8000, 15000),
         },
         {
             "name": "이도윤", "university": "숭실대", "major": "경영학부",
             "openness": 3, "conscientiousness": 4, "extraversion": 5, "agreeableness": 3, "neuroticism": 2,
             "interest_tags": ["창업", "농구", "여행"],
+            "tags": ["재테크", "운동", "여행"],
+            "interest_weights": {"재테크": 1.0, "운동": 1.0, "여행": 1.0},
+            "diversity_beta": 0.5,
             "location": (37.6085, 126.9998), "budget": (10000, 20000),
         },
         {
             "name": "박서연", "university": "순천향대", "major": "컴퓨터소프트웨어공학과",
             "openness": 4, "conscientiousness": 3, "extraversion": 3, "agreeableness": 4, "neuroticism": 3,
             "interest_tags": ["인공지능", "영화", "카페투어"],
+            "tags": ["기술", "영상", "요리"],
+            "interest_weights": {"기술": 1.0, "영상": 1.0, "요리": 1.0},
+            "diversity_beta": 0.5,
             "location": (37.6112, 127.0001), "budget": (9000, 16000),
         },
         {
             "name": "최민준", "university": "국민대", "major": "심리학과",
             "openness": 5, "conscientiousness": 2, "extraversion": 2, "agreeableness": 5, "neuroticism": 3,
             "interest_tags": ["독서", "심리상담", "글쓰기"],
+            "tags": ["독서", "학술", "창작"],
+            "interest_weights": {"독서": 1.0, "학술": 1.0, "창작": 1.0},
+            "diversity_beta": 0.5,
             "location": (37.6077, 126.9966), "budget": (7000, 13000),
         },
         {
             "name": "정유진", "university": "국민대", "major": "시각디자인학과",
             "openness": 5, "conscientiousness": 3, "extraversion": 4, "agreeableness": 4, "neuroticism": 2,
             "interest_tags": ["전시회", "카페투어", "사진"],
+            "tags": ["창작", "요리", "영상"],
+            "interest_weights": {"창작": 1.0, "요리": 1.0, "영상": 1.0},
+            "diversity_beta": 0.5,
             "location": (37.6116, 126.9952), "budget": (8000, 18000),
         },
         {
             "name": "한지훈", "university": "숭실대", "major": "기계공학부",
             "openness": 2, "conscientiousness": 5, "extraversion": 2, "agreeableness": 3, "neuroticism": 3,
             "interest_tags": ["자동차", "캠핑", "등산"],
+            "tags": ["기술", "여행", "운동"],
+            "interest_weights": {"기술": 1.0, "여행": 1.0, "운동": 1.0},
+            "diversity_beta": 0.5,
             "location": (37.6096, 126.9985), "budget": (10000, 15000),
         },
         {
             "name": "오세연", "university": "순천향대", "major": "간호학과",
             "openness": 3, "conscientiousness": 5, "extraversion": 3, "agreeableness": 5, "neuroticism": 2,
             "interest_tags": ["운동", "요리", "여행"],
+            "tags": ["운동", "요리", "여행"],
+            "interest_weights": {"운동": 1.0, "요리": 1.0, "여행": 1.0},
+            "diversity_beta": 0.5,
             "location": (37.6131, 126.9980), "budget": (9000, 14000),
         },
         {
             "name": "강도현", "university": "숭실대", "major": "전자정보공학부",
             "openness": 3, "conscientiousness": 4, "extraversion": 3, "agreeableness": 3, "neuroticism": 4,
             "interest_tags": ["게임", "인공지능", "농구"],
+            "tags": ["게임", "기술", "운동"],
+            "interest_weights": {"게임": 1.0, "기술": 1.0, "운동": 1.0},
+            "diversity_beta": 0.5,
             "location": (37.6089, 126.9949), "budget": (8000, 15000),
         },
     ]
@@ -112,22 +140,23 @@ def generate_mock_users(n: int = 8) -> List[Dict[str, Any]]:
 # 국민대학교 미래관(37.6103, 126.9974) 반경 1.5km 이내, 정릉·길음·성북 인근 제휴 식당 14곳.
 # generate_mock_users()의 모든 위치가 이 중심점 인근 1km 반경에 모여 있으므로, 어떤 그룹
 # 조합이 와도 resolve_restaurant()가 조건 완화 없이(또는 최대 1단계 완화로) 식당을 찾을 수
-# 있도록 가격대(7000~25000원)와 방향을 고루 분산시켰다.
+# 있도록 가격대(7000~25000원)와 방향을 고루 분산시켰다. category 필드는 통합 이후 추가 -
+# 김주환 브랜치/FRONTEND.md 계약의 {name, category, price, near} 출력을 채우는 데 쓰인다.
 MOCK_RESTAURANT_DB: List[Dict[str, Any]] = [
-    {"name": "정릉동 큰집순두부", "lat": 37.6122, "lng": 126.9968, "price_per_person": 9000},
-    {"name": "미래관 앞 김밥천국", "lat": 37.6106, "lng": 126.9977, "price_per_person": 7000},
-    {"name": "정릉시장 왕돈까스", "lat": 37.6095, "lng": 126.9958, "price_per_person": 11000},
-    {"name": "북악산 스카이카페", "lat": 37.6132, "lng": 126.9990, "price_per_person": 8500},
-    {"name": "정릉천 떡볶이포차", "lat": 37.6115, "lng": 126.9950, "price_per_person": 7500},
-    {"name": "국민대 후문 화로구이", "lat": 37.6085, "lng": 127.0002, "price_per_person": 22000},
-    {"name": "정릉동 이자카야 하나", "lat": 37.6088, "lng": 126.9935, "price_per_person": 20000},
-    {"name": "성북 국밥거리", "lat": 37.6070, "lng": 126.9965, "price_per_person": 9500},
-    {"name": "정릉 파스타공방", "lat": 37.6078, "lng": 126.9945, "price_per_person": 15000},
-    {"name": "아리랑고개 초밥마을", "lat": 37.6090, "lng": 126.9995, "price_per_person": 24000},
-    {"name": "정릉동 스타벅스", "lat": 37.6118, "lng": 126.9990, "price_per_person": 7800},
-    {"name": "길음동 닭한마리", "lat": 37.6065, "lng": 126.9958, "price_per_person": 16000},
-    {"name": "정릉 온기 백반집", "lat": 37.6100, "lng": 126.9945, "price_per_person": 8000},
-    {"name": "미래관 카페테리아2호점", "lat": 37.6112, "lng": 126.9985, "price_per_person": 7200},
+    {"name": "정릉동 큰집순두부", "category": "한식", "lat": 37.6122, "lng": 126.9968, "price_per_person": 9000},
+    {"name": "미래관 앞 김밥천국", "category": "분식", "lat": 37.6106, "lng": 126.9977, "price_per_person": 7000},
+    {"name": "정릉시장 왕돈까스", "category": "한식", "lat": 37.6095, "lng": 126.9958, "price_per_person": 11000},
+    {"name": "북악산 스카이카페", "category": "카페", "lat": 37.6132, "lng": 126.9990, "price_per_person": 8500},
+    {"name": "정릉천 떡볶이포차", "category": "분식", "lat": 37.6115, "lng": 126.9950, "price_per_person": 7500},
+    {"name": "국민대 후문 화로구이", "category": "고깃집", "lat": 37.6085, "lng": 127.0002, "price_per_person": 22000},
+    {"name": "정릉동 이자카야 하나", "category": "일식", "lat": 37.6088, "lng": 126.9935, "price_per_person": 20000},
+    {"name": "성북 국밥거리", "category": "한식", "lat": 37.6070, "lng": 126.9965, "price_per_person": 9500},
+    {"name": "정릉 파스타공방", "category": "양식", "lat": 37.6078, "lng": 126.9945, "price_per_person": 15000},
+    {"name": "아리랑고개 초밥마을", "category": "일식", "lat": 37.6090, "lng": 126.9995, "price_per_person": 24000},
+    {"name": "정릉동 스타벅스", "category": "카페", "lat": 37.6118, "lng": 126.9990, "price_per_person": 7800},
+    {"name": "길음동 닭한마리", "category": "한식", "lat": 37.6065, "lng": 126.9958, "price_per_person": 16000},
+    {"name": "정릉 온기 백반집", "category": "한식", "lat": 37.6100, "lng": 126.9945, "price_per_person": 8000},
+    {"name": "미래관 카페테리아2호점", "category": "카페", "lat": 37.6112, "lng": 126.9985, "price_per_person": 7200},
 ]
 
 
@@ -210,11 +239,14 @@ def _run_feedback_demo() -> None:
     print(f"  초기 diversity_beta: {profile['diversity_beta']}")
 
     # --- 케이스 1: 정상 리뷰 제출 (24시간 이내, 실패 이력 없음) ---------------
+    # r4_choice는 feedback.py의 강제선택 enum(Q4_MORE_SIMILAR/Q4_SAME/Q4_MORE_DIFFERENT)과
+    # 정확히 일치해야 diversity_beta가 움직인다(실제 서비스에서는 프론트가 이 3개 버튼만
+    # 노출하므로 자유 텍스트가 들어올 일이 없다).
     raw_review_answers = {
         "r1": "낯선 전공 사람들이랑 얘기하는 게 생각보다 재밌었고, 다음엔 더 새로운 모임에도 나가보고 싶어요.",
         "r2": "그래도 낯가림 때문에 처음엔 많이 긴장했어요.",
         "r3": "다들 친절해서 편하게 얘기할 수 있었어요.",
-        "r4_choice": "낯선 배경의 사람들과 얘기하는 게 새롭고 재밌었어요",
+        "r4_choice": "더 달라도 됨",
     }
     result_1 = run_feedback_pipeline(raw_review_answers, profile, hours_since_meal=5.0, failure_count=0)
     print("\n  [케이스 1] 정상 제출 (식사 후 5시간, 실패 0회)")
@@ -235,20 +267,22 @@ def _run_feedback_demo() -> None:
     print(f"    deltas: {result_3['deltas']} (None이어야 정상 - 델타 0 처리)")
 
     # --- 케이스 4: 임계값 초과(profile_shift_event=True)가 실제로 트리거되는지 확인 ---
-    # LLM 없이도(폴백 시 delta=0) 로직 자체를 검증하기 위해, 동일 축에 큰 델타가
-    # 여러 라운드 누적된 상황을 직접 구성해 check_discrepancy_threshold까지 통과시켜본다.
+    # LLM 없이도 EMA 로직 자체를 검증하기 위해, openness에 최대 델타(+1, confidence=1)가
+    # 여러 라운드 일관되게 들어온 상황을 직접 구성해 check_discrepancy_threshold까지
+    # 통과시켜본다. EMA 특성상(매 회차 10% 감쇠) 무한 발산하지 않고 BEHAVIOR_CLIP=1.5
+    # 근방에서 포화되는지도 함께 확인한다.
     drifted_profile = dict(profile)
     drifted_profile["behavior_corrected_vector"] = dict(profile["self_report_vector"])
-    accumulated = 0.0
-    for _ in range(6):  # 학습률 0.5 * 델타 1.0 = 0.5씩, 누적 상한 1.5까지 여러 번 반영
-        clipped = clip_delta(1.0, current_accumulated=accumulated)
-        drifted_profile = update_behavior_vector(drifted_profile, {"openness": clipped, "conscientiousness": 0.0, "extraversion": 0.0, "agreeableness": 0.0, "neuroticism": 0.0})
-        accumulated += clipped
+    max_delta = {"openness": 1.0, "conscientiousness": 0.0, "extraversion": 0.0,
+                "agreeableness": 0.0, "neuroticism": 0.0, "confidence": 1.0,
+                "worked_topics": [], "dead_topics": []}
+    for _ in range(6):
+        drifted_profile = apply_delta(drifted_profile, max_delta)
 
     discrepancy = compute_discrepancy(drifted_profile["self_report_vector"], drifted_profile["behavior_corrected_vector"])
     shift_event = check_discrepancy_threshold(discrepancy)
-    print("\n  [케이스 4] openness에 큰 델타를 여러 라운드 누적시켜 임계값(1.0) 초과 유도")
-    print(f"    누적 후 openness discrepancy: {discrepancy['openness']:.2f} (accumulated_cap=1.5로 상한)")
+    print("\n  [케이스 4] openness에 최대 델타를 여러 라운드 EMA 반영시켜 임계값(1.0) 초과 유도")
+    print(f"    누적 후 openness discrepancy: {discrepancy['openness']:.2f} (BEHAVIOR_CLIP=1.5에서 포화)")
     print(f"    profile_shift_event: {shift_event} (True여야 정상)")
 
 
