@@ -42,6 +42,29 @@ def overlap_keywords(members):
     return [k for k, n in c.items() if n >= 2] or []
 
 
+CORRECTION = """
+
+[재작성 지시] 직전 출력이 규칙을 어겼다: %s
+targets 가 1명뿐인 질문은 금지다. 1번은 전원, 2·3번은 최소 2명이어야 한다.
+세 질문의 targets 합집합에 전원이 들어가야 한다. 다시 써라."""
+
+
+def _check(out, names):
+    """모델 출력을 검증한다. 프롬프트 준수를 믿지 않는다."""
+    errs, covered = [], set()
+    for i, ib in enumerate(out.get("icebreakers") or []):
+        tg = [t for t in (ib.get("targets") or []) if t in names]
+        covered |= set(tg)
+        if i == 0 and len(tg) < len(names):
+            errs.append("1번이 전원 대상이 아님(%d/%d)" % (len(tg), len(names)))
+        elif len(tg) < 2:
+            errs.append("%d번이 1인 전용" % (i + 1))
+    miss = names - covered
+    if miss:
+        errs.append("질문에 안 나오는 사람: %s" % ", ".join(sorted(miss)))
+    return errs
+
+
 def build_card(members, group_id):
     lines = []
     for p in members:
@@ -53,8 +76,27 @@ def build_card(members, group_id):
         members="\n".join(lines),
         overlap=", ".join(ov) if ov else "(직접 겹치는 키워드 없음)",
         majors=", ".join(sorted({p["major"] for p in members})))
+    names = {p.get("name", p["user_id"]) for p in members}
     out = llm.call(prompt, CARD_SCHEMA, system=prompts.CARD_SYSTEM,
                    temp=0.7, tag="card:" + group_id)
+    errs = _check(out, names)
+    if errs:
+        # 한 번만 다시 묻는다. 프롬프트가 바뀌므로 캐시 키도 바뀐다.
+        sys.stderr.write("[cards] %s 재작성: %s\n" % (group_id, "; ".join(errs)))
+        out2 = llm.call(prompt + CORRECTION % "; ".join(errs), CARD_SCHEMA,
+                        system=prompts.CARD_SYSTEM, temp=0.7,
+                        tag="card:%s:retry" % group_id)
+        if not _check(out2, names):
+            out = out2
+        else:
+            sys.stderr.write("[cards] %s 재작성도 실패 — 그대로 사용\n"
+                             % group_id)
+            out = out2
+
+    qs, tgs = [], []
+    for ib in out["icebreakers"]:
+        qs.append(ib["question"])
+        tgs.append([t for t in (ib.get("targets") or []) if t in names])
     return {
         "group_id": group_id,
         "members": [{"user_id": p["user_id"], "name": p.get("name", ""),
@@ -62,7 +104,8 @@ def build_card(members, group_id):
                      "college": p["college"], "year": p["year"],
                      "interests": p["interests"]} for p in members],
         "reason": out["reason"],
-        "icebreakers": out["icebreakers"],
+        "icebreakers": qs,                 # 프론트엔드 계약: 문자열 배열 유지
+        "icebreaker_targets": tgs,
         "overlap": ov,
         "restaurant": pick_restaurant(members),
     }

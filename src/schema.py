@@ -206,10 +206,23 @@ CARD_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
     "properties": {
-        "reason": {"type": "string"},          # 왜 이 조합인지 한 줄
+        "reason": {"type": "string"},
+        # 각 질문마다 '누가 답할 수 있는지'를 함께 받는다.
+        # 프롬프트로 세 번 고쳐도 1인 전용 질문이 새어나와서, 코드로 검증한다.
         "icebreakers": {
-            "type": "array", "items": {"type": "string"},
+            "type": "array",
             "minItems": 3, "maxItems": 3,
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "question": {"type": "string"},
+                    "targets": {"type": "array",
+                                "items": {"type": "string"},
+                                "minItems": 1, "maxItems": 6},
+                },
+                "required": ["question", "targets"],
+            },
         },
     },
     "required": ["reason", "icebreakers"],
