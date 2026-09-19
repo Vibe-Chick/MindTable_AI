@@ -9,6 +9,8 @@
     LLM_PROVIDER  openai | anthropic | gemini   (기본 openai)
     LLM_MODEL     모델 ID
     LLM_API_KEY   API 키
+    LLM_BASE_URL  게이트웨이 주소. OpenAI 호환 프록시를 쓸 때 지정한다.
+                  예) 국민대: https://ai.cs.kookmin.ac.kr/v1
     LLM_CACHE_ONLY=1   캐시에 없으면 에러. 무대 시연 때 반드시 켠다.
     LLM_STUB=1         API 없이 스키마에 맞는 가짜 응답 생성. 개발 전용.
                        결과를 캐시에 쓰지 않으므로 실제 실행을 오염시키지 않는다.
@@ -40,6 +42,14 @@ DEFAULT_MODEL = {
     "gemini":    "SET_LLM_MODEL",
 }
 MODEL = os.environ.get("LLM_MODEL") or DEFAULT_MODEL.get(PROVIDER, "")
+
+DEFAULT_BASE = {
+    "openai":    "https://api.openai.com/v1",
+    "anthropic": "https://api.anthropic.com/v1",
+    "gemini":    "https://generativelanguage.googleapis.com/v1beta",
+}
+BASE_URL = (os.environ.get("LLM_BASE_URL")
+            or DEFAULT_BASE.get(PROVIDER, "")).rstrip("/")
 
 MAX_RETRY = 3
 WORKERS = 4          # 신규 키는 동시 요청이 많으면 429. 늘리지 말 것
@@ -79,7 +89,7 @@ def _build(prompt, schema, system, temp):
                                 "schema": schema},
             },
         }
-        return ("https://api.openai.com/v1/chat/completions", body,
+        return (BASE_URL + "/chat/completions", body,
                 {"Authorization": "Bearer " + API_KEY},
                 lambda r: json.loads(r["choices"][0]["message"]["content"]))
 
@@ -93,7 +103,7 @@ def _build(prompt, schema, system, temp):
         }
         if system:
             body["system"] = system
-        return ("https://api.anthropic.com/v1/messages", body,
+        return (BASE_URL + "/messages", body,
                 {"x-api-key": API_KEY, "anthropic-version": "2023-06-01"},
                 lambda r: next(b["input"] for b in r["content"]
                                if b.get("type") == "tool_use"))
@@ -111,8 +121,7 @@ def _build(prompt, schema, system, temp):
         }
         if system:
             body["systemInstruction"] = {"parts": [{"text": system}]}
-        url = ("https://generativelanguage.googleapis.com/v1beta/models/"
-               + MODEL + ":generateContent?key=" + API_KEY)
+        url = BASE_URL + "/models/" + MODEL + ":generateContent?key=" + API_KEY
         return (url, body, {},
                 lambda r: json.loads(
                     r["candidates"][0]["content"]["parts"][0]["text"]))
@@ -213,6 +222,16 @@ def map_call(items, fn, workers=WORKERS):
     with ThreadPoolExecutor(max_workers=workers) as ex:
         list(ex.map(run, range(len(items))))
     return out
+
+
+def list_models():
+    """게이트웨이가 실제로 내주는 모델 목록. 권한 그룹에 따라 달라진다."""
+    req = urllib.request.Request(
+        BASE_URL + "/models",
+        headers={"Authorization": "Bearer " + API_KEY, "x-api-key": API_KEY})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        data = json.loads(r.read().decode("utf-8"))
+    return sorted(m.get("id", "?") for m in data.get("data", []))
 
 
 def cache_stats():

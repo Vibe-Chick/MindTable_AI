@@ -36,14 +36,18 @@ def from_api(profiles, model=None):
     import os
     import urllib.request
     key = os.environ.get("LLM_API_KEY", "")
-    model = model or os.environ.get("EMBED_MODEL", "text-embedding-3-small")
+    model = model or os.environ.get("EMBED_MODEL", "")
+    base = (os.environ.get("LLM_BASE_URL")
+            or "https://api.openai.com/v1").rstrip("/")
     if not key:
         raise RuntimeError("LLM_API_KEY 미설정")
+    if not model:
+        raise RuntimeError("EMBED_MODEL 미설정 — 폴백으로 진행")
     vocab = sorted({k for p in profiles for k in _weights(p)})
     if not vocab:
         return profiles
     req = urllib.request.Request(
-        "https://api.openai.com/v1/embeddings",
+        base + "/embeddings",
         data=json.dumps({"model": model, "input": vocab}).encode(),
         headers={"Content-Type": "application/json",
                  "Authorization": "Bearer " + key}, method="POST")
