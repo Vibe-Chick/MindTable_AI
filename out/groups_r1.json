@@ -1,94 +1,94 @@
 {
   "groups": [
     [
-      "u028",
-      "u003",
-      "u044",
-      "u005"
-    ],
-    [
-      "u009",
-      "u008",
-      "u045",
-      "u013"
-    ],
-    [
-      "u042",
-      "u017",
-      "u053",
-      "u055"
-    ],
-    [
-      "u043",
-      "u047",
+      "u059",
       "u051",
-      "u021"
+      "u056",
+      "u031"
     ],
     [
-      "u018",
       "u036",
-      "u020",
-      "u014"
+      "u043",
+      "u057",
+      "u003"
+    ],
+    [
+      "u008",
+      "u022",
+      "u027",
+      "u028"
     ],
     [
       "u029",
-      "u001",
       "u046",
-      "u054"
+      "u012",
+      "u011"
     ],
     [
-      "u002",
-      "u011",
-      "u022",
-      "u026"
-    ],
-    [
-      "u015",
+      "u005",
       "u016",
-      "u035",
-      "u056"
-    ],
-    [
-      "u052",
-      "u037",
-      "u049",
-      "u007"
-    ],
-    [
-      "u023",
-      "u027",
-      "u031",
-      "u010"
-    ],
-    [
-      "u032",
-      "u048",
-      "u039",
-      "u057"
-    ],
-    [
-      "u058",
-      "u059",
-      "u050",
-      "u019"
-    ],
-    [
-      "u024",
-      "u038",
-      "u041",
+      "u047",
       "u004"
     ],
     [
-      "u033",
-      "u060",
-      "u040",
-      "u006"
+      "u024",
+      "u049",
+      "u019",
+      "u025"
     ],
     [
-      "u012",
-      "u034",
-      "u025",
+      "u037",
+      "u007",
+      "u014",
+      "u041"
+    ],
+    [
+      "u039",
+      "u002",
+      "u015",
+      "u020"
+    ],
+    [
+      "u021",
+      "u032",
+      "u052",
+      "u009"
+    ],
+    [
+      "u053",
+      "u035",
+      "u023",
+      "u034"
+    ],
+    [
+      "u018",
+      "u026",
+      "u006",
+      "u040"
+    ],
+    [
+      "u042",
+      "u058",
+      "u050",
       "u030"
+    ],
+    [
+      "u010",
+      "u045",
+      "u060",
+      "u001"
+    ],
+    [
+      "u017",
+      "u055",
+      "u054",
+      "u044"
+    ],
+    [
+      "u013",
+      "u033",
+      "u048",
+      "u038"
     ]
   ],
   "cards": [
@@ -96,141 +96,151 @@
       "group_id": "g_r1_00",
       "members": [
         {
-          "user_id": "u028",
-          "name": "준서",
-          "school": "서울여대",
-          "major": "사학과",
-          "college": "인문대학",
+          "user_id": "u059",
+          "name": "학생59",
+          "school": "숭실대",
+          "major": "경영학부",
+          "college": "경영대학",
           "year": 2,
           "interests": [
-            "애니메이션",
-            "독립영화",
-            "위스키"
+            "커피",
+            "위스키",
+            "소설"
           ]
         },
         {
-          "user_id": "u003",
-          "name": "지우",
-          "school": "한양대",
-          "major": "기계공학부",
-          "college": "공과대학",
+          "user_id": "u051",
+          "name": "학생51",
+          "school": "중앙대",
+          "major": "소프트웨어학부",
+          "college": "소프트웨어대학",
           "year": 3,
           "interests": [
-            "독립영화",
-            "애니메이션",
-            "위스키"
+            "오픈소스",
+            "홈서버",
+            "러닝"
           ]
         },
         {
-          "user_id": "u044",
-          "name": "하은",
-          "school": "동국대",
-          "major": "수학과",
-          "college": "이과대학",
+          "user_id": "u056",
+          "name": "학생56",
+          "school": "한양대",
+          "major": "컴퓨터소프트웨어학부",
+          "college": "공과대학",
           "year": 1,
           "interests": [
-            "FPS",
-            "인디게임",
-            "에세이"
+            "자작PC",
+            "보안",
+            "롤"
           ]
         },
         {
-          "user_id": "u005",
-          "name": "하은",
-          "school": "중앙대",
-          "major": "공연영상창작학부",
-          "college": "예술대학",
+          "user_id": "u031",
+          "name": "학생31",
+          "school": "숭실대",
+          "major": "전자정보공학부",
+          "college": "IT대학",
           "year": 1,
           "interests": [
-            "일본영화",
-            "다큐멘터리",
-            "인디게임"
+            "자작PC",
+            "리눅스",
+            "독립영화"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "보드게임",
-        "재즈",
-        "베이킹"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "애니메이션",
-        "독립영화",
-        "위스키",
-        "인디게임"
+        "자작PC"
       ],
       "restaurant": {
-        "name": "충무로 노포 분식",
-        "category": "분식",
-        "price": "0.7만",
-        "near": "동국대"
+        "name": "상도동 정육식당",
+        "category": "고기",
+        "price": "1.5만",
+        "near": "숭실대"
       }
     },
     {
       "group_id": "g_r1_01",
       "members": [
         {
-          "user_id": "u009",
-          "name": "지우",
-          "school": "건국대",
-          "major": "화학공학부",
-          "college": "공과대학",
-          "year": 1,
+          "user_id": "u036",
+          "name": "학생36",
+          "school": "동국대",
+          "major": "법학과",
+          "college": "법과대학",
+          "year": 3,
           "interests": [
-            "리눅스",
-            "오픈소스",
-            "LP수집"
+            "철학",
+            "소설",
+            "등산"
           ]
         },
         {
-          "user_id": "u008",
-          "name": "현우",
-          "school": "중앙대",
-          "major": "소프트웨어학부",
-          "college": "소프트웨어대학",
-          "year": 1,
-          "interests": [
-            "보안",
-            "자작PC",
-            "사진"
-          ]
-        },
-        {
-          "user_id": "u045",
-          "name": "다은",
+          "user_id": "u043",
+          "name": "학생43",
           "school": "동국대",
           "major": "수학과",
           "college": "이과대학",
-          "year": 2,
+          "year": 1,
           "interests": [
-            "북클럽",
-            "철학",
-            "자작PC"
+            "소설",
+            "역사",
+            "클라이밍"
           ]
         },
         {
-          "user_id": "u013",
-          "name": "태윤",
+          "user_id": "u057",
+          "name": "학생57",
+          "school": "중앙대",
+          "major": "소프트웨어학부",
+          "college": "소프트웨어대학",
+          "year": 2,
+          "interests": [
+            "클라이밍",
+            "헬스",
+            "북클럽"
+          ]
+        },
+        {
+          "user_id": "u003",
+          "name": "학생03",
           "school": "서울여대",
-          "major": "데이터사이언스학과",
-          "college": "과학기술융합대학",
+          "major": "사학과",
+          "college": "인문대학",
           "year": 4,
           "interests": [
-            "라즈베리파이",
-            "자작PC",
-            "캠핑"
+            "철학",
+            "역사",
+            "클라이밍"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "재즈",
-        "사진",
-        "보드게임"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "자작PC"
+        "철학",
+        "소설",
+        "역사",
+        "클라이밍"
       ],
       "restaurant": {
         "name": "충무로 노포 분식",
@@ -243,141 +253,149 @@
       "group_id": "g_r1_02",
       "members": [
         {
-          "user_id": "u042",
-          "name": "도윤",
-          "school": "한양대",
-          "major": "컴퓨터소프트웨어학부",
-          "college": "공과대학",
-          "year": 3,
-          "interests": [
-            "보안",
-            "리눅스",
-            "영화제"
-          ]
-        },
-        {
-          "user_id": "u017",
-          "name": "서연",
-          "school": "한양대",
-          "major": "컴퓨터소프트웨어학부",
-          "college": "공과대학",
-          "year": 2,
-          "interests": [
-            "맛집탐방",
-            "커피",
-            "오픈소스"
-          ]
-        },
-        {
-          "user_id": "u053",
-          "name": "소율",
+          "user_id": "u008",
+          "name": "학생08",
           "school": "서울여대",
-          "major": "사학과",
-          "college": "인문대학",
-          "year": 3,
+          "major": "데이터사이언스학과",
+          "college": "과학기술융합대학",
+          "year": 1,
           "interests": [
-            "북클럽",
-            "소설",
-            "라즈베리파이"
+            "방탈출",
+            "인디게임",
+            "독립영화"
           ]
         },
         {
-          "user_id": "u055",
-          "name": "채원",
+          "user_id": "u022",
+          "name": "학생22",
+          "school": "동국대",
+          "major": "미술학부",
+          "college": "예술대학",
+          "year": 3,
+          "interests": [
+            "자전거여행",
+            "사진",
+            "방탈출"
+          ]
+        },
+        {
+          "user_id": "u027",
+          "name": "학생27",
+          "school": "한양대",
+          "major": "미디어커뮤니케이션학과",
+          "college": "사회과학대학",
+          "year": 3,
+          "interests": [
+            "철학",
+            "소설",
+            "공연관람"
+          ]
+        },
+        {
+          "user_id": "u028",
+          "name": "학생28",
           "school": "숭실대",
-          "major": "전자정보공학부",
-          "college": "IT대학",
+          "major": "영어영문학과",
+          "college": "인문대학",
           "year": 2,
           "interests": [
-            "홈서버",
-            "라즈베리파이",
-            "북클럽"
+            "독립영화",
+            "애니메이션",
+            "홈카페"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "베이킹",
-        "등산",
-        "클라이밍"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "북클럽",
-        "라즈베리파이"
+        "방탈출",
+        "독립영화"
       ],
       "restaurant": {
-        "name": "왕십리 국밥집",
-        "category": "한식",
-        "price": "0.9만",
-        "near": "한양대"
+        "name": "충무로 노포 분식",
+        "category": "분식",
+        "price": "0.7만",
+        "near": "동국대"
       }
     },
     {
       "group_id": "g_r1_03",
       "members": [
         {
-          "user_id": "u043",
-          "name": "지원",
+          "user_id": "u029",
+          "name": "학생29",
+          "school": "건국대",
+          "major": "화학공학부",
+          "college": "공과대학",
+          "year": 1,
+          "interests": [
+            "소설",
+            "북클럽",
+            "라즈베리파이"
+          ]
+        },
+        {
+          "user_id": "u046",
+          "name": "학생46",
           "school": "한양대",
           "major": "미디어커뮤니케이션학과",
           "college": "사회과학대학",
-          "year": 2,
+          "year": 1,
           "interests": [
-            "역사",
-            "북클럽",
-            "캠핑"
+            "홈서버",
+            "오픈소스",
+            "역사"
           ]
         },
         {
-          "user_id": "u047",
-          "name": "나연",
-          "school": "건국대",
-          "major": "수의예과",
-          "college": "수의과대학",
-          "year": 4,
-          "interests": [
-            "철학",
-            "소설",
-            "클라이밍"
-          ]
-        },
-        {
-          "user_id": "u051",
-          "name": "시우",
+          "user_id": "u012",
+          "name": "학생12",
           "school": "숭실대",
           "major": "소프트웨어학부",
           "college": "IT대학",
-          "year": 2,
+          "year": 1,
           "interests": [
-            "소설",
-            "북클럽",
-            "LP수집"
+            "보안",
+            "홈서버",
+            "러닝"
           ]
         },
         {
-          "user_id": "u021",
-          "name": "태윤",
-          "school": "서울여대",
-          "major": "데이터사이언스학과",
-          "college": "과학기술융합대학",
-          "year": 4,
+          "user_id": "u011",
+          "name": "학생11",
+          "school": "중앙대",
+          "major": "경영학부",
+          "college": "경영경제대학",
+          "year": 2,
           "interests": [
-            "북클럽",
-            "철학",
-            "밴드"
+            "홈서버",
+            "리눅스",
+            "위스키"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "홈서버",
-        "재즈",
-        "베이킹"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "북클럽",
-        "철학",
-        "소설"
+        "홈서버"
       ],
       "restaurant": {
         "name": "왕십리 국밥집",
@@ -390,141 +408,151 @@
       "group_id": "g_r1_04",
       "members": [
         {
-          "user_id": "u018",
-          "name": "준서",
-          "school": "숭실대",
-          "major": "영어영문학과",
-          "college": "인문대학",
+          "user_id": "u005",
+          "name": "학생05",
+          "school": "동국대",
+          "major": "미술학부",
+          "college": "예술대학",
           "year": 4,
           "interests": [
-            "재즈",
             "LP수집",
-            "홈서버"
+            "작곡",
+            "국내여행"
           ]
         },
         {
-          "user_id": "u036",
-          "name": "현우",
-          "school": "건국대",
-          "major": "화학공학부",
-          "college": "공과대학",
-          "year": 2,
-          "interests": [
-            "라즈베리파이",
-            "홈서버",
-            "밴드"
-          ]
-        },
-        {
-          "user_id": "u020",
-          "name": "지원",
-          "school": "서울여대",
-          "major": "사학과",
-          "college": "인문대학",
+          "user_id": "u016",
+          "name": "학생16",
+          "school": "숭실대",
+          "major": "경영학부",
+          "college": "경영대학",
           "year": 1,
           "interests": [
-            "홈서버",
-            "라즈베리파이",
+            "배낭여행",
+            "캠핑",
             "에세이"
           ]
         },
         {
-          "user_id": "u014",
-          "name": "도윤",
-          "school": "숭실대",
-          "major": "전자정보공학부",
-          "college": "IT대학",
+          "user_id": "u047",
+          "name": "학생47",
+          "school": "건국대",
+          "major": "철학과",
+          "college": "문과대학",
           "year": 2,
           "interests": [
-            "라즈베리파이",
-            "자작PC",
-            "역사"
+            "배낭여행",
+            "자전거여행",
+            "보드게임"
+          ]
+        },
+        {
+          "user_id": "u004",
+          "name": "학생04",
+          "school": "한양대",
+          "major": "미디어커뮤니케이션학과",
+          "college": "사회과학대학",
+          "year": 1,
+          "interests": [
+            "작곡",
+            "재즈",
+            "철학"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "독립영화",
-        "클라이밍",
-        "철학"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "홈서버",
-        "라즈베리파이"
+        "작곡",
+        "배낭여행"
       ],
       "restaurant": {
-        "name": "상도동 정육식당",
-        "category": "고기",
-        "price": "1.5만",
-        "near": "숭실대"
+        "name": "충무로 노포 분식",
+        "category": "분식",
+        "price": "0.7만",
+        "near": "동국대"
       }
     },
     {
       "group_id": "g_r1_05",
       "members": [
         {
-          "user_id": "u029",
-          "name": "지우",
-          "school": "서울여대",
-          "major": "사학과",
-          "college": "인문대학",
+          "user_id": "u024",
+          "name": "학생24",
+          "school": "한양대",
+          "major": "컴퓨터소프트웨어학부",
+          "college": "공과대학",
           "year": 2,
           "interests": [
+            "에세이",
             "철학",
-            "북클럽",
-            "수영"
+            "커피"
           ]
         },
         {
-          "user_id": "u001",
-          "name": "나연",
+          "user_id": "u049",
+          "name": "학생49",
           "school": "동국대",
-          "major": "수학과",
-          "college": "이과대학",
+          "major": "미술학부",
+          "college": "예술대학",
           "year": 1,
           "interests": [
             "철학",
-            "에세이",
-            "일본영화"
+            "북클럽",
+            "베이킹"
           ]
         },
         {
-          "user_id": "u046",
-          "name": "소율",
-          "school": "중앙대",
-          "major": "공연영상창작학부",
-          "college": "예술대학",
-          "year": 4,
-          "interests": [
-            "에세이",
-            "역사",
-            "보드게임"
-          ]
-        },
-        {
-          "user_id": "u054",
-          "name": "태윤",
+          "user_id": "u019",
+          "name": "학생19",
           "school": "동국대",
           "major": "법학과",
           "college": "법과대학",
-          "year": 4,
+          "year": 1,
           "interests": [
-            "독립영화",
-            "영화제",
-            "역사"
+            "역사",
+            "에세이",
+            "자전거여행"
+          ]
+        },
+        {
+          "user_id": "u025",
+          "name": "학생25",
+          "school": "동국대",
+          "major": "수학과",
+          "college": "이과대학",
+          "year": 2,
+          "interests": [
+            "북클럽",
+            "철학",
+            "일본영화"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "등산",
-        "사진",
-        "클라이밍"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "철학",
         "에세이",
-        "역사"
+        "철학",
+        "북클럽"
       ],
       "restaurant": {
         "name": "충무로 노포 분식",
@@ -537,68 +565,73 @@
       "group_id": "g_r1_06",
       "members": [
         {
-          "user_id": "u002",
-          "name": "나연",
+          "user_id": "u037",
+          "name": "학생37",
           "school": "한양대",
-          "major": "컴퓨터소프트웨어학부",
-          "college": "공과대학",
-          "year": 1,
-          "interests": [
-            "보드게임",
-            "롤",
-            "클라이밍"
-          ]
-        },
-        {
-          "user_id": "u011",
-          "name": "수빈",
-          "school": "동국대",
-          "major": "미술학부",
-          "college": "예술대학",
-          "year": 3,
-          "interests": [
-            "인디게임",
-            "FPS",
-            "다큐멘터리"
-          ]
-        },
-        {
-          "user_id": "u022",
-          "name": "채원",
-          "school": "동국대",
-          "major": "미술학부",
-          "college": "예술대학",
-          "year": 3,
-          "interests": [
-            "자전거여행",
-            "사진",
-            "방탈출"
-          ]
-        },
-        {
-          "user_id": "u026",
-          "name": "하은",
-          "school": "숭실대",
-          "major": "전자정보공학부",
-          "college": "IT대학",
+          "major": "미디어커뮤니케이션학과",
+          "college": "사회과학대학",
           "year": 2,
           "interests": [
-            "보드게임",
-            "인디게임",
-            "자전거여행"
+            "수영",
+            "등산",
+            "작곡"
+          ]
+        },
+        {
+          "user_id": "u007",
+          "name": "학생07",
+          "school": "중앙대",
+          "major": "공연영상창작학부",
+          "college": "예술대학",
+          "year": 1,
+          "interests": [
+            "헬스",
+            "수영",
+            "배낭여행"
+          ]
+        },
+        {
+          "user_id": "u014",
+          "name": "학생14",
+          "school": "건국대",
+          "major": "수의예과",
+          "college": "수의과대학",
+          "year": 4,
+          "interests": [
+            "주짓수",
+            "헬스",
+            "소설"
+          ]
+        },
+        {
+          "user_id": "u041",
+          "name": "학생41",
+          "school": "동국대",
+          "major": "법학과",
+          "college": "법과대학",
+          "year": 1,
+          "interests": [
+            "소설",
+            "철학",
+            "공연관람"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "독립영화",
-        "배낭여행",
-        "베이킹"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "보드게임",
-        "인디게임",
-        "자전거여행"
+        "수영",
+        "헬스",
+        "소설"
       ],
       "restaurant": {
         "name": "충무로 노포 분식",
@@ -611,140 +644,148 @@
       "group_id": "g_r1_07",
       "members": [
         {
-          "user_id": "u015",
-          "name": "하은",
-          "school": "숭실대",
-          "major": "전자정보공학부",
-          "college": "IT대학",
-          "year": 1,
-          "interests": [
-            "방탈출",
-            "인디게임",
-            "커피"
-          ]
-        },
-        {
-          "user_id": "u016",
-          "name": "다은",
-          "school": "중앙대",
-          "major": "경영학부",
-          "college": "경영경제대학",
-          "year": 2,
-          "interests": [
-            "커피",
-            "홈카페",
-            "FPS"
-          ]
-        },
-        {
-          "user_id": "u035",
-          "name": "채원",
+          "user_id": "u039",
+          "name": "학생39",
           "school": "숭실대",
           "major": "영어영문학과",
           "college": "인문대학",
-          "year": 1,
+          "year": 3,
           "interests": [
-            "베이킹",
-            "홈카페",
-            "등산"
+            "오픈소스",
+            "라즈베리파이",
+            "맛집탐방"
           ]
         },
         {
-          "user_id": "u056",
-          "name": "시우",
-          "school": "중앙대",
-          "major": "소프트웨어학부",
-          "college": "소프트웨어대학",
+          "user_id": "u002",
+          "name": "학생02",
+          "school": "한양대",
+          "major": "기계공학부",
+          "college": "공과대학",
           "year": 1,
           "interests": [
-            "베이킹",
-            "맛집탐방",
-            "리눅스"
+            "리눅스",
+            "라즈베리파이",
+            "역사"
+          ]
+        },
+        {
+          "user_id": "u015",
+          "name": "학생15",
+          "school": "숭실대",
+          "major": "소프트웨어학부",
+          "college": "IT대학",
+          "year": 2,
+          "interests": [
+            "라즈베리파이",
+            "자작PC",
+            "북클럽"
+          ]
+        },
+        {
+          "user_id": "u020",
+          "name": "학생20",
+          "school": "서울여대",
+          "major": "사학과",
+          "college": "인문대학",
+          "year": 2,
+          "interests": [
+            "다큐멘터리",
+            "애니메이션",
+            "철학"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "베이킹",
-        "보드게임",
-        "등산"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "커피",
-        "홈카페",
-        "베이킹"
+        "라즈베리파이"
       ],
       "restaurant": {
-        "name": "흑석 파스타바",
-        "category": "양식",
-        "price": "1.3만",
-        "near": "중앙대"
+        "name": "상도동 정육식당",
+        "category": "고기",
+        "price": "1.5만",
+        "near": "숭실대"
       }
     },
     {
       "group_id": "g_r1_08",
       "members": [
         {
-          "user_id": "u052",
-          "name": "민준",
-          "school": "숭실대",
-          "major": "전자정보공학부",
-          "college": "IT대학",
-          "year": 1,
+          "user_id": "u021",
+          "name": "학생21",
+          "school": "동국대",
+          "major": "미술학부",
+          "college": "예술대학",
+          "year": 4,
           "interests": [
-            "라즈베리파이",
-            "리눅스",
-            "커피"
+            "LP수집",
+            "밴드",
+            "홈카페"
           ]
         },
         {
-          "user_id": "u037",
-          "name": "수빈",
+          "user_id": "u032",
+          "name": "학생32",
+          "school": "건국대",
+          "major": "화학공학부",
+          "college": "공과대학",
+          "year": 4,
+          "interests": [
+            "커피",
+            "맛집탐방",
+            "작곡"
+          ]
+        },
+        {
+          "user_id": "u052",
+          "name": "학생52",
           "school": "중앙대",
           "major": "공연영상창작학부",
           "college": "예술대학",
           "year": 1,
           "interests": [
-            "LP수집",
             "재즈",
-            "철학"
+            "공연관람",
+            "커피"
           ]
         },
         {
-          "user_id": "u049",
-          "name": "도윤",
+          "user_id": "u009",
+          "name": "학생09",
           "school": "중앙대",
           "major": "소프트웨어학부",
           "college": "소프트웨어대학",
-          "year": 1,
+          "year": 2,
           "interests": [
-            "공연관람",
-            "밴드",
-            "주짓수"
-          ]
-        },
-        {
-          "user_id": "u007",
-          "name": "예준",
-          "school": "서울여대",
-          "major": "데이터사이언스학과",
-          "college": "과학기술융합대학",
-          "year": 4,
-          "interests": [
-            "보드게임",
-            "인디게임",
-            "철학"
+            "사진",
+            "국내여행",
+            "헬스"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "철학",
-        "독립영화",
-        "배낭여행"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "철학"
+        "커피"
       ],
       "restaurant": {
         "name": "흑석 파스타바",
@@ -757,8 +798,34 @@
       "group_id": "g_r1_09",
       "members": [
         {
+          "user_id": "u053",
+          "name": "학생53",
+          "school": "서울여대",
+          "major": "사학과",
+          "college": "인문대학",
+          "year": 4,
+          "interests": [
+            "일본영화",
+            "다큐멘터리",
+            "수영"
+          ]
+        },
+        {
+          "user_id": "u035",
+          "name": "학생35",
+          "school": "동국대",
+          "major": "수학과",
+          "college": "이과대학",
+          "year": 2,
+          "interests": [
+            "홈서버",
+            "자작PC",
+            "헬스"
+          ]
+        },
+        {
           "user_id": "u023",
-          "name": "지원",
+          "name": "학생23",
           "school": "한양대",
           "major": "미디어커뮤니케이션학과",
           "college": "사회과학대학",
@@ -770,275 +837,268 @@
           ]
         },
         {
-          "user_id": "u027",
-          "name": "준서",
-          "school": "중앙대",
-          "major": "소프트웨어학부",
-          "college": "소프트웨어대학",
-          "year": 3,
+          "user_id": "u034",
+          "name": "학생34",
+          "school": "서울여대",
+          "major": "데이터사이언스학과",
+          "college": "과학기술융합대학",
+          "year": 4,
           "interests": [
-            "오픈소스",
-            "라즈베리파이",
-            "등산"
-          ]
-        },
-        {
-          "user_id": "u031",
-          "name": "다은",
-          "school": "한양대",
-          "major": "기계공학부",
-          "college": "공과대학",
-          "year": 1,
-          "interests": [
-            "오픈소스",
-            "보안",
-            "러닝"
-          ]
-        },
-        {
-          "user_id": "u010",
-          "name": "지원",
-          "school": "숭실대",
-          "major": "영어영문학과",
-          "college": "인문대학",
-          "year": 2,
-          "interests": [
-            "영화제",
-            "일본영화",
-            "클라이밍"
+            "방탈출",
+            "롤",
+            "작곡"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "등산",
-        "베이킹",
-        "철학"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "러닝",
-        "오픈소스"
+        "수영"
       ],
       "restaurant": {
-        "name": "왕십리 국밥집",
-        "category": "한식",
-        "price": "0.9만",
-        "near": "한양대"
+        "name": "공릉 카레하우스",
+        "category": "일식",
+        "price": "1.1만",
+        "near": "서울여대"
       }
     },
     {
       "group_id": "g_r1_10",
       "members": [
         {
-          "user_id": "u032",
-          "name": "지우",
-          "school": "건국대",
-          "major": "화학공학부",
-          "college": "공과대학",
-          "year": 3,
-          "interests": [
-            "소설",
-            "에세이",
-            "밴드"
-          ]
-        },
-        {
-          "user_id": "u048",
-          "name": "시우",
-          "school": "건국대",
-          "major": "수의예과",
-          "college": "수의과대학",
-          "year": 1,
-          "interests": [
-            "역사",
-            "철학",
-            "수영"
-          ]
-        },
-        {
-          "user_id": "u039",
-          "name": "시우",
-          "school": "한양대",
-          "major": "미디어커뮤니케이션학과",
-          "college": "사회과학대학",
-          "year": 1,
-          "interests": [
-            "철학",
-            "북클럽",
-            "방탈출"
-          ]
-        },
-        {
-          "user_id": "u057",
-          "name": "지우",
+          "user_id": "u018",
+          "name": "학생18",
           "school": "서울여대",
           "major": "사학과",
           "college": "인문대학",
+          "year": 3,
+          "interests": [
+            "다큐멘터리",
+            "독립영화",
+            "재즈"
+          ]
+        },
+        {
+          "user_id": "u026",
+          "name": "학생26",
+          "school": "동국대",
+          "major": "수학과",
+          "college": "이과대학",
+          "year": 3,
+          "interests": [
+            "재즈",
+            "밴드",
+            "다큐멘터리"
+          ]
+        },
+        {
+          "user_id": "u006",
+          "name": "학생06",
+          "school": "서울여대",
+          "major": "데이터사이언스학과",
+          "college": "과학기술융합대학",
           "year": 1,
           "interests": [
-            "소설",
-            "북클럽",
-            "홈서버"
+            "영화제",
+            "독립영화",
+            "역사"
+          ]
+        },
+        {
+          "user_id": "u040",
+          "name": "학생40",
+          "school": "서울여대",
+          "major": "사학과",
+          "college": "인문대학",
+          "year": 4,
+          "interests": [
+            "위스키",
+            "커피",
+            "철학"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "사진",
-        "배낭여행",
-        "재즈"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "소설",
-        "철학",
-        "북클럽"
+        "다큐멘터리",
+        "독립영화",
+        "재즈"
       ],
       "restaurant": {
-        "name": "건대 양꼬치거리",
-        "category": "중식",
-        "price": "1.4만",
-        "near": "건국대"
+        "name": "공릉 카레하우스",
+        "category": "일식",
+        "price": "1.1만",
+        "near": "서울여대"
       }
     },
     {
       "group_id": "g_r1_11",
       "members": [
         {
-          "user_id": "u058",
-          "name": "민준",
-          "school": "중앙대",
-          "major": "경영학부",
-          "college": "경영경제대학",
-          "year": 1,
+          "user_id": "u042",
+          "name": "학생42",
+          "school": "한양대",
+          "major": "컴퓨터소프트웨어학부",
+          "college": "공과대학",
+          "year": 4,
           "interests": [
-            "일본영화",
-            "다큐멘터리",
-            "캠핑"
+            "보드게임",
+            "FPS",
+            "사진"
           ]
         },
         {
-          "user_id": "u059",
-          "name": "소율",
+          "user_id": "u058",
+          "name": "학생58",
           "school": "서울여대",
-          "major": "사학과",
-          "college": "인문대학",
-          "year": 1,
+          "major": "데이터사이언스학과",
+          "college": "과학기술융합대학",
+          "year": 4,
           "interests": [
-            "자전거여행",
-            "배낭여행",
-            "애니메이션"
+            "인디게임",
+            "FPS",
+            "독립영화"
           ]
         },
         {
           "user_id": "u050",
-          "name": "서연",
+          "name": "학생50",
           "school": "중앙대",
-          "major": "공연영상창작학부",
-          "college": "예술대학",
-          "year": 3,
+          "major": "소프트웨어학부",
+          "college": "소프트웨어대학",
+          "year": 1,
           "interests": [
-            "일본영화",
-            "다큐멘터리",
-            "LP수집"
+            "인디게임",
+            "보드게임",
+            "클라이밍"
           ]
         },
         {
-          "user_id": "u019",
-          "name": "다은",
-          "school": "건국대",
-          "major": "철학과",
-          "college": "문과대학",
-          "year": 2,
+          "user_id": "u030",
+          "name": "학생30",
+          "school": "동국대",
+          "major": "법학과",
+          "college": "법과대학",
+          "year": 4,
           "interests": [
-            "다큐멘터리",
+            "일본영화",
             "영화제",
-            "자전거여행"
+            "위스키"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "클라이밍",
-        "홈서버",
-        "재즈"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "일본영화",
-        "다큐멘터리",
-        "자전거여행"
+        "보드게임",
+        "FPS",
+        "인디게임"
       ],
       "restaurant": {
-        "name": "흑석 파스타바",
-        "category": "양식",
-        "price": "1.3만",
-        "near": "중앙대"
+        "name": "충무로 노포 분식",
+        "category": "분식",
+        "price": "0.7만",
+        "near": "동국대"
       }
     },
     {
       "group_id": "g_r1_12",
       "members": [
         {
-          "user_id": "u024",
-          "name": "도윤",
-          "school": "한양대",
-          "major": "컴퓨터소프트웨어학부",
-          "college": "공과대학",
-          "year": 2,
+          "user_id": "u010",
+          "name": "학생10",
+          "school": "숭실대",
+          "major": "소프트웨어학부",
+          "college": "IT대학",
+          "year": 3,
           "interests": [
-            "에세이",
-            "철학",
-            "커피"
+            "보드게임",
+            "인디게임",
+            "철학"
           ]
         },
         {
-          "user_id": "u038",
-          "name": "현우",
+          "user_id": "u045",
+          "name": "학생45",
+          "school": "한양대",
+          "major": "미디어커뮤니케이션학과",
+          "college": "사회과학대학",
+          "year": 2,
+          "interests": [
+            "북클럽",
+            "역사",
+            "클라이밍"
+          ]
+        },
+        {
+          "user_id": "u060",
+          "name": "학생60",
+          "school": "동국대",
+          "major": "법학과",
+          "college": "법과대학",
+          "year": 1,
+          "interests": [
+            "에세이",
+            "소설",
+            "주짓수"
+          ]
+        },
+        {
+          "user_id": "u001",
+          "name": "학생01",
           "school": "동국대",
           "major": "수학과",
           "college": "이과대학",
           "year": 1,
           "interests": [
-            "역사",
-            "북클럽",
-            "커피"
-          ]
-        },
-        {
-          "user_id": "u041",
-          "name": "하은",
-          "school": "서울여대",
-          "major": "사학과",
-          "college": "인문대학",
-          "year": 4,
-          "interests": [
-            "방탈출",
-            "보드게임",
-            "에세이"
-          ]
-        },
-        {
-          "user_id": "u004",
-          "name": "현우",
-          "school": "숭실대",
-          "major": "전자정보공학부",
-          "college": "IT대학",
-          "year": 1,
-          "interests": [
-            "캠핑",
-            "배낭여행",
-            "밴드"
+            "철학",
+            "에세이",
+            "일본영화"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "베이킹",
-        "홈서버",
-        "재즈"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "에세이",
-        "커피"
+        "철학",
+        "에세이"
       ],
       "restaurant": {
         "name": "충무로 노포 분식",
@@ -1051,147 +1111,154 @@
       "group_id": "g_r1_13",
       "members": [
         {
-          "user_id": "u033",
-          "name": "서연",
-          "school": "한양대",
-          "major": "미디어커뮤니케이션학과",
-          "college": "사회과학대학",
-          "year": 2,
-          "interests": [
-            "러닝",
-            "등산",
-            "FPS"
-          ]
-        },
-        {
-          "user_id": "u060",
-          "name": "서연",
-          "school": "동국대",
-          "major": "수학과",
-          "college": "이과대학",
-          "year": 1,
-          "interests": [
-            "주짓수",
-            "수영",
-            "공연관람"
-          ]
-        },
-        {
-          "user_id": "u040",
-          "name": "도윤",
-          "school": "동국대",
-          "major": "수학과",
-          "college": "이과대학",
-          "year": 4,
-          "interests": [
-            "주짓수",
-            "등산",
-            "라즈베리파이"
-          ]
-        },
-        {
-          "user_id": "u006",
-          "name": "준서",
+          "user_id": "u017",
+          "name": "학생17",
           "school": "중앙대",
           "major": "경영학부",
           "college": "경영경제대학",
-          "year": 1,
+          "year": 2,
           "interests": [
-            "홈카페",
-            "베이킹",
+            "배낭여행",
+            "자전거여행",
+            "밴드"
+          ]
+        },
+        {
+          "user_id": "u055",
+          "name": "학생55",
+          "school": "건국대",
+          "major": "화학공학부",
+          "college": "공과대학",
+          "year": 4,
+          "interests": [
+            "사진",
+            "캠핑",
+            "보드게임"
+          ]
+        },
+        {
+          "user_id": "u054",
+          "name": "학생54",
+          "school": "숭실대",
+          "major": "경영학부",
+          "college": "경영대학",
+          "year": 2,
+          "interests": [
+            "주짓수",
+            "등산",
+            "캠핑"
+          ]
+        },
+        {
+          "user_id": "u044",
+          "name": "학생44",
+          "school": "건국대",
+          "major": "수의예과",
+          "college": "수의과대학",
+          "year": 2,
+          "interests": [
+            "소설",
+            "북클럽",
             "캠핑"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "재즈",
-        "보드게임",
-        "독립영화"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "등산",
-        "주짓수"
+        "캠핑"
       ],
       "restaurant": {
-        "name": "충무로 노포 분식",
-        "category": "분식",
-        "price": "0.7만",
-        "near": "동국대"
+        "name": "건대 양꼬치거리",
+        "category": "중식",
+        "price": "1.4만",
+        "near": "건국대"
       }
     },
     {
       "group_id": "g_r1_14",
       "members": [
         {
-          "user_id": "u012",
-          "name": "시우",
-          "school": "건국대",
-          "major": "화학공학부",
-          "college": "공과대학",
-          "year": 2,
-          "interests": [
-            "공연관람",
-            "재즈",
-            "사진"
-          ]
-        },
-        {
-          "user_id": "u034",
-          "name": "건우",
-          "school": "동국대",
-          "major": "미술학부",
-          "college": "예술대학",
-          "year": 2,
-          "interests": [
-            "재즈",
-            "밴드",
-            "홈카페"
-          ]
-        },
-        {
-          "user_id": "u025",
-          "name": "나연",
+          "user_id": "u013",
+          "name": "학생13",
           "school": "중앙대",
-          "major": "경영학부",
-          "college": "경영경제대학",
+          "major": "공연영상창작학부",
+          "college": "예술대학",
           "year": 1,
           "interests": [
-            "위스키",
-            "홈카페",
-            "LP수집"
+            "LP수집",
+            "밴드",
+            "오픈소스"
           ]
         },
         {
-          "user_id": "u030",
-          "name": "현우",
-          "school": "서울여대",
-          "major": "사학과",
+          "user_id": "u033",
+          "name": "학생33",
+          "school": "숭실대",
+          "major": "영어영문학과",
           "college": "인문대학",
-          "year": 2,
+          "year": 1,
           "interests": [
-            "독립영화",
-            "영화제",
-            "밴드"
+            "에세이",
+            "북클럽",
+            "롤"
+          ]
+        },
+        {
+          "user_id": "u048",
+          "name": "학생48",
+          "school": "동국대",
+          "major": "법학과",
+          "college": "법과대학",
+          "year": 1,
+          "interests": [
+            "소설",
+            "역사",
+            "공연관람"
+          ]
+        },
+        {
+          "user_id": "u038",
+          "name": "학생38",
+          "school": "중앙대",
+          "major": "공연영상창작학부",
+          "college": "예술대학",
+          "year": 1,
+          "interests": [
+            "LP수집",
+            "재즈",
+            "철학"
           ]
         }
       ],
       "reason": "(stub)",
       "icebreakers": [
-        "배낭여행",
-        "사진",
-        "재즈"
+        "(stub)",
+        "(stub)",
+        "(stub)"
+      ],
+      "icebreaker_targets": [
+        [],
+        [],
+        []
       ],
       "overlap": [
-        "재즈",
-        "밴드",
-        "홈카페"
+        "LP수집"
       ],
       "restaurant": {
-        "name": "충무로 노포 분식",
-        "category": "분식",
-        "price": "0.7만",
-        "near": "동국대"
+        "name": "흑석 파스타바",
+        "category": "양식",
+        "price": "1.3만",
+        "near": "중앙대"
       }
     }
   ]

@@ -32,43 +32,41 @@
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.83,
+    "confidence": 0.73,
     "history": [],
     "met": [],
-    "name": "나연",
+    "name": "학생01",
     "theme": "독서",
-    "_mismatch": "N",
     "_true": {
       "O": 2,
       "C": 1,
       "E": 4,
       "A": 3,
-      "N": 5
+      "N": 4
     },
-    "_true_theme": "요리",
-    "_topic_mismatch": true,
+    "_true_theme": "독서",
     "_true_interests": [
-      "위스키",
-      "베이킹",
-      "커피"
+      "에세이",
+      "북클럽",
+      "소설"
     ],
     "_true_tags": [
-      "요리"
+      "독서"
     ],
     "_div_ideal": 0.836
   },
   {
     "user_id": "u002",
     "school": "한양대",
-    "major": "컴퓨터소프트웨어학부",
+    "major": "기계공학부",
     "college": "공과대학",
     "year": 1,
     "self_report": {
-      "O": 2,
-      "C": 4,
+      "O": 4,
+      "C": 5,
       "E": 3,
       "A": 3,
-      "N": 3
+      "N": 4
     },
     "behavior": {
       "O": 0.0,
@@ -78,53 +76,52 @@
       "N": 0.0
     },
     "interests": [
-      "보드게임",
-      "롤",
-      "클라이밍"
+      "리눅스",
+      "라즈베리파이",
+      "역사"
     ],
     "interest_weights": {
-      "게임": 1.0
+      "기술": 1.0
     },
     "tags": [
-      "게임"
+      "기술"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.64,
+    "confidence": 0.88,
     "history": [],
     "met": [],
-    "name": "나연",
-    "theme": "게임",
-    "_mismatch": "N",
+    "name": "학생02",
+    "theme": "기술",
     "_true": {
-      "O": 2,
-      "C": 4,
+      "O": 4,
+      "C": 5,
       "E": 3,
       "A": 3,
-      "N": 2
+      "N": 4
     },
-    "_true_theme": "게임",
+    "_true_theme": "기술",
     "_true_interests": [
-      "보드게임",
-      "방탈출",
-      "FPS"
+      "리눅스",
+      "홈서버",
+      "라즈베리파이"
     ],
     "_true_tags": [
-      "게임"
+      "기술"
     ],
-    "_div_ideal": 0.836
+    "_div_ideal": 0.953
   },
   {
     "user_id": "u003",
-    "school": "한양대",
-    "major": "기계공학부",
-    "college": "공과대학",
-    "year": 3,
+    "school": "서울여대",
+    "major": "사학과",
+    "college": "인문대학",
+    "year": 4,
     "self_report": {
-      "O": 3,
-      "C": 4,
+      "O": 4,
+      "C": 2,
       "E": 2,
-      "A": 2,
+      "A": 4,
       "N": 3
     },
     "behavior": {
@@ -135,9 +132,183 @@
       "N": 0.0
     },
     "interests": [
-      "독립영화",
-      "애니메이션",
+      "철학",
+      "역사",
+      "클라이밍"
+    ],
+    "interest_weights": {
+      "독서": 1.0,
+      "운동": 1.0
+    },
+    "tags": [
+      "독서",
+      "운동"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.73,
+    "history": [],
+    "met": [],
+    "name": "학생03",
+    "theme": "독서",
+    "_mismatch": "O",
+    "_true": {
+      "O": 5,
+      "C": 2,
+      "E": 2,
+      "A": 4,
+      "N": 3
+    },
+    "_true_theme": "독서",
+    "_true_interests": [
+      "에세이",
+      "철학",
+      "소설"
+    ],
+    "_true_tags": [
+      "독서"
+    ],
+    "_div_ideal": 0.758
+  },
+  {
+    "user_id": "u004",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
+    "year": 1,
+    "self_report": {
+      "O": 4,
+      "C": 2,
+      "E": 3,
+      "A": 3,
+      "N": 4
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "작곡",
+      "재즈",
+      "철학"
+    ],
+    "interest_weights": {
+      "음악": 1.0
+    },
+    "tags": [
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.61,
+    "history": [],
+    "met": [],
+    "name": "학생04",
+    "theme": "음악",
+    "_true": {
+      "O": 4,
+      "C": 2,
+      "E": 3,
+      "A": 3,
+      "N": 4
+    },
+    "_true_theme": "음악",
+    "_true_interests": [
+      "LP수집",
+      "밴드",
+      "공연관람"
+    ],
+    "_true_tags": [
+      "음악"
+    ],
+    "_div_ideal": 0.739
+  },
+  {
+    "user_id": "u005",
+    "school": "동국대",
+    "major": "미술학부",
+    "college": "예술대학",
+    "year": 4,
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 1,
+      "A": 3,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "LP수집",
+      "작곡",
+      "국내여행"
+    ],
+    "interest_weights": {
+      "음악": 1.0,
+      "여행": 1.0
+    },
+    "tags": [
+      "음악",
+      "여행"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.65,
+    "history": [],
+    "met": [],
+    "name": "학생05",
+    "theme": "음악",
+    "_true": {
+      "O": 3,
+      "C": 3,
+      "E": 1,
+      "A": 3,
+      "N": 3
+    },
+    "_true_theme": "요리",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "맛집탐방",
+      "커피",
       "위스키"
+    ],
+    "_true_tags": [
+      "요리"
+    ],
+    "_div_ideal": 0.767
+  },
+  {
+    "user_id": "u006",
+    "school": "서울여대",
+    "major": "데이터사이언스학과",
+    "college": "과학기술융합대학",
+    "year": 1,
+    "self_report": {
+      "O": 4,
+      "C": 4,
+      "E": 1,
+      "A": 4,
+      "N": 4
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "영화제",
+      "독립영화",
+      "역사"
     ],
     "interest_weights": {
       "영상": 1.0
@@ -147,42 +318,42 @@
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.68,
+    "confidence": 0.7,
     "history": [],
     "met": [],
-    "name": "지우",
+    "name": "학생06",
     "theme": "영상",
-    "_mismatch": "A",
     "_true": {
-      "O": 3,
+      "O": 4,
       "C": 4,
-      "E": 2,
-      "A": 1,
-      "N": 3
+      "E": 1,
+      "A": 4,
+      "N": 4
     },
-    "_true_theme": "영상",
+    "_true_theme": "독서",
+    "_topic_mismatch": true,
     "_true_interests": [
-      "영화제",
-      "다큐멘터리",
-      "독립영화"
+      "역사",
+      "철학",
+      "소설"
     ],
     "_true_tags": [
-      "영상"
+      "독서"
     ],
-    "_div_ideal": 0.778
+    "_div_ideal": 0.754
   },
   {
-    "user_id": "u004",
-    "school": "숭실대",
-    "major": "전자정보공학부",
-    "college": "IT대학",
+    "user_id": "u007",
+    "school": "중앙대",
+    "major": "공연영상창작학부",
+    "college": "예술대학",
     "year": 1,
     "self_report": {
       "O": 4,
-      "C": 2,
-      "E": 3,
-      "A": 2,
-      "N": 1
+      "C": 4,
+      "E": 5,
+      "A": 3,
+      "N": 3
     },
     "behavior": {
       "O": 0.0,
@@ -192,9 +363,125 @@
       "N": 0.0
     },
     "interests": [
-      "캠핑",
-      "배낭여행",
-      "밴드"
+      "헬스",
+      "수영",
+      "배낭여행"
+    ],
+    "interest_weights": {
+      "운동": 1.0
+    },
+    "tags": [
+      "운동"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.81,
+    "history": [],
+    "met": [],
+    "name": "학생07",
+    "theme": "운동",
+    "_mismatch": "A",
+    "_true": {
+      "O": 4,
+      "C": 4,
+      "E": 5,
+      "A": 1,
+      "N": 3
+    },
+    "_true_theme": "운동",
+    "_true_interests": [
+      "주짓수",
+      "러닝",
+      "등산"
+    ],
+    "_true_tags": [
+      "운동"
+    ],
+    "_div_ideal": 0.909
+  },
+  {
+    "user_id": "u008",
+    "school": "서울여대",
+    "major": "데이터사이언스학과",
+    "college": "과학기술융합대학",
+    "year": 1,
+    "self_report": {
+      "O": 2,
+      "C": 4,
+      "E": 2,
+      "A": 4,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "방탈출",
+      "인디게임",
+      "독립영화"
+    ],
+    "interest_weights": {
+      "게임": 1.0,
+      "영상": 1.0
+    },
+    "tags": [
+      "게임",
+      "영상"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.8,
+    "history": [],
+    "met": [],
+    "name": "학생08",
+    "theme": "게임",
+    "_true": {
+      "O": 2,
+      "C": 4,
+      "E": 2,
+      "A": 4,
+      "N": 2
+    },
+    "_true_theme": "영상",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "일본영화",
+      "영화제",
+      "독립영화"
+    ],
+    "_true_tags": [
+      "영상"
+    ],
+    "_div_ideal": 0.847
+  },
+  {
+    "user_id": "u009",
+    "school": "중앙대",
+    "major": "소프트웨어학부",
+    "college": "소프트웨어대학",
+    "year": 2,
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 4,
+      "A": 5,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "사진",
+      "국내여행",
+      "헬스"
     ],
     "interest_weights": {
       "여행": 1.0
@@ -204,156 +491,42 @@
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.64,
+    "confidence": 0.9,
     "history": [],
     "met": [],
-    "name": "현우",
+    "name": "학생09",
     "theme": "여행",
-    "_mismatch": "N",
+    "_mismatch": "O",
     "_true": {
-      "O": 4,
+      "O": 5,
       "C": 2,
-      "E": 3,
-      "A": 2,
+      "E": 4,
+      "A": 5,
       "N": 2
     },
-    "_true_theme": "요리",
-    "_topic_mismatch": true,
+    "_true_theme": "여행",
     "_true_interests": [
-      "커피",
-      "맛집탐방",
-      "홈카페"
+      "자전거여행",
+      "사진",
+      "국내여행"
     ],
     "_true_tags": [
-      "요리"
+      "여행"
     ],
-    "_div_ideal": 0.821
+    "_div_ideal": 0.761
   },
   {
-    "user_id": "u005",
-    "school": "중앙대",
-    "major": "공연영상창작학부",
-    "college": "예술대학",
-    "year": 1,
+    "user_id": "u010",
+    "school": "숭실대",
+    "major": "소프트웨어학부",
+    "college": "IT대학",
+    "year": 3,
     "self_report": {
       "O": 3,
-      "C": 2,
-      "E": 4,
+      "C": 4,
+      "E": 2,
       "A": 3,
-      "N": 4
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "일본영화",
-      "다큐멘터리",
-      "인디게임"
-    ],
-    "interest_weights": {
-      "영상": 1.0
-    },
-    "tags": [
-      "영상"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.67,
-    "history": [],
-    "met": [],
-    "name": "하은",
-    "theme": "영상",
-    "_true": {
-      "O": 3,
-      "C": 2,
-      "E": 4,
-      "A": 3,
-      "N": 4
-    },
-    "_true_theme": "영상",
-    "_true_interests": [
-      "독립영화",
-      "영화제",
-      "일본영화"
-    ],
-    "_true_tags": [
-      "영상"
-    ],
-    "_div_ideal": 0.816
-  },
-  {
-    "user_id": "u006",
-    "school": "중앙대",
-    "major": "경영학부",
-    "college": "경영경제대학",
-    "year": 1,
-    "self_report": {
-      "O": 4,
-      "C": 2,
-      "E": 3,
-      "A": 4,
-      "N": 4
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "홈카페",
-      "베이킹",
-      "캠핑"
-    ],
-    "interest_weights": {
-      "요리": 1.0
-    },
-    "tags": [
-      "요리"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.65,
-    "history": [],
-    "met": [],
-    "name": "준서",
-    "theme": "요리",
-    "_true": {
-      "O": 4,
-      "C": 2,
-      "E": 3,
-      "A": 4,
-      "N": 4
-    },
-    "_true_theme": "기술",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "라즈베리파이",
-      "자작PC",
-      "홈서버"
-    ],
-    "_true_tags": [
-      "기술"
-    ],
-    "_div_ideal": 1.0
-  },
-  {
-    "user_id": "u007",
-    "school": "서울여대",
-    "major": "데이터사이언스학과",
-    "college": "과학기술융합대학",
-    "year": 4,
-    "self_report": {
-      "O": 2,
-      "C": 1,
-      "E": 4,
-      "A": 4,
-      "N": 1
+      "N": 3
     },
     "behavior": {
       "O": 0.0,
@@ -368,47 +541,107 @@
       "철학"
     ],
     "interest_weights": {
-      "게임": 1.0
+      "게임": 1.0,
+      "독서": 1.0
     },
     "tags": [
-      "게임"
+      "게임",
+      "독서"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.73,
+    "confidence": 0.74,
     "history": [],
     "met": [],
-    "name": "예준",
+    "name": "학생10",
     "theme": "게임",
+    "_mismatch": "N",
     "_true": {
-      "O": 2,
-      "C": 1,
-      "E": 4,
-      "A": 4,
+      "O": 3,
+      "C": 4,
+      "E": 2,
+      "A": 3,
       "N": 1
     },
     "_true_theme": "게임",
     "_true_interests": [
-      "FPS",
-      "롤",
-      "방탈출"
+      "인디게임",
+      "방탈출",
+      "롤"
     ],
     "_true_tags": [
       "게임"
     ],
-    "_div_ideal": 0.628
+    "_div_ideal": 1.0
   },
   {
-    "user_id": "u008",
+    "user_id": "u011",
     "school": "중앙대",
+    "major": "경영학부",
+    "college": "경영경제대학",
+    "year": 2,
+    "self_report": {
+      "O": 4,
+      "C": 2,
+      "E": 3,
+      "A": 4,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "홈서버",
+      "리눅스",
+      "위스키"
+    ],
+    "interest_weights": {
+      "기술": 1.0
+    },
+    "tags": [
+      "기술"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.85,
+    "history": [],
+    "met": [],
+    "name": "학생11",
+    "theme": "기술",
+    "_mismatch": "E",
+    "_true": {
+      "O": 4,
+      "C": 2,
+      "E": 2,
+      "A": 4,
+      "N": 3
+    },
+    "_true_theme": "기술",
+    "_true_interests": [
+      "보안",
+      "오픈소스",
+      "홈서버"
+    ],
+    "_true_tags": [
+      "기술"
+    ],
+    "_div_ideal": 0.612
+  },
+  {
+    "user_id": "u012",
+    "school": "숭실대",
     "major": "소프트웨어학부",
-    "college": "소프트웨어대학",
+    "college": "IT대학",
     "year": 1,
     "self_report": {
       "O": 3,
       "C": 3,
-      "E": 3,
-      "A": 3,
+      "E": 4,
+      "A": 2,
       "N": 4
     },
     "behavior": {
@@ -420,67 +653,8 @@
     },
     "interests": [
       "보안",
-      "자작PC",
-      "사진"
-    ],
-    "interest_weights": {
-      "기술": 1.0,
-      "여행": 1.0
-    },
-    "tags": [
-      "기술",
-      "여행"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.86,
-    "history": [],
-    "met": [],
-    "name": "현우",
-    "theme": "기술",
-    "_true": {
-      "O": 3,
-      "C": 3,
-      "E": 3,
-      "A": 3,
-      "N": 4
-    },
-    "_true_theme": "영상",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "영화제",
-      "애니메이션",
-      "일본영화"
-    ],
-    "_true_tags": [
-      "영상"
-    ],
-    "_div_ideal": 0.687
-  },
-  {
-    "user_id": "u009",
-    "school": "건국대",
-    "major": "화학공학부",
-    "college": "공과대학",
-    "year": 1,
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 2,
-      "A": 2,
-      "N": 4
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "리눅스",
-      "오픈소스",
-      "LP수집"
+      "홈서버",
+      "러닝"
     ],
     "interest_weights": {
       "기술": 1.0
@@ -490,218 +664,40 @@
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.9,
+    "confidence": 0.92,
     "history": [],
     "met": [],
-    "name": "지우",
+    "name": "학생12",
     "theme": "기술",
-    "_mismatch": "N",
     "_true": {
       "O": 3,
       "C": 3,
-      "E": 2,
+      "E": 4,
       "A": 2,
-      "N": 5
-    },
-    "_true_theme": "영상",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "독립영화",
-      "애니메이션",
-      "일본영화"
-    ],
-    "_true_tags": [
-      "영상"
-    ],
-    "_div_ideal": 0.892
-  },
-  {
-    "user_id": "u010",
-    "school": "숭실대",
-    "major": "영어영문학과",
-    "college": "인문대학",
-    "year": 2,
-    "self_report": {
-      "O": 5,
-      "C": 2,
-      "E": 4,
-      "A": 4,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "영화제",
-      "일본영화",
-      "클라이밍"
-    ],
-    "interest_weights": {
-      "영상": 1.0,
-      "운동": 1.0
-    },
-    "tags": [
-      "영상",
-      "운동"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.83,
-    "history": [],
-    "met": [],
-    "name": "지원",
-    "theme": "영상",
-    "_true": {
-      "O": 5,
-      "C": 2,
-      "E": 4,
-      "A": 4,
-      "N": 3
-    },
-    "_true_theme": "게임",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "롤",
-      "FPS",
-      "인디게임"
-    ],
-    "_true_tags": [
-      "게임"
-    ],
-    "_div_ideal": 0.938
-  },
-  {
-    "user_id": "u011",
-    "school": "동국대",
-    "major": "미술학부",
-    "college": "예술대학",
-    "year": 3,
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 2,
-      "A": 3,
       "N": 4
     },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "인디게임",
-      "FPS",
-      "다큐멘터리"
-    ],
-    "interest_weights": {
-      "게임": 1.0
-    },
-    "tags": [
-      "게임"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.89,
-    "history": [],
-    "met": [],
-    "name": "수빈",
-    "theme": "게임",
-    "_mismatch": "N",
-    "_true": {
-      "O": 4,
-      "C": 3,
-      "E": 2,
-      "A": 3,
-      "N": 2
-    },
-    "_true_theme": "게임",
+    "_true_theme": "기술",
     "_true_interests": [
-      "보드게임",
-      "방탈출",
-      "FPS"
+      "보안",
+      "오픈소스",
+      "라즈베리파이"
     ],
     "_true_tags": [
-      "게임"
+      "기술"
     ],
-    "_div_ideal": 0.876
-  },
-  {
-    "user_id": "u012",
-    "school": "건국대",
-    "major": "화학공학부",
-    "college": "공과대학",
-    "year": 2,
-    "self_report": {
-      "O": 4,
-      "C": 4,
-      "E": 2,
-      "A": 3,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "공연관람",
-      "재즈",
-      "사진"
-    ],
-    "interest_weights": {
-      "음악": 1.0,
-      "여행": 1.0
-    },
-    "tags": [
-      "음악",
-      "여행"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.8,
-    "history": [],
-    "met": [],
-    "name": "시우",
-    "theme": "음악",
-    "_mismatch": "E",
-    "_true": {
-      "O": 4,
-      "C": 4,
-      "E": 3,
-      "A": 3,
-      "N": 3
-    },
-    "_true_theme": "게임",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "보드게임",
-      "방탈출",
-      "인디게임"
-    ],
-    "_true_tags": [
-      "게임"
-    ],
-    "_div_ideal": 0.998
+    "_div_ideal": 0.764
   },
   {
     "user_id": "u013",
-    "school": "서울여대",
-    "major": "데이터사이언스학과",
-    "college": "과학기술융합대학",
-    "year": 4,
+    "school": "중앙대",
+    "major": "공연영상창작학부",
+    "college": "예술대학",
+    "year": 1,
     "self_report": {
-      "O": 4,
+      "O": 2,
       "C": 2,
-      "E": 3,
-      "A": 3,
+      "E": 5,
+      "A": 2,
       "N": 4
     },
     "behavior": {
@@ -712,32 +708,33 @@
       "N": 0.0
     },
     "interests": [
-      "라즈베리파이",
-      "자작PC",
-      "캠핑"
+      "LP수집",
+      "밴드",
+      "오픈소스"
     ],
     "interest_weights": {
-      "기술": 1.0
+      "음악": 1.0
     },
     "tags": [
-      "기술"
+      "음악"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.6,
+    "confidence": 0.66,
     "history": [],
     "met": [],
-    "name": "태윤",
-    "theme": "기술",
-    "_mismatch": "N",
+    "name": "학생13",
+    "theme": "음악",
+    "_mismatch": "C",
     "_true": {
-      "O": 4,
-      "C": 2,
-      "E": 3,
-      "A": 3,
-      "N": 3
+      "O": 2,
+      "C": 3,
+      "E": 5,
+      "A": 2,
+      "N": 4
     },
     "_true_theme": "기술",
+    "_topic_mismatch": true,
     "_true_interests": [
       "홈서버",
       "자작PC",
@@ -746,12 +743,69 @@
     "_true_tags": [
       "기술"
     ],
-    "_div_ideal": 0.658
+    "_div_ideal": 0.83
   },
   {
     "user_id": "u014",
+    "school": "건국대",
+    "major": "수의예과",
+    "college": "수의과대학",
+    "year": 4,
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 3,
+      "A": 3,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "주짓수",
+      "헬스",
+      "소설"
+    ],
+    "interest_weights": {
+      "운동": 1.0
+    },
+    "tags": [
+      "운동"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.88,
+    "history": [],
+    "met": [],
+    "name": "학생14",
+    "theme": "운동",
+    "_mismatch": "E",
+    "_true": {
+      "O": 3,
+      "C": 3,
+      "E": 4,
+      "A": 3,
+      "N": 2
+    },
+    "_true_theme": "운동",
+    "_true_interests": [
+      "클라이밍",
+      "등산",
+      "수영"
+    ],
+    "_true_tags": [
+      "운동"
+    ],
+    "_div_ideal": 0.789
+  },
+  {
+    "user_id": "u015",
     "school": "숭실대",
-    "major": "전자정보공학부",
+    "major": "소프트웨어학부",
     "college": "IT대학",
     "year": 2,
     "self_report": {
@@ -759,7 +813,7 @@
       "C": 3,
       "E": 3,
       "A": 3,
-      "N": 2
+      "N": 4
     },
     "behavior": {
       "O": 0.0,
@@ -771,54 +825,52 @@
     "interests": [
       "라즈베리파이",
       "자작PC",
-      "역사"
+      "북클럽"
     ],
     "interest_weights": {
-      "기술": 1.0,
-      "독서": 1.0
+      "기술": 1.0
     },
     "tags": [
-      "기술",
-      "독서"
+      "기술"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.55,
+    "confidence": 0.91,
     "history": [],
     "met": [],
-    "name": "도윤",
+    "name": "학생15",
     "theme": "기술",
     "_true": {
       "O": 2,
       "C": 3,
       "E": 3,
       "A": 3,
-      "N": 2
+      "N": 4
     },
-    "_true_theme": "독서",
+    "_true_theme": "영상",
     "_topic_mismatch": true,
     "_true_interests": [
-      "북클럽",
-      "에세이",
-      "역사"
+      "일본영화",
+      "독립영화",
+      "다큐멘터리"
     ],
     "_true_tags": [
-      "독서"
+      "영상"
     ],
-    "_div_ideal": 0.651
+    "_div_ideal": 0.646
   },
   {
-    "user_id": "u015",
+    "user_id": "u016",
     "school": "숭실대",
-    "major": "전자정보공학부",
-    "college": "IT대학",
+    "major": "경영학부",
+    "college": "경영대학",
     "year": 1,
     "self_report": {
       "O": 4,
-      "C": 4,
-      "E": 4,
-      "A": 2,
-      "N": 4
+      "C": 2,
+      "E": 3,
+      "A": 3,
+      "N": 5
     },
     "behavior": {
       "O": 0.0,
@@ -828,55 +880,54 @@
       "N": 0.0
     },
     "interests": [
-      "방탈출",
-      "인디게임",
-      "커피"
+      "배낭여행",
+      "캠핑",
+      "에세이"
     ],
     "interest_weights": {
-      "게임": 1.0,
-      "요리": 1.0
+      "여행": 1.0
     },
     "tags": [
-      "게임",
-      "요리"
+      "여행"
     ],
     "interest_vec": [],
     "beta": 0.5,
     "confidence": 0.9,
     "history": [],
     "met": [],
-    "name": "하은",
-    "theme": "게임",
+    "name": "학생16",
+    "theme": "여행",
     "_true": {
       "O": 4,
-      "C": 4,
-      "E": 4,
-      "A": 2,
-      "N": 4
+      "C": 2,
+      "E": 3,
+      "A": 3,
+      "N": 5
     },
-    "_true_theme": "게임",
+    "_true_theme": "독서",
+    "_topic_mismatch": true,
     "_true_interests": [
-      "롤",
-      "인디게임",
-      "보드게임"
+      "역사",
+      "북클럽",
+      "에세이"
     ],
     "_true_tags": [
-      "게임"
+      "독서"
     ],
-    "_div_ideal": 0.623
+    "_div_ideal": 0.718
   },
   {
-    "user_id": "u016",
+    "user_id": "u017",
     "school": "중앙대",
     "major": "경영학부",
     "college": "경영경제대학",
     "year": 2,
     "self_report": {
       "O": 4,
-      "C": 4,
-      "E": 3,
-      "A": 3,
-      "N": 2
+      "C": 5,
+      "E": 2,
+      "A": 4,
+      "N": 3
     },
     "behavior": {
       "O": 0.0,
@@ -886,165 +937,51 @@
       "N": 0.0
     },
     "interests": [
-      "커피",
-      "홈카페",
-      "FPS"
+      "배낭여행",
+      "자전거여행",
+      "밴드"
     ],
     "interest_weights": {
-      "요리": 1.0
+      "여행": 1.0
     },
     "tags": [
-      "요리"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.63,
-    "history": [],
-    "met": [],
-    "name": "다은",
-    "theme": "요리",
-    "_true": {
-      "O": 4,
-      "C": 4,
-      "E": 3,
-      "A": 3,
-      "N": 2
-    },
-    "_true_theme": "요리",
-    "_true_interests": [
-      "홈카페",
-      "베이킹",
-      "위스키"
-    ],
-    "_true_tags": [
-      "요리"
-    ],
-    "_div_ideal": 0.835
-  },
-  {
-    "user_id": "u017",
-    "school": "한양대",
-    "major": "컴퓨터소프트웨어학부",
-    "college": "공과대학",
-    "year": 2,
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 3,
-      "A": 3,
-      "N": 4
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "맛집탐방",
-      "커피",
-      "오픈소스"
-    ],
-    "interest_weights": {
-      "요리": 1.0
-    },
-    "tags": [
-      "요리"
+      "여행"
     ],
     "interest_vec": [],
     "beta": 0.5,
     "confidence": 0.94,
     "history": [],
     "met": [],
-    "name": "서연",
-    "theme": "요리",
-    "_mismatch": "A",
+    "name": "학생17",
+    "theme": "여행",
+    "_mismatch": "O",
     "_true": {
-      "O": 4,
-      "C": 3,
-      "E": 3,
-      "A": 2,
-      "N": 4
+      "O": 3,
+      "C": 5,
+      "E": 2,
+      "A": 4,
+      "N": 3
     },
-    "_true_theme": "요리",
+    "_true_theme": "여행",
     "_true_interests": [
-      "위스키",
-      "커피",
-      "맛집탐방"
+      "사진",
+      "자전거여행",
+      "캠핑"
     ],
     "_true_tags": [
-      "요리"
+      "여행"
     ],
-    "_div_ideal": 0.806
+    "_div_ideal": 0.758
   },
   {
     "user_id": "u018",
-    "school": "숭실대",
-    "major": "영어영문학과",
+    "school": "서울여대",
+    "major": "사학과",
     "college": "인문대학",
-    "year": 4,
+    "year": 3,
     "self_report": {
-      "O": 1,
-      "C": 3,
-      "E": 2,
-      "A": 1,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "재즈",
-      "LP수집",
-      "홈서버"
-    ],
-    "interest_weights": {
-      "음악": 1.0,
-      "기술": 1.0
-    },
-    "tags": [
-      "음악",
-      "기술"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.67,
-    "history": [],
-    "met": [],
-    "name": "준서",
-    "theme": "음악",
-    "_true": {
-      "O": 1,
-      "C": 3,
-      "E": 2,
-      "A": 1,
-      "N": 3
-    },
-    "_true_theme": "음악",
-    "_true_interests": [
-      "재즈",
-      "작곡",
-      "LP수집"
-    ],
-    "_true_tags": [
-      "음악"
-    ],
-    "_div_ideal": 0.741
-  },
-  {
-    "user_id": "u019",
-    "school": "건국대",
-    "major": "철학과",
-    "college": "문과대학",
-    "year": 2,
-    "self_report": {
-      "O": 3,
-      "C": 2,
+      "O": 4,
+      "C": 4,
       "E": 3,
       "A": 2,
       "N": 2
@@ -1058,52 +995,54 @@
     },
     "interests": [
       "다큐멘터리",
-      "영화제",
-      "자전거여행"
+      "독립영화",
+      "재즈"
     ],
     "interest_weights": {
-      "영상": 1.0
+      "영상": 1.0,
+      "음악": 1.0
     },
     "tags": [
-      "영상"
+      "영상",
+      "음악"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.82,
+    "confidence": 0.72,
     "history": [],
     "met": [],
-    "name": "다은",
+    "name": "학생18",
     "theme": "영상",
-    "_mismatch": "N",
+    "_mismatch": "O",
     "_true": {
-      "O": 3,
-      "C": 2,
+      "O": 5,
+      "C": 4,
       "E": 3,
       "A": 2,
-      "N": 3
+      "N": 2
     },
     "_true_theme": "영상",
     "_true_interests": [
-      "애니메이션",
       "영화제",
-      "다큐멘터리"
+      "다큐멘터리",
+      "애니메이션"
     ],
     "_true_tags": [
       "영상"
     ],
-    "_div_ideal": 0.768
+    "_div_ideal": 0.731
   },
   {
-    "user_id": "u020",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
+    "user_id": "u019",
+    "school": "동국대",
+    "major": "법학과",
+    "college": "법과대학",
     "year": 1,
     "self_report": {
       "O": 2,
-      "C": 2,
-      "E": 5,
-      "A": 4,
+      "C": 4,
+      "E": 2,
+      "A": 3,
       "N": 3
     },
     "behavior": {
@@ -1114,47 +1053,107 @@
       "N": 0.0
     },
     "interests": [
-      "홈서버",
-      "라즈베리파이",
-      "에세이"
+      "역사",
+      "에세이",
+      "자전거여행"
     ],
     "interest_weights": {
-      "기술": 1.0
+      "독서": 1.0
     },
     "tags": [
-      "기술"
+      "독서"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.9,
+    "confidence": 0.63,
     "history": [],
     "met": [],
-    "name": "지원",
-    "theme": "기술",
-    "_mismatch": "A",
+    "name": "학생19",
+    "theme": "독서",
     "_true": {
       "O": 2,
-      "C": 2,
-      "E": 5,
-      "A": 5,
+      "C": 4,
+      "E": 2,
+      "A": 3,
       "N": 3
     },
-    "_true_theme": "기술",
+    "_true_theme": "요리",
+    "_topic_mismatch": true,
     "_true_interests": [
-      "홈서버",
+      "베이킹",
+      "위스키",
+      "홈카페"
+    ],
+    "_true_tags": [
+      "요리"
+    ],
+    "_div_ideal": 0.719
+  },
+  {
+    "user_id": "u020",
+    "school": "서울여대",
+    "major": "사학과",
+    "college": "인문대학",
+    "year": 2,
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 2,
+      "A": 2,
+      "N": 5
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "다큐멘터리",
+      "애니메이션",
+      "철학"
+    ],
+    "interest_weights": {
+      "영상": 1.0,
+      "독서": 1.0
+    },
+    "tags": [
+      "영상",
+      "독서"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.73,
+    "history": [],
+    "met": [],
+    "name": "학생20",
+    "theme": "영상",
+    "_mismatch": "C",
+    "_true": {
+      "O": 3,
+      "C": 1,
+      "E": 2,
+      "A": 2,
+      "N": 5
+    },
+    "_true_theme": "기술",
+    "_topic_mismatch": true,
+    "_true_interests": [
       "리눅스",
-      "보안"
+      "보안",
+      "홈서버"
     ],
     "_true_tags": [
       "기술"
     ],
-    "_div_ideal": 0.923
+    "_div_ideal": 0.984
   },
   {
     "user_id": "u021",
-    "school": "서울여대",
-    "major": "데이터사이언스학과",
-    "college": "과학기술융합대학",
+    "school": "동국대",
+    "major": "미술학부",
+    "college": "예술대학",
     "year": 4,
     "self_report": {
       "O": 3,
@@ -1171,25 +1170,25 @@
       "N": 0.0
     },
     "interests": [
-      "북클럽",
-      "철학",
-      "밴드"
+      "LP수집",
+      "밴드",
+      "홈카페"
     ],
     "interest_weights": {
-      "독서": 1.0,
-      "음악": 1.0
+      "음악": 1.0,
+      "요리": 1.0
     },
     "tags": [
-      "독서",
-      "음악"
+      "음악",
+      "요리"
     ],
     "interest_vec": [],
     "beta": 0.5,
     "confidence": 0.87,
     "history": [],
     "met": [],
-    "name": "태윤",
-    "theme": "독서",
+    "name": "학생21",
+    "theme": "음악",
     "_true": {
       "O": 3,
       "C": 3,
@@ -1197,14 +1196,15 @@
       "A": 1,
       "N": 4
     },
-    "_true_theme": "독서",
+    "_true_theme": "영상",
+    "_topic_mismatch": true,
     "_true_interests": [
-      "소설",
-      "북클럽",
-      "에세이"
+      "일본영화",
+      "애니메이션",
+      "영화제"
     ],
     "_true_tags": [
-      "독서"
+      "영상"
     ],
     "_div_ideal": 0.898
   },
@@ -1246,7 +1246,7 @@
     "confidence": 0.66,
     "history": [],
     "met": [],
-    "name": "채원",
+    "name": "학생22",
     "theme": "여행",
     "_true": {
       "O": 3,
@@ -1255,15 +1255,15 @@
       "A": 2,
       "N": 3
     },
-    "_true_theme": "운동",
+    "_true_theme": "음악",
     "_topic_mismatch": true,
     "_true_interests": [
-      "등산",
-      "헬스",
-      "러닝"
+      "재즈",
+      "작곡",
+      "공연관람"
     ],
     "_true_tags": [
-      "운동"
+      "음악"
     ],
     "_div_ideal": 0.59
   },
@@ -1302,10 +1302,10 @@
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.93,
+    "confidence": 0.55,
     "history": [],
     "met": [],
-    "name": "지원",
+    "name": "학생23",
     "theme": "운동",
     "_true": {
       "O": 3,
@@ -1314,14 +1314,15 @@
       "A": 4,
       "N": 5
     },
-    "_true_theme": "운동",
+    "_true_theme": "게임",
+    "_topic_mismatch": true,
     "_true_interests": [
-      "수영",
-      "등산",
-      "클라이밍"
+      "방탈출",
+      "롤",
+      "인디게임"
     ],
     "_true_tags": [
-      "운동"
+      "게임"
     ],
     "_div_ideal": 0.907
   },
@@ -1360,10 +1361,10 @@
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.81,
+    "confidence": 0.79,
     "history": [],
     "met": [],
-    "name": "도윤",
+    "name": "학생24",
     "theme": "독서",
     "_true": {
       "O": 3,
@@ -1374,9 +1375,9 @@
     },
     "_true_theme": "독서",
     "_true_interests": [
-      "북클럽",
+      "에세이",
       "소설",
-      "에세이"
+      "철학"
     ],
     "_true_tags": [
       "독서"
@@ -1385,131 +1386,16 @@
   },
   {
     "user_id": "u025",
-    "school": "중앙대",
-    "major": "경영학부",
-    "college": "경영경제대학",
-    "year": 1,
+    "school": "동국대",
+    "major": "수학과",
+    "college": "이과대학",
+    "year": 2,
     "self_report": {
-      "O": 2,
+      "O": 3,
       "C": 4,
       "E": 2,
-      "A": 4,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "위스키",
-      "홈카페",
-      "LP수집"
-    ],
-    "interest_weights": {
-      "요리": 1.0,
-      "음악": 1.0
-    },
-    "tags": [
-      "요리",
-      "음악"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.63,
-    "history": [],
-    "met": [],
-    "name": "나연",
-    "theme": "요리",
-    "_mismatch": "E",
-    "_true": {
-      "O": 2,
-      "C": 4,
-      "E": 1,
-      "A": 4,
-      "N": 3
-    },
-    "_true_theme": "요리",
-    "_true_interests": [
-      "베이킹",
-      "맛집탐방",
-      "커피"
-    ],
-    "_true_tags": [
-      "요리"
-    ],
-    "_div_ideal": 0.74
-  },
-  {
-    "user_id": "u026",
-    "school": "숭실대",
-    "major": "전자정보공학부",
-    "college": "IT대학",
-    "year": 2,
-    "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 4,
-      "A": 4,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "보드게임",
-      "인디게임",
-      "자전거여행"
-    ],
-    "interest_weights": {
-      "게임": 1.0
-    },
-    "tags": [
-      "게임"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.93,
-    "history": [],
-    "met": [],
-    "name": "하은",
-    "theme": "게임",
-    "_true": {
-      "O": 3,
-      "C": 2,
-      "E": 4,
-      "A": 4,
-      "N": 3
-    },
-    "_true_theme": "게임",
-    "_true_interests": [
-      "방탈출",
-      "롤",
-      "인디게임"
-    ],
-    "_true_tags": [
-      "게임"
-    ],
-    "_div_ideal": 0.761
-  },
-  {
-    "user_id": "u027",
-    "school": "중앙대",
-    "major": "소프트웨어학부",
-    "college": "소프트웨어대학",
-    "year": 3,
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 5,
       "A": 3,
-      "N": 2
+      "N": 4
     },
     "behavior": {
       "O": 0.0,
@@ -1519,301 +1405,9 @@
       "N": 0.0
     },
     "interests": [
-      "오픈소스",
-      "라즈베리파이",
-      "등산"
-    ],
-    "interest_weights": {
-      "기술": 1.0,
-      "운동": 1.0
-    },
-    "tags": [
-      "기술",
-      "운동"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.62,
-    "history": [],
-    "met": [],
-    "name": "준서",
-    "theme": "기술",
-    "_mismatch": "A",
-    "_true": {
-      "O": 3,
-      "C": 3,
-      "E": 5,
-      "A": 4,
-      "N": 2
-    },
-    "_true_theme": "음악",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "LP수집",
-      "밴드",
-      "공연관람"
-    ],
-    "_true_tags": [
-      "음악"
-    ],
-    "_div_ideal": 0.924
-  },
-  {
-    "user_id": "u028",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 2,
-    "self_report": {
-      "O": 4,
-      "C": 2,
-      "E": 5,
-      "A": 4,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "애니메이션",
-      "독립영화",
-      "위스키"
-    ],
-    "interest_weights": {
-      "영상": 1.0
-    },
-    "tags": [
-      "영상"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.66,
-    "history": [],
-    "met": [],
-    "name": "준서",
-    "theme": "영상",
-    "_mismatch": "E",
-    "_true": {
-      "O": 4,
-      "C": 2,
-      "E": 4,
-      "A": 4,
-      "N": 3
-    },
-    "_true_theme": "영상",
-    "_true_interests": [
-      "독립영화",
-      "영화제",
-      "다큐멘터리"
-    ],
-    "_true_tags": [
-      "영상"
-    ],
-    "_div_ideal": 0.954
-  },
-  {
-    "user_id": "u029",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 2,
-    "self_report": {
-      "O": 2,
-      "C": 3,
-      "E": 2,
-      "A": 3,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "철학",
       "북클럽",
-      "수영"
-    ],
-    "interest_weights": {
-      "독서": 1.0,
-      "운동": 1.0
-    },
-    "tags": [
-      "독서",
-      "운동"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.95,
-    "history": [],
-    "met": [],
-    "name": "지우",
-    "theme": "독서",
-    "_mismatch": "N",
-    "_true": {
-      "O": 2,
-      "C": 3,
-      "E": 2,
-      "A": 3,
-      "N": 2
-    },
-    "_true_theme": "독서",
-    "_true_interests": [
-      "에세이",
-      "역사",
-      "철학"
-    ],
-    "_true_tags": [
-      "독서"
-    ],
-    "_div_ideal": 0.827
-  },
-  {
-    "user_id": "u030",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 2,
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 4,
-      "A": 4,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "독립영화",
-      "영화제",
-      "밴드"
-    ],
-    "interest_weights": {
-      "영상": 1.0,
-      "음악": 1.0
-    },
-    "tags": [
-      "영상",
-      "음악"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.88,
-    "history": [],
-    "met": [],
-    "name": "현우",
-    "theme": "영상",
-    "_true": {
-      "O": 3,
-      "C": 3,
-      "E": 4,
-      "A": 4,
-      "N": 3
-    },
-    "_true_theme": "영상",
-    "_true_interests": [
-      "영화제",
-      "독립영화",
+      "철학",
       "일본영화"
-    ],
-    "_true_tags": [
-      "영상"
-    ],
-    "_div_ideal": 0.743
-  },
-  {
-    "user_id": "u031",
-    "school": "한양대",
-    "major": "기계공학부",
-    "college": "공과대학",
-    "year": 1,
-    "self_report": {
-      "O": 3,
-      "C": 5,
-      "E": 2,
-      "A": 3,
-      "N": 4
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "오픈소스",
-      "보안",
-      "러닝"
-    ],
-    "interest_weights": {
-      "기술": 1.0,
-      "운동": 1.0
-    },
-    "tags": [
-      "기술",
-      "운동"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.93,
-    "history": [],
-    "met": [],
-    "name": "다은",
-    "theme": "기술",
-    "_true": {
-      "O": 3,
-      "C": 5,
-      "E": 2,
-      "A": 3,
-      "N": 4
-    },
-    "_true_theme": "기술",
-    "_true_interests": [
-      "자작PC",
-      "홈서버",
-      "라즈베리파이"
-    ],
-    "_true_tags": [
-      "기술"
-    ],
-    "_div_ideal": 0.992
-  },
-  {
-    "user_id": "u032",
-    "school": "건국대",
-    "major": "화학공학부",
-    "college": "공과대학",
-    "year": 3,
-    "self_report": {
-      "O": 4,
-      "C": 4,
-      "E": 2,
-      "A": 5,
-      "N": 4
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "소설",
-      "에세이",
-      "밴드"
     ],
     "interest_weights": {
       "독서": 1.0
@@ -1823,560 +1417,43 @@
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.95,
+    "confidence": 0.81,
     "history": [],
     "met": [],
-    "name": "지우",
+    "name": "학생25",
     "theme": "독서",
+    "_mismatch": "O",
     "_true": {
       "O": 4,
       "C": 4,
       "E": 2,
-      "A": 5,
-      "N": 4
-    },
-    "_true_theme": "독서",
-    "_true_interests": [
-      "북클럽",
-      "역사",
-      "에세이"
-    ],
-    "_true_tags": [
-      "독서"
-    ],
-    "_div_ideal": 0.958
-  },
-  {
-    "user_id": "u033",
-    "school": "한양대",
-    "major": "미디어커뮤니케이션학과",
-    "college": "사회과학대학",
-    "year": 2,
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 3,
       "A": 3,
       "N": 4
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "러닝",
-      "등산",
-      "FPS"
-    ],
-    "interest_weights": {
-      "운동": 1.0
-    },
-    "tags": [
-      "운동"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.87,
-    "history": [],
-    "met": [],
-    "name": "서연",
-    "theme": "운동",
-    "_mismatch": "E",
-    "_true": {
-      "O": 3,
-      "C": 3,
-      "E": 5,
-      "A": 3,
-      "N": 4
-    },
-    "_true_theme": "운동",
-    "_true_interests": [
-      "클라이밍",
-      "러닝",
-      "헬스"
-    ],
-    "_true_tags": [
-      "운동"
-    ],
-    "_div_ideal": 0.822
-  },
-  {
-    "user_id": "u034",
-    "school": "동국대",
-    "major": "미술학부",
-    "college": "예술대학",
-    "year": 2,
-    "self_report": {
-      "O": 4,
-      "C": 2,
-      "E": 3,
-      "A": 3,
-      "N": 2
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "재즈",
-      "밴드",
-      "홈카페"
-    ],
-    "interest_weights": {
-      "음악": 1.0
-    },
-    "tags": [
-      "음악"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.58,
-    "history": [],
-    "met": [],
-    "name": "건우",
-    "theme": "음악",
-    "_mismatch": "E",
-    "_true": {
-      "O": 4,
-      "C": 2,
-      "E": 5,
-      "A": 3,
-      "N": 2
-    },
-    "_true_theme": "음악",
-    "_true_interests": [
-      "작곡",
-      "LP수집",
-      "밴드"
-    ],
-    "_true_tags": [
-      "음악"
-    ],
-    "_div_ideal": 1.0
-  },
-  {
-    "user_id": "u035",
-    "school": "숭실대",
-    "major": "영어영문학과",
-    "college": "인문대학",
-    "year": 1,
-    "self_report": {
-      "O": 4,
-      "C": 2,
-      "E": 5,
-      "A": 2,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "베이킹",
-      "홈카페",
-      "등산"
-    ],
-    "interest_weights": {
-      "요리": 1.0,
-      "운동": 1.0
-    },
-    "tags": [
-      "요리",
-      "운동"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.72,
-    "history": [],
-    "met": [],
-    "name": "채원",
-    "theme": "요리",
-    "_true": {
-      "O": 4,
-      "C": 2,
-      "E": 5,
-      "A": 2,
-      "N": 3
     },
     "_true_theme": "요리",
+    "_topic_mismatch": true,
     "_true_interests": [
+      "베이킹",
       "위스키",
-      "홈카페",
       "맛집탐방"
     ],
     "_true_tags": [
       "요리"
     ],
-    "_div_ideal": 0.736
+    "_div_ideal": 0.754
   },
   {
-    "user_id": "u036",
-    "school": "건국대",
-    "major": "화학공학부",
-    "college": "공과대학",
-    "year": 2,
-    "self_report": {
-      "O": 2,
-      "C": 4,
-      "E": 2,
-      "A": 5,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "라즈베리파이",
-      "홈서버",
-      "밴드"
-    ],
-    "interest_weights": {
-      "기술": 1.0,
-      "음악": 1.0
-    },
-    "tags": [
-      "기술",
-      "음악"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.72,
-    "history": [],
-    "met": [],
-    "name": "현우",
-    "theme": "기술",
-    "_mismatch": "A",
-    "_true": {
-      "O": 2,
-      "C": 4,
-      "E": 2,
-      "A": 5,
-      "N": 3
-    },
-    "_true_theme": "기술",
-    "_true_interests": [
-      "홈서버",
-      "보안",
-      "리눅스"
-    ],
-    "_true_tags": [
-      "기술"
-    ],
-    "_div_ideal": 0.68
-  },
-  {
-    "user_id": "u037",
-    "school": "중앙대",
-    "major": "공연영상창작학부",
-    "college": "예술대학",
-    "year": 1,
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 3,
-      "A": 5,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "LP수집",
-      "재즈",
-      "철학"
-    ],
-    "interest_weights": {
-      "음악": 1.0
-    },
-    "tags": [
-      "음악"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.93,
-    "history": [],
-    "met": [],
-    "name": "수빈",
-    "theme": "음악",
-    "_mismatch": "O",
-    "_true": {
-      "O": 4,
-      "C": 3,
-      "E": 3,
-      "A": 5,
-      "N": 3
-    },
-    "_true_theme": "음악",
-    "_true_interests": [
-      "밴드",
-      "재즈",
-      "공연관람"
-    ],
-    "_true_tags": [
-      "음악"
-    ],
-    "_div_ideal": 0.823
-  },
-  {
-    "user_id": "u038",
+    "user_id": "u026",
     "school": "동국대",
     "major": "수학과",
     "college": "이과대학",
-    "year": 1,
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 2,
-      "A": 3,
-      "N": 4
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "역사",
-      "북클럽",
-      "커피"
-    ],
-    "interest_weights": {
-      "독서": 1.0
-    },
-    "tags": [
-      "독서"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.66,
-    "history": [],
-    "met": [],
-    "name": "현우",
-    "theme": "독서",
-    "_true": {
-      "O": 4,
-      "C": 3,
-      "E": 2,
-      "A": 3,
-      "N": 4
-    },
-    "_true_theme": "독서",
-    "_true_interests": [
-      "역사",
-      "에세이",
-      "소설"
-    ],
-    "_true_tags": [
-      "독서"
-    ],
-    "_div_ideal": 0.753
-  },
-  {
-    "user_id": "u039",
-    "school": "한양대",
-    "major": "미디어커뮤니케이션학과",
-    "college": "사회과학대학",
-    "year": 1,
-    "self_report": {
-      "O": 2,
-      "C": 3,
-      "E": 3,
-      "A": 2,
-      "N": 5
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "철학",
-      "북클럽",
-      "방탈출"
-    ],
-    "interest_weights": {
-      "독서": 1.0
-    },
-    "tags": [
-      "독서"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.87,
-    "history": [],
-    "met": [],
-    "name": "시우",
-    "theme": "독서",
-    "_mismatch": "A",
-    "_true": {
-      "O": 2,
-      "C": 3,
-      "E": 3,
-      "A": 1,
-      "N": 5
-    },
-    "_true_theme": "음악",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "LP수집",
-      "공연관람",
-      "작곡"
-    ],
-    "_true_tags": [
-      "음악"
-    ],
-    "_div_ideal": 0.721
-  },
-  {
-    "user_id": "u040",
-    "school": "동국대",
-    "major": "수학과",
-    "college": "이과대학",
-    "year": 4,
-    "self_report": {
-      "O": 4,
-      "C": 2,
-      "E": 2,
-      "A": 3,
-      "N": 2
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "주짓수",
-      "등산",
-      "라즈베리파이"
-    ],
-    "interest_weights": {
-      "운동": 1.0,
-      "기술": 1.0
-    },
-    "tags": [
-      "운동",
-      "기술"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.89,
-    "history": [],
-    "met": [],
-    "name": "도윤",
-    "theme": "운동",
-    "_mismatch": "E",
-    "_true": {
-      "O": 4,
-      "C": 2,
-      "E": 1,
-      "A": 3,
-      "N": 2
-    },
-    "_true_theme": "운동",
-    "_true_interests": [
-      "수영",
-      "클라이밍",
-      "헬스"
-    ],
-    "_true_tags": [
-      "운동"
-    ],
-    "_div_ideal": 0.871
-  },
-  {
-    "user_id": "u041",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 4,
-    "self_report": {
-      "O": 4,
-      "C": 4,
-      "E": 5,
-      "A": 2,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "방탈출",
-      "보드게임",
-      "에세이"
-    ],
-    "interest_weights": {
-      "게임": 1.0,
-      "독서": 1.0
-    },
-    "tags": [
-      "게임",
-      "독서"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.87,
-    "history": [],
-    "met": [],
-    "name": "하은",
-    "theme": "게임",
-    "_true": {
-      "O": 4,
-      "C": 4,
-      "E": 5,
-      "A": 2,
-      "N": 3
-    },
-    "_true_theme": "게임",
-    "_true_interests": [
-      "보드게임",
-      "방탈출",
-      "인디게임"
-    ],
-    "_true_tags": [
-      "게임"
-    ],
-    "_div_ideal": 0.692
-  },
-  {
-    "user_id": "u042",
-    "school": "한양대",
-    "major": "컴퓨터소프트웨어학부",
-    "college": "공과대학",
     "year": 3,
     "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 4,
-      "A": 4,
-      "N": 2
+      "O": 4,
+      "C": 4,
+      "E": 2,
+      "A": 3,
+      "N": 3
     },
     "behavior": {
       "O": 0.0,
@@ -2386,168 +1463,54 @@
       "N": 0.0
     },
     "interests": [
-      "보안",
-      "리눅스",
-      "영화제"
+      "재즈",
+      "밴드",
+      "다큐멘터리"
     ],
     "interest_weights": {
-      "기술": 1.0,
+      "음악": 1.0,
       "영상": 1.0
     },
     "tags": [
-      "기술",
+      "음악",
       "영상"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.58,
-    "history": [],
-    "met": [],
-    "name": "도윤",
-    "theme": "기술",
-    "_mismatch": "E",
-    "_true": {
-      "O": 3,
-      "C": 2,
-      "E": 5,
-      "A": 4,
-      "N": 2
-    },
-    "_true_theme": "운동",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "수영",
-      "헬스",
-      "러닝"
-    ],
-    "_true_tags": [
-      "운동"
-    ],
-    "_div_ideal": 0.942
-  },
-  {
-    "user_id": "u043",
-    "school": "한양대",
-    "major": "미디어커뮤니케이션학과",
-    "college": "사회과학대학",
-    "year": 2,
-    "self_report": {
-      "O": 3,
-      "C": 4,
-      "E": 2,
-      "A": 3,
-      "N": 2
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "역사",
-      "북클럽",
-      "캠핑"
-    ],
-    "interest_weights": {
-      "독서": 1.0
-    },
-    "tags": [
-      "독서"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.9,
-    "history": [],
-    "met": [],
-    "name": "지원",
-    "theme": "독서",
-    "_true": {
-      "O": 3,
-      "C": 4,
-      "E": 2,
-      "A": 3,
-      "N": 2
-    },
-    "_true_theme": "독서",
-    "_true_interests": [
-      "역사",
-      "소설",
-      "에세이"
-    ],
-    "_true_tags": [
-      "독서"
-    ],
-    "_div_ideal": 0.751
-  },
-  {
-    "user_id": "u044",
-    "school": "동국대",
-    "major": "수학과",
-    "college": "이과대학",
-    "year": 1,
-    "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 3,
-      "A": 4,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "FPS",
-      "인디게임",
-      "에세이"
-    ],
-    "interest_weights": {
-      "게임": 1.0
-    },
-    "tags": [
-      "게임"
     ],
     "interest_vec": [],
     "beta": 0.5,
     "confidence": 0.78,
     "history": [],
     "met": [],
-    "name": "하은",
-    "theme": "게임",
+    "name": "학생26",
+    "theme": "음악",
     "_true": {
-      "O": 3,
-      "C": 2,
-      "E": 3,
-      "A": 4,
-      "N": 3
-    },
-    "_true_theme": "게임",
-    "_true_interests": [
-      "FPS",
-      "롤",
-      "보드게임"
-    ],
-    "_true_tags": [
-      "게임"
-    ],
-    "_div_ideal": 0.615
-  },
-  {
-    "user_id": "u045",
-    "school": "동국대",
-    "major": "수학과",
-    "college": "이과대학",
-    "year": 2,
-    "self_report": {
       "O": 4,
       "C": 4,
-      "E": 4,
+      "E": 2,
       "A": 3,
+      "N": 3
+    },
+    "_true_theme": "음악",
+    "_true_interests": [
+      "밴드",
+      "작곡",
+      "재즈"
+    ],
+    "_true_tags": [
+      "음악"
+    ],
+    "_div_ideal": 0.625
+  },
+  {
+    "user_id": "u027",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
+    "year": 3,
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 4,
+      "A": 4,
       "N": 4
     },
     "behavior": {
@@ -2558,9 +1521,126 @@
       "N": 0.0
     },
     "interests": [
-      "북클럽",
       "철학",
-      "자작PC"
+      "소설",
+      "공연관람"
+    ],
+    "interest_weights": {
+      "독서": 1.0,
+      "음악": 1.0
+    },
+    "tags": [
+      "독서",
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.81,
+    "history": [],
+    "met": [],
+    "name": "학생27",
+    "theme": "독서",
+    "_true": {
+      "O": 3,
+      "C": 2,
+      "E": 4,
+      "A": 4,
+      "N": 4
+    },
+    "_true_theme": "음악",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "작곡",
+      "재즈",
+      "공연관람"
+    ],
+    "_true_tags": [
+      "음악"
+    ],
+    "_div_ideal": 0.689
+  },
+  {
+    "user_id": "u028",
+    "school": "숭실대",
+    "major": "영어영문학과",
+    "college": "인문대학",
+    "year": 2,
+    "self_report": {
+      "O": 2,
+      "C": 4,
+      "E": 4,
+      "A": 3,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "독립영화",
+      "애니메이션",
+      "홈카페"
+    ],
+    "interest_weights": {
+      "영상": 1.0,
+      "요리": 1.0
+    },
+    "tags": [
+      "영상",
+      "요리"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.66,
+    "history": [],
+    "met": [],
+    "name": "학생28",
+    "theme": "영상",
+    "_true": {
+      "O": 2,
+      "C": 4,
+      "E": 4,
+      "A": 3,
+      "N": 3
+    },
+    "_true_theme": "영상",
+    "_true_interests": [
+      "독립영화",
+      "다큐멘터리",
+      "일본영화"
+    ],
+    "_true_tags": [
+      "영상"
+    ],
+    "_div_ideal": 0.681
+  },
+  {
+    "user_id": "u029",
+    "school": "건국대",
+    "major": "화학공학부",
+    "college": "공과대학",
+    "year": 1,
+    "self_report": {
+      "O": 3,
+      "C": 4,
+      "E": 3,
+      "A": 2,
+      "N": 4
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "소설",
+      "북클럽",
+      "라즈베리파이"
     ],
     "interest_weights": {
       "독서": 1.0,
@@ -2575,33 +1655,846 @@
     "confidence": 0.85,
     "history": [],
     "met": [],
-    "name": "다은",
+    "name": "학생29",
     "theme": "독서",
     "_true": {
-      "O": 4,
+      "O": 3,
       "C": 4,
-      "E": 4,
-      "A": 3,
+      "E": 3,
+      "A": 2,
       "N": 4
+    },
+    "_true_theme": "영상",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "애니메이션",
+      "영화제",
+      "독립영화"
+    ],
+    "_true_tags": [
+      "영상"
+    ],
+    "_div_ideal": 0.693
+  },
+  {
+    "user_id": "u030",
+    "school": "동국대",
+    "major": "법학과",
+    "college": "법과대학",
+    "year": 4,
+    "self_report": {
+      "O": 3,
+      "C": 4,
+      "E": 3,
+      "A": 4,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "일본영화",
+      "영화제",
+      "위스키"
+    ],
+    "interest_weights": {
+      "영상": 1.0,
+      "요리": 1.0
+    },
+    "tags": [
+      "영상",
+      "요리"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.65,
+    "history": [],
+    "met": [],
+    "name": "학생30",
+    "theme": "영상",
+    "_true": {
+      "O": 3,
+      "C": 4,
+      "E": 3,
+      "A": 4,
+      "N": 2
+    },
+    "_true_theme": "영상",
+    "_true_interests": [
+      "애니메이션",
+      "독립영화",
+      "다큐멘터리"
+    ],
+    "_true_tags": [
+      "영상"
+    ],
+    "_div_ideal": 0.845
+  },
+  {
+    "user_id": "u031",
+    "school": "숭실대",
+    "major": "전자정보공학부",
+    "college": "IT대학",
+    "year": 1,
+    "self_report": {
+      "O": 3,
+      "C": 1,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "자작PC",
+      "리눅스",
+      "독립영화"
+    ],
+    "interest_weights": {
+      "기술": 1.0,
+      "영상": 1.0
+    },
+    "tags": [
+      "기술",
+      "영상"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.81,
+    "history": [],
+    "met": [],
+    "name": "학생31",
+    "theme": "기술",
+    "_mismatch": "N",
+    "_true": {
+      "O": 3,
+      "C": 1,
+      "E": 2,
+      "A": 3,
+      "N": 2
     },
     "_true_theme": "운동",
     "_topic_mismatch": true,
     "_true_interests": [
-      "수영",
-      "클라이밍",
+      "주짓수",
+      "헬스",
       "러닝"
     ],
     "_true_tags": [
       "운동"
     ],
-    "_div_ideal": 0.703
+    "_div_ideal": 0.867
   },
   {
-    "user_id": "u046",
+    "user_id": "u032",
+    "school": "건국대",
+    "major": "화학공학부",
+    "college": "공과대학",
+    "year": 4,
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 4,
+      "A": 3,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "커피",
+      "맛집탐방",
+      "작곡"
+    ],
+    "interest_weights": {
+      "요리": 1.0,
+      "음악": 1.0
+    },
+    "tags": [
+      "요리",
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.95,
+    "history": [],
+    "met": [],
+    "name": "학생32",
+    "theme": "요리",
+    "_true": {
+      "O": 3,
+      "C": 3,
+      "E": 4,
+      "A": 3,
+      "N": 3
+    },
+    "_true_theme": "게임",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "방탈출",
+      "FPS",
+      "보드게임"
+    ],
+    "_true_tags": [
+      "게임"
+    ],
+    "_div_ideal": 0.711
+  },
+  {
+    "user_id": "u033",
+    "school": "숭실대",
+    "major": "영어영문학과",
+    "college": "인문대학",
+    "year": 1,
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 2,
+      "A": 2,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "에세이",
+      "북클럽",
+      "롤"
+    ],
+    "interest_weights": {
+      "독서": 1.0
+    },
+    "tags": [
+      "독서"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.65,
+    "history": [],
+    "met": [],
+    "name": "학생33",
+    "theme": "독서",
+    "_true": {
+      "O": 4,
+      "C": 3,
+      "E": 2,
+      "A": 2,
+      "N": 3
+    },
+    "_true_theme": "영상",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "독립영화",
+      "일본영화",
+      "애니메이션"
+    ],
+    "_true_tags": [
+      "영상"
+    ],
+    "_div_ideal": 0.802
+  },
+  {
+    "user_id": "u034",
+    "school": "서울여대",
+    "major": "데이터사이언스학과",
+    "college": "과학기술융합대학",
+    "year": 4,
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 3,
+      "A": 5,
+      "N": 4
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "방탈출",
+      "롤",
+      "작곡"
+    ],
+    "interest_weights": {
+      "게임": 1.0,
+      "음악": 1.0
+    },
+    "tags": [
+      "게임",
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.77,
+    "history": [],
+    "met": [],
+    "name": "학생34",
+    "theme": "게임",
+    "_true": {
+      "O": 4,
+      "C": 3,
+      "E": 3,
+      "A": 5,
+      "N": 4
+    },
+    "_true_theme": "게임",
+    "_true_interests": [
+      "인디게임",
+      "롤",
+      "보드게임"
+    ],
+    "_true_tags": [
+      "게임"
+    ],
+    "_div_ideal": 0.858
+  },
+  {
+    "user_id": "u035",
+    "school": "동국대",
+    "major": "수학과",
+    "college": "이과대학",
+    "year": 2,
+    "self_report": {
+      "O": 2,
+      "C": 2,
+      "E": 4,
+      "A": 3,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "홈서버",
+      "자작PC",
+      "헬스"
+    ],
+    "interest_weights": {
+      "기술": 1.0,
+      "운동": 1.0
+    },
+    "tags": [
+      "기술",
+      "운동"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.91,
+    "history": [],
+    "met": [],
+    "name": "학생35",
+    "theme": "기술",
+    "_true": {
+      "O": 2,
+      "C": 2,
+      "E": 4,
+      "A": 3,
+      "N": 2
+    },
+    "_true_theme": "기술",
+    "_true_interests": [
+      "홈서버",
+      "보안",
+      "오픈소스"
+    ],
+    "_true_tags": [
+      "기술"
+    ],
+    "_div_ideal": 0.84
+  },
+  {
+    "user_id": "u036",
+    "school": "동국대",
+    "major": "법학과",
+    "college": "법과대학",
+    "year": 3,
+    "self_report": {
+      "O": 4,
+      "C": 2,
+      "E": 3,
+      "A": 2,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "철학",
+      "소설",
+      "등산"
+    ],
+    "interest_weights": {
+      "독서": 1.0,
+      "운동": 1.0
+    },
+    "tags": [
+      "독서",
+      "운동"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.71,
+    "history": [],
+    "met": [],
+    "name": "학생36",
+    "theme": "독서",
+    "_true": {
+      "O": 4,
+      "C": 2,
+      "E": 3,
+      "A": 2,
+      "N": 2
+    },
+    "_true_theme": "독서",
+    "_true_interests": [
+      "소설",
+      "북클럽",
+      "철학"
+    ],
+    "_true_tags": [
+      "독서"
+    ],
+    "_div_ideal": 0.805
+  },
+  {
+    "user_id": "u037",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
+    "year": 2,
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 3,
+      "A": 3,
+      "N": 4
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "수영",
+      "등산",
+      "작곡"
+    ],
+    "interest_weights": {
+      "운동": 1.0,
+      "음악": 1.0
+    },
+    "tags": [
+      "운동",
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.72,
+    "history": [],
+    "met": [],
+    "name": "학생37",
+    "theme": "운동",
+    "_true": {
+      "O": 3,
+      "C": 2,
+      "E": 3,
+      "A": 3,
+      "N": 4
+    },
+    "_true_theme": "운동",
+    "_true_interests": [
+      "클라이밍",
+      "주짓수",
+      "수영"
+    ],
+    "_true_tags": [
+      "운동"
+    ],
+    "_div_ideal": 0.868
+  },
+  {
+    "user_id": "u038",
     "school": "중앙대",
     "major": "공연영상창작학부",
     "college": "예술대학",
+    "year": 1,
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 3,
+      "A": 5,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "LP수집",
+      "재즈",
+      "철학"
+    ],
+    "interest_weights": {
+      "음악": 1.0
+    },
+    "tags": [
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.64,
+    "history": [],
+    "met": [],
+    "name": "학생38",
+    "theme": "음악",
+    "_true": {
+      "O": 3,
+      "C": 3,
+      "E": 3,
+      "A": 5,
+      "N": 3
+    },
+    "_true_theme": "운동",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "주짓수",
+      "수영",
+      "클라이밍"
+    ],
+    "_true_tags": [
+      "운동"
+    ],
+    "_div_ideal": 0.823
+  },
+  {
+    "user_id": "u039",
+    "school": "숭실대",
+    "major": "영어영문학과",
+    "college": "인문대학",
+    "year": 3,
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "오픈소스",
+      "라즈베리파이",
+      "맛집탐방"
+    ],
+    "interest_weights": {
+      "기술": 1.0,
+      "요리": 1.0
+    },
+    "tags": [
+      "기술",
+      "요리"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.69,
+    "history": [],
+    "met": [],
+    "name": "학생39",
+    "theme": "기술",
+    "_true": {
+      "O": 3,
+      "C": 2,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "_true_theme": "기술",
+    "_true_interests": [
+      "홈서버",
+      "라즈베리파이",
+      "리눅스"
+    ],
+    "_true_tags": [
+      "기술"
+    ],
+    "_div_ideal": 0.838
+  },
+  {
+    "user_id": "u040",
+    "school": "서울여대",
+    "major": "사학과",
+    "college": "인문대학",
     "year": 4,
+    "self_report": {
+      "O": 2,
+      "C": 3,
+      "E": 2,
+      "A": 4,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "위스키",
+      "커피",
+      "철학"
+    ],
+    "interest_weights": {
+      "요리": 1.0
+    },
+    "tags": [
+      "요리"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.85,
+    "history": [],
+    "met": [],
+    "name": "학생40",
+    "theme": "요리",
+    "_mismatch": "A",
+    "_true": {
+      "O": 2,
+      "C": 3,
+      "E": 2,
+      "A": 3,
+      "N": 2
+    },
+    "_true_theme": "요리",
+    "_true_interests": [
+      "커피",
+      "베이킹",
+      "홈카페"
+    ],
+    "_true_tags": [
+      "요리"
+    ],
+    "_div_ideal": 1.0
+  },
+  {
+    "user_id": "u041",
+    "school": "동국대",
+    "major": "법학과",
+    "college": "법과대학",
+    "year": 1,
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 4,
+      "A": 4,
+      "N": 5
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "소설",
+      "철학",
+      "공연관람"
+    ],
+    "interest_weights": {
+      "독서": 1.0,
+      "음악": 1.0
+    },
+    "tags": [
+      "독서",
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.86,
+    "history": [],
+    "met": [],
+    "name": "학생41",
+    "theme": "독서",
+    "_true": {
+      "O": 4,
+      "C": 3,
+      "E": 4,
+      "A": 4,
+      "N": 5
+    },
+    "_true_theme": "독서",
+    "_true_interests": [
+      "철학",
+      "소설",
+      "에세이"
+    ],
+    "_true_tags": [
+      "독서"
+    ],
+    "_div_ideal": 0.975
+  },
+  {
+    "user_id": "u042",
+    "school": "한양대",
+    "major": "컴퓨터소프트웨어학부",
+    "college": "공과대학",
+    "year": 4,
+    "self_report": {
+      "O": 2,
+      "C": 4,
+      "E": 3,
+      "A": 2,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "보드게임",
+      "FPS",
+      "사진"
+    ],
+    "interest_weights": {
+      "게임": 1.0,
+      "여행": 1.0
+    },
+    "tags": [
+      "게임",
+      "여행"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.85,
+    "history": [],
+    "met": [],
+    "name": "학생42",
+    "theme": "게임",
+    "_true": {
+      "O": 2,
+      "C": 4,
+      "E": 3,
+      "A": 2,
+      "N": 3
+    },
+    "_true_theme": "영상",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "일본영화",
+      "애니메이션",
+      "영화제"
+    ],
+    "_true_tags": [
+      "영상"
+    ],
+    "_div_ideal": 0.797
+  },
+  {
+    "user_id": "u043",
+    "school": "동국대",
+    "major": "수학과",
+    "college": "이과대학",
+    "year": 1,
+    "self_report": {
+      "O": 3,
+      "C": 4,
+      "E": 4,
+      "A": 4,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "소설",
+      "역사",
+      "클라이밍"
+    ],
+    "interest_weights": {
+      "독서": 1.0,
+      "운동": 1.0
+    },
+    "tags": [
+      "독서",
+      "운동"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.61,
+    "history": [],
+    "met": [],
+    "name": "학생43",
+    "theme": "독서",
+    "_true": {
+      "O": 3,
+      "C": 4,
+      "E": 4,
+      "A": 4,
+      "N": 2
+    },
+    "_true_theme": "독서",
+    "_true_interests": [
+      "철학",
+      "북클럽",
+      "역사"
+    ],
+    "_true_tags": [
+      "독서"
+    ],
+    "_div_ideal": 0.734
+  },
+  {
+    "user_id": "u044",
+    "school": "건국대",
+    "major": "수의예과",
+    "college": "수의과대학",
+    "year": 2,
     "self_report": {
       "O": 3,
       "C": 3,
@@ -2617,55 +2510,56 @@
       "N": 0.0
     },
     "interests": [
-      "에세이",
-      "역사",
-      "보드게임"
+      "소설",
+      "북클럽",
+      "캠핑"
     ],
     "interest_weights": {
-      "독서": 1.0
+      "독서": 1.0,
+      "여행": 1.0
     },
     "tags": [
-      "독서"
+      "독서",
+      "여행"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.58,
+    "confidence": 0.7,
     "history": [],
     "met": [],
-    "name": "소율",
+    "name": "학생44",
     "theme": "독서",
-    "_mismatch": "C",
     "_true": {
       "O": 3,
-      "C": 4,
+      "C": 3,
       "E": 2,
       "A": 3,
       "N": 2
     },
-    "_true_theme": "요리",
+    "_true_theme": "음악",
     "_topic_mismatch": true,
     "_true_interests": [
-      "위스키",
-      "홈카페",
-      "맛집탐방"
+      "LP수집",
+      "재즈",
+      "공연관람"
     ],
     "_true_tags": [
-      "요리"
+      "음악"
     ],
-    "_div_ideal": 0.661
+    "_div_ideal": 0.73
   },
   {
-    "user_id": "u047",
-    "school": "건국대",
-    "major": "수의예과",
-    "college": "수의과대학",
-    "year": 4,
+    "user_id": "u045",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
+    "year": 2,
     "self_report": {
-      "O": 3,
-      "C": 4,
-      "E": 5,
-      "A": 4,
-      "N": 4
+      "O": 2,
+      "C": 2,
+      "E": 3,
+      "A": 3,
+      "N": 2
     },
     "behavior": {
       "O": 0.0,
@@ -2675,8 +2569,8 @@
       "N": 0.0
     },
     "interests": [
-      "철학",
-      "소설",
+      "북클럽",
+      "역사",
       "클라이밍"
     ],
     "interest_weights": {
@@ -2687,444 +2581,42 @@
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.59,
+    "confidence": 0.63,
     "history": [],
     "met": [],
-    "name": "나연",
+    "name": "학생45",
     "theme": "독서",
     "_true": {
-      "O": 3,
-      "C": 4,
-      "E": 5,
-      "A": 4,
-      "N": 4
-    },
-    "_true_theme": "독서",
-    "_true_interests": [
-      "철학",
-      "북클럽",
-      "역사"
-    ],
-    "_true_tags": [
-      "독서"
-    ],
-    "_div_ideal": 0.919
-  },
-  {
-    "user_id": "u048",
-    "school": "건국대",
-    "major": "수의예과",
-    "college": "수의과대학",
-    "year": 1,
-    "self_report": {
-      "O": 2,
-      "C": 3,
-      "E": 1,
-      "A": 5,
-      "N": 2
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "역사",
-      "철학",
-      "수영"
-    ],
-    "interest_weights": {
-      "독서": 1.0
-    },
-    "tags": [
-      "독서"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.86,
-    "history": [],
-    "met": [],
-    "name": "시우",
-    "theme": "독서",
-    "_mismatch": "O",
-    "_true": {
-      "O": 3,
-      "C": 3,
-      "E": 1,
-      "A": 5,
-      "N": 2
-    },
-    "_true_theme": "영상",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "영화제",
-      "일본영화",
-      "애니메이션"
-    ],
-    "_true_tags": [
-      "영상"
-    ],
-    "_div_ideal": 1.0
-  },
-  {
-    "user_id": "u049",
-    "school": "중앙대",
-    "major": "소프트웨어학부",
-    "college": "소프트웨어대학",
-    "year": 1,
-    "self_report": {
-      "O": 3,
-      "C": 5,
-      "E": 3,
-      "A": 3,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "공연관람",
-      "밴드",
-      "주짓수"
-    ],
-    "interest_weights": {
-      "음악": 1.0
-    },
-    "tags": [
-      "음악"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.56,
-    "history": [],
-    "met": [],
-    "name": "도윤",
-    "theme": "음악",
-    "_true": {
-      "O": 3,
-      "C": 5,
-      "E": 3,
-      "A": 3,
-      "N": 3
-    },
-    "_true_theme": "음악",
-    "_true_interests": [
-      "재즈",
-      "공연관람",
-      "LP수집"
-    ],
-    "_true_tags": [
-      "음악"
-    ],
-    "_div_ideal": 0.815
-  },
-  {
-    "user_id": "u050",
-    "school": "중앙대",
-    "major": "공연영상창작학부",
-    "college": "예술대학",
-    "year": 3,
-    "self_report": {
-      "O": 2,
-      "C": 3,
-      "E": 1,
-      "A": 3,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "일본영화",
-      "다큐멘터리",
-      "LP수집"
-    ],
-    "interest_weights": {
-      "영상": 1.0
-    },
-    "tags": [
-      "영상"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.81,
-    "history": [],
-    "met": [],
-    "name": "서연",
-    "theme": "영상",
-    "_true": {
-      "O": 2,
-      "C": 3,
-      "E": 1,
-      "A": 3,
-      "N": 3
-    },
-    "_true_theme": "영상",
-    "_true_interests": [
-      "영화제",
-      "독립영화",
-      "다큐멘터리"
-    ],
-    "_true_tags": [
-      "영상"
-    ],
-    "_div_ideal": 0.815
-  },
-  {
-    "user_id": "u051",
-    "school": "숭실대",
-    "major": "소프트웨어학부",
-    "college": "IT대학",
-    "year": 2,
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 3,
-      "A": 3,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "소설",
-      "북클럽",
-      "LP수집"
-    ],
-    "interest_weights": {
-      "독서": 1.0
-    },
-    "tags": [
-      "독서"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.87,
-    "history": [],
-    "met": [],
-    "name": "시우",
-    "theme": "독서",
-    "_true": {
-      "O": 3,
-      "C": 3,
-      "E": 3,
-      "A": 3,
-      "N": 3
-    },
-    "_true_theme": "독서",
-    "_true_interests": [
-      "북클럽",
-      "에세이",
-      "소설"
-    ],
-    "_true_tags": [
-      "독서"
-    ],
-    "_div_ideal": 0.988
-  },
-  {
-    "user_id": "u052",
-    "school": "숭실대",
-    "major": "전자정보공학부",
-    "college": "IT대학",
-    "year": 1,
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 2,
-      "A": 4,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "라즈베리파이",
-      "리눅스",
-      "커피"
-    ],
-    "interest_weights": {
-      "기술": 1.0
-    },
-    "tags": [
-      "기술"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.77,
-    "history": [],
-    "met": [],
-    "name": "민준",
-    "theme": "기술",
-    "_true": {
-      "O": 3,
-      "C": 3,
-      "E": 2,
-      "A": 4,
-      "N": 3
-    },
-    "_true_theme": "운동",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "등산",
-      "헬스",
-      "러닝"
-    ],
-    "_true_tags": [
-      "운동"
-    ],
-    "_div_ideal": 0.869
-  },
-  {
-    "user_id": "u053",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 3,
-    "self_report": {
-      "O": 2,
-      "C": 3,
-      "E": 2,
-      "A": 3,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "북클럽",
-      "소설",
-      "라즈베리파이"
-    ],
-    "interest_weights": {
-      "독서": 1.0,
-      "기술": 1.0
-    },
-    "tags": [
-      "독서",
-      "기술"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.92,
-    "history": [],
-    "met": [],
-    "name": "소율",
-    "theme": "독서",
-    "_mismatch": "E",
-    "_true": {
-      "O": 2,
-      "C": 3,
-      "E": 3,
-      "A": 3,
-      "N": 3
-    },
-    "_true_theme": "음악",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "공연관람",
-      "재즈",
-      "작곡"
-    ],
-    "_true_tags": [
-      "음악"
-    ],
-    "_div_ideal": 0.749
-  },
-  {
-    "user_id": "u054",
-    "school": "동국대",
-    "major": "법학과",
-    "college": "법과대학",
-    "year": 4,
-    "self_report": {
-      "O": 5,
-      "C": 3,
-      "E": 2,
-      "A": 3,
-      "N": 4
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "독립영화",
-      "영화제",
-      "역사"
-    ],
-    "interest_weights": {
-      "영상": 1.0,
-      "독서": 1.0
-    },
-    "tags": [
-      "영상",
-      "독서"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.79,
-    "history": [],
-    "met": [],
-    "name": "태윤",
-    "theme": "영상",
-    "_mismatch": "A",
-    "_true": {
-      "O": 5,
-      "C": 3,
-      "E": 2,
-      "A": 4,
-      "N": 4
-    },
-    "_true_theme": "음악",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "작곡",
-      "공연관람",
-      "LP수집"
-    ],
-    "_true_tags": [
-      "음악"
-    ],
-    "_div_ideal": 0.952
-  },
-  {
-    "user_id": "u055",
-    "school": "숭실대",
-    "major": "전자정보공학부",
-    "college": "IT대학",
-    "year": 2,
-    "self_report": {
       "O": 2,
       "C": 2,
-      "E": 2,
+      "E": 3,
       "A": 3,
-      "N": 3
+      "N": 2
+    },
+    "_true_theme": "게임",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "FPS",
+      "인디게임",
+      "방탈출"
+    ],
+    "_true_tags": [
+      "게임"
+    ],
+    "_div_ideal": 0.733
+  },
+  {
+    "user_id": "u046",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
+    "year": 1,
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 3,
+      "A": 3,
+      "N": 4
     },
     "behavior": {
       "O": 0.0,
@@ -3135,8 +2627,8 @@
     },
     "interests": [
       "홈서버",
-      "라즈베리파이",
-      "북클럽"
+      "오픈소스",
+      "역사"
     ],
     "interest_weights": {
       "기술": 1.0,
@@ -3148,32 +2640,209 @@
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.63,
+    "confidence": 0.92,
     "history": [],
     "met": [],
-    "name": "채원",
+    "name": "학생46",
     "theme": "기술",
+    "_mismatch": "N",
     "_true": {
-      "O": 2,
-      "C": 2,
-      "E": 2,
+      "O": 3,
+      "C": 3,
+      "E": 3,
       "A": 3,
       "N": 3
     },
-    "_true_theme": "영상",
-    "_topic_mismatch": true,
+    "_true_theme": "기술",
     "_true_interests": [
-      "애니메이션",
-      "일본영화",
-      "영화제"
+      "라즈베리파이",
+      "자작PC",
+      "오픈소스"
     ],
     "_true_tags": [
-      "영상"
+      "기술"
     ],
-    "_div_ideal": 0.761
+    "_div_ideal": 0.763
   },
   {
-    "user_id": "u056",
+    "user_id": "u047",
+    "school": "건국대",
+    "major": "철학과",
+    "college": "문과대학",
+    "year": 2,
+    "self_report": {
+      "O": 4,
+      "C": 5,
+      "E": 4,
+      "A": 2,
+      "N": 5
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "배낭여행",
+      "자전거여행",
+      "보드게임"
+    ],
+    "interest_weights": {
+      "여행": 1.0
+    },
+    "tags": [
+      "여행"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.78,
+    "history": [],
+    "met": [],
+    "name": "학생47",
+    "theme": "여행",
+    "_mismatch": "A",
+    "_true": {
+      "O": 4,
+      "C": 5,
+      "E": 4,
+      "A": 1,
+      "N": 5
+    },
+    "_true_theme": "운동",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "수영",
+      "헬스",
+      "주짓수"
+    ],
+    "_true_tags": [
+      "운동"
+    ],
+    "_div_ideal": 0.781
+  },
+  {
+    "user_id": "u048",
+    "school": "동국대",
+    "major": "법학과",
+    "college": "법과대학",
+    "year": 1,
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 4,
+      "A": 1,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "소설",
+      "역사",
+      "공연관람"
+    ],
+    "interest_weights": {
+      "독서": 1.0,
+      "음악": 1.0
+    },
+    "tags": [
+      "독서",
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.7,
+    "history": [],
+    "met": [],
+    "name": "학생48",
+    "theme": "독서",
+    "_mismatch": "A",
+    "_true": {
+      "O": 3,
+      "C": 3,
+      "E": 4,
+      "A": 1,
+      "N": 3
+    },
+    "_true_theme": "요리",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "홈카페",
+      "커피",
+      "맛집탐방"
+    ],
+    "_true_tags": [
+      "요리"
+    ],
+    "_div_ideal": 0.936
+  },
+  {
+    "user_id": "u049",
+    "school": "동국대",
+    "major": "미술학부",
+    "college": "예술대학",
+    "year": 1,
+    "self_report": {
+      "O": 4,
+      "C": 2,
+      "E": 4,
+      "A": 3,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "철학",
+      "북클럽",
+      "베이킹"
+    ],
+    "interest_weights": {
+      "독서": 1.0,
+      "요리": 1.0
+    },
+    "tags": [
+      "독서",
+      "요리"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.71,
+    "history": [],
+    "met": [],
+    "name": "학생49",
+    "theme": "독서",
+    "_true": {
+      "O": 4,
+      "C": 2,
+      "E": 4,
+      "A": 3,
+      "N": 3
+    },
+    "_true_theme": "여행",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "캠핑",
+      "사진",
+      "배낭여행"
+    ],
+    "_true_tags": [
+      "여행"
+    ],
+    "_div_ideal": 0.742
+  },
+  {
+    "user_id": "u050",
     "school": "중앙대",
     "major": "소프트웨어학부",
     "college": "소프트웨어대학",
@@ -3181,9 +2850,9 @@
     "self_report": {
       "O": 3,
       "C": 2,
-      "E": 2,
+      "E": 4,
       "A": 4,
-      "N": 1
+      "N": 4
     },
     "behavior": {
       "O": 0.0,
@@ -3193,112 +2862,172 @@
       "N": 0.0
     },
     "interests": [
-      "베이킹",
-      "맛집탐방",
-      "리눅스"
+      "인디게임",
+      "보드게임",
+      "클라이밍"
     ],
     "interest_weights": {
-      "요리": 1.0
+      "게임": 1.0,
+      "운동": 1.0
     },
     "tags": [
-      "요리"
+      "게임",
+      "운동"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.78,
+    "confidence": 0.89,
     "history": [],
     "met": [],
-    "name": "시우",
-    "theme": "요리",
+    "name": "학생50",
+    "theme": "게임",
     "_true": {
       "O": 3,
       "C": 2,
-      "E": 2,
+      "E": 4,
       "A": 4,
-      "N": 1
-    },
-    "_true_theme": "운동",
-    "_topic_mismatch": true,
-    "_true_interests": [
-      "수영",
-      "클라이밍",
-      "헬스"
-    ],
-    "_true_tags": [
-      "운동"
-    ],
-    "_div_ideal": 0.82
-  },
-  {
-    "user_id": "u057",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 1,
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 4,
-      "A": 3,
-      "N": 3
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "소설",
-      "북클럽",
-      "홈서버"
-    ],
-    "interest_weights": {
-      "독서": 1.0,
-      "기술": 1.0
-    },
-    "tags": [
-      "독서",
-      "기술"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.85,
-    "history": [],
-    "met": [],
-    "name": "지우",
-    "theme": "독서",
-    "_true": {
-      "O": 4,
-      "C": 3,
-      "E": 4,
-      "A": 3,
-      "N": 3
+      "N": 4
     },
     "_true_theme": "독서",
+    "_topic_mismatch": true,
     "_true_interests": [
+      "철학",
       "소설",
-      "북클럽",
-      "철학"
+      "에세이"
     ],
     "_true_tags": [
       "독서"
     ],
-    "_div_ideal": 0.714
+    "_div_ideal": 0.905
   },
   {
-    "user_id": "u058",
+    "user_id": "u051",
     "school": "중앙대",
-    "major": "경영학부",
-    "college": "경영경제대학",
+    "major": "소프트웨어학부",
+    "college": "소프트웨어대학",
+    "year": 3,
+    "self_report": {
+      "O": 5,
+      "C": 3,
+      "E": 3,
+      "A": 4,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "오픈소스",
+      "홈서버",
+      "러닝"
+    ],
+    "interest_weights": {
+      "기술": 1.0
+    },
+    "tags": [
+      "기술"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.73,
+    "history": [],
+    "met": [],
+    "name": "학생51",
+    "theme": "기술",
+    "_mismatch": "O",
+    "_true": {
+      "O": 5,
+      "C": 3,
+      "E": 3,
+      "A": 4,
+      "N": 3
+    },
+    "_true_theme": "기술",
+    "_true_interests": [
+      "라즈베리파이",
+      "보안",
+      "홈서버"
+    ],
+    "_true_tags": [
+      "기술"
+    ],
+    "_div_ideal": 0.855
+  },
+  {
+    "user_id": "u052",
+    "school": "중앙대",
+    "major": "공연영상창작학부",
+    "college": "예술대학",
     "year": 1,
     "self_report": {
+      "O": 4,
+      "C": 2,
+      "E": 4,
+      "A": 4,
+      "N": 1
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "재즈",
+      "공연관람",
+      "커피"
+    ],
+    "interest_weights": {
+      "음악": 1.0,
+      "요리": 1.0
+    },
+    "tags": [
+      "음악",
+      "요리"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.95,
+    "history": [],
+    "met": [],
+    "name": "학생52",
+    "theme": "음악",
+    "_mismatch": "E",
+    "_true": {
+      "O": 4,
+      "C": 2,
+      "E": 5,
+      "A": 4,
+      "N": 1
+    },
+    "_true_theme": "음악",
+    "_true_interests": [
+      "공연관람",
+      "작곡",
+      "밴드"
+    ],
+    "_true_tags": [
+      "음악"
+    ],
+    "_div_ideal": 0.909
+  },
+  {
+    "user_id": "u053",
+    "school": "서울여대",
+    "major": "사학과",
+    "college": "인문대학",
+    "year": 4,
+    "self_report": {
       "O": 2,
-      "C": 5,
-      "E": 3,
-      "A": 3,
-      "N": 4
+      "C": 3,
+      "E": 2,
+      "A": 4,
+      "N": 3
     },
     "behavior": {
       "O": 0.0,
@@ -3310,51 +3039,165 @@
     "interests": [
       "일본영화",
       "다큐멘터리",
-      "캠핑"
+      "수영"
     ],
     "interest_weights": {
       "영상": 1.0,
-      "여행": 1.0
+      "운동": 1.0
     },
     "tags": [
       "영상",
-      "여행"
+      "운동"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.92,
+    "confidence": 0.59,
     "history": [],
     "met": [],
-    "name": "민준",
+    "name": "학생53",
     "theme": "영상",
-    "_mismatch": "A",
+    "_mismatch": "C",
     "_true": {
       "O": 2,
       "C": 5,
-      "E": 3,
+      "E": 2,
       "A": 4,
-      "N": 4
+      "N": 3
     },
     "_true_theme": "영상",
     "_true_interests": [
+      "일본영화",
       "영화제",
-      "애니메이션",
-      "독립영화"
+      "애니메이션"
     ],
     "_true_tags": [
       "영상"
     ],
-    "_div_ideal": 0.876
+    "_div_ideal": 0.847
   },
   {
-    "user_id": "u059",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
+    "user_id": "u054",
+    "school": "숭실대",
+    "major": "경영학부",
+    "college": "경영대학",
+    "year": 2,
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 5,
+      "A": 1,
+      "N": 1
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "주짓수",
+      "등산",
+      "캠핑"
+    ],
+    "interest_weights": {
+      "운동": 1.0,
+      "여행": 1.0
+    },
+    "tags": [
+      "운동",
+      "여행"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.61,
+    "history": [],
+    "met": [],
+    "name": "학생54",
+    "theme": "운동",
+    "_true": {
+      "O": 3,
+      "C": 2,
+      "E": 5,
+      "A": 1,
+      "N": 1
+    },
+    "_true_theme": "운동",
+    "_true_interests": [
+      "주짓수",
+      "등산",
+      "러닝"
+    ],
+    "_true_tags": [
+      "운동"
+    ],
+    "_div_ideal": 0.944
+  },
+  {
+    "user_id": "u055",
+    "school": "건국대",
+    "major": "화학공학부",
+    "college": "공과대학",
+    "year": 4,
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 4,
+      "A": 1,
+      "N": 5
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "사진",
+      "캠핑",
+      "보드게임"
+    ],
+    "interest_weights": {
+      "여행": 1.0
+    },
+    "tags": [
+      "여행"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.66,
+    "history": [],
+    "met": [],
+    "name": "학생55",
+    "theme": "여행",
+    "_true": {
+      "O": 3,
+      "C": 2,
+      "E": 4,
+      "A": 1,
+      "N": 5
+    },
+    "_true_theme": "여행",
+    "_true_interests": [
+      "캠핑",
+      "배낭여행",
+      "자전거여행"
+    ],
+    "_true_tags": [
+      "여행"
+    ],
+    "_div_ideal": 0.785
+  },
+  {
+    "user_id": "u056",
+    "school": "한양대",
+    "major": "컴퓨터소프트웨어학부",
+    "college": "공과대학",
     "year": 1,
     "self_report": {
-      "O": 2,
-      "C": 3,
+      "O": 4,
+      "C": 4,
       "E": 3,
       "A": 3,
       "N": 2
@@ -3367,99 +3210,275 @@
       "N": 0.0
     },
     "interests": [
-      "자전거여행",
-      "배낭여행",
-      "애니메이션"
+      "자작PC",
+      "보안",
+      "롤"
     ],
     "interest_weights": {
-      "여행": 1.0,
-      "영상": 1.0
+      "기술": 1.0,
+      "게임": 1.0
     },
     "tags": [
-      "여행",
-      "영상"
+      "기술",
+      "게임"
     ],
     "interest_vec": [],
     "beta": 0.5,
-    "confidence": 0.78,
+    "confidence": 0.9,
     "history": [],
     "met": [],
-    "name": "소율",
-    "theme": "여행",
+    "name": "학생56",
+    "theme": "기술",
     "_true": {
-      "O": 2,
-      "C": 3,
+      "O": 4,
+      "C": 4,
       "E": 3,
       "A": 3,
       "N": 2
+    },
+    "_true_theme": "기술",
+    "_true_interests": [
+      "보안",
+      "오픈소스",
+      "홈서버"
+    ],
+    "_true_tags": [
+      "기술"
+    ],
+    "_div_ideal": 0.798
+  },
+  {
+    "user_id": "u057",
+    "school": "중앙대",
+    "major": "소프트웨어학부",
+    "college": "소프트웨어대학",
+    "year": 2,
+    "self_report": {
+      "O": 2,
+      "C": 2,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "클라이밍",
+      "헬스",
+      "북클럽"
+    ],
+    "interest_weights": {
+      "운동": 1.0,
+      "독서": 1.0
+    },
+    "tags": [
+      "운동",
+      "독서"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.64,
+    "history": [],
+    "met": [],
+    "name": "학생57",
+    "theme": "운동",
+    "_true": {
+      "O": 2,
+      "C": 2,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "_true_theme": "운동",
+    "_true_interests": [
+      "주짓수",
+      "헬스",
+      "클라이밍"
+    ],
+    "_true_tags": [
+      "운동"
+    ],
+    "_div_ideal": 0.761
+  },
+  {
+    "user_id": "u058",
+    "school": "서울여대",
+    "major": "데이터사이언스학과",
+    "college": "과학기술융합대학",
+    "year": 4,
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 3,
+      "A": 2,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "인디게임",
+      "FPS",
+      "독립영화"
+    ],
+    "interest_weights": {
+      "게임": 1.0
+    },
+    "tags": [
+      "게임"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.73,
+    "history": [],
+    "met": [],
+    "name": "학생58",
+    "theme": "게임",
+    "_true": {
+      "O": 3,
+      "C": 3,
+      "E": 3,
+      "A": 2,
+      "N": 2
+    },
+    "_true_theme": "독서",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "소설",
+      "북클럽",
+      "에세이"
+    ],
+    "_true_tags": [
+      "독서"
+    ],
+    "_div_ideal": 0.948
+  },
+  {
+    "user_id": "u059",
+    "school": "숭실대",
+    "major": "경영학부",
+    "college": "경영대학",
+    "year": 2,
+    "self_report": {
+      "O": 1,
+      "C": 4,
+      "E": 4,
+      "A": 5,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "커피",
+      "위스키",
+      "소설"
+    ],
+    "interest_weights": {
+      "요리": 1.0,
+      "독서": 1.0
+    },
+    "tags": [
+      "요리",
+      "독서"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.9,
+    "history": [],
+    "met": [],
+    "name": "학생59",
+    "theme": "요리",
+    "_true": {
+      "O": 1,
+      "C": 4,
+      "E": 4,
+      "A": 5,
+      "N": 2
+    },
+    "_true_theme": "여행",
+    "_topic_mismatch": true,
+    "_true_interests": [
+      "자전거여행",
+      "배낭여행",
+      "국내여행"
+    ],
+    "_true_tags": [
+      "여행"
+    ],
+    "_div_ideal": 0.866
+  },
+  {
+    "user_id": "u060",
+    "school": "동국대",
+    "major": "법학과",
+    "college": "법과대학",
+    "year": 1,
+    "self_report": {
+      "O": 1,
+      "C": 3,
+      "E": 2,
+      "A": 4,
+      "N": 4
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "에세이",
+      "소설",
+      "주짓수"
+    ],
+    "interest_weights": {
+      "독서": 1.0,
+      "운동": 1.0
+    },
+    "tags": [
+      "독서",
+      "운동"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.75,
+    "history": [],
+    "met": [],
+    "name": "학생60",
+    "theme": "독서",
+    "_mismatch": "C",
+    "_true": {
+      "O": 1,
+      "C": 4,
+      "E": 2,
+      "A": 4,
+      "N": 4
     },
     "_true_theme": "게임",
     "_topic_mismatch": true,
     "_true_interests": [
       "보드게임",
-      "롤",
-      "인디게임"
+      "인디게임",
+      "FPS"
     ],
     "_true_tags": [
       "게임"
     ],
-    "_div_ideal": 0.815
-  },
-  {
-    "user_id": "u060",
-    "school": "동국대",
-    "major": "수학과",
-    "college": "이과대학",
-    "year": 1,
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 5,
-      "A": 4,
-      "N": 2
-    },
-    "behavior": {
-      "O": 0.0,
-      "C": 0.0,
-      "E": 0.0,
-      "A": 0.0,
-      "N": 0.0
-    },
-    "interests": [
-      "주짓수",
-      "수영",
-      "공연관람"
-    ],
-    "interest_weights": {
-      "운동": 1.0
-    },
-    "tags": [
-      "운동"
-    ],
-    "interest_vec": [],
-    "beta": 0.5,
-    "confidence": 0.7,
-    "history": [],
-    "met": [],
-    "name": "서연",
-    "theme": "운동",
-    "_mismatch": "A",
-    "_true": {
-      "O": 3,
-      "C": 3,
-      "E": 5,
-      "A": 5,
-      "N": 2
-    },
-    "_true_theme": "운동",
-    "_true_interests": [
-      "주짓수",
-      "러닝",
-      "헬스"
-    ],
-    "_true_tags": [
-      "운동"
-    ],
-    "_div_ideal": 0.978
+    "_div_ideal": 0.62
   }
 ]
