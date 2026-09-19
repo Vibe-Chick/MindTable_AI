@@ -1,0 +1,368 @@
+[
+  {
+    "user_id": "u001",
+    "school": "숭실대",
+    "major": "소프트웨어학부",
+    "college": "IT대학",
+    "year": 2,
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.225,
+      "C": 0.0,
+      "E": 0.45,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "홈서버",
+      "리눅스",
+      "재즈 LP"
+    ],
+    "interest_weights": {
+      "기술": 1.0,
+      "음악": 1.405
+    },
+    "tags": [
+      "기술",
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.85,
+    "history": [
+      "g_r1_00"
+    ],
+    "met": [
+      "u007",
+      "u004",
+      "u003"
+    ],
+    "display": "학생01"
+  },
+  {
+    "user_id": "u002",
+    "school": "중앙대",
+    "major": "경영학부",
+    "college": "경영경제대학",
+    "year": 3,
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 5,
+      "A": 3,
+      "N": 2
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.1625,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "클라이밍",
+      "주식",
+      "네트워킹"
+    ],
+    "interest_weights": {
+      "운동": 1.2925,
+      "학술": 1.0,
+      "기술": 1.0
+    },
+    "tags": [
+      "운동",
+      "학술",
+      "기술"
+    ],
+    "interest_vec": [],
+    "beta": 0.35,
+    "confidence": 0.85,
+    "history": [
+      "g_r1_01"
+    ],
+    "met": [
+      "u008",
+      "u005",
+      "u006"
+    ],
+    "display": "학생02"
+  },
+  {
+    "user_id": "u003",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
+    "year": 2,
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 3,
+      "A": 4,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.0,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "단편 영화",
+      "독립영화제"
+    ],
+    "interest_weights": {
+      "영상": 1.0
+    },
+    "tags": [
+      "영상"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.75,
+    "history": [
+      "g_r1_00"
+    ],
+    "met": [
+      "u001",
+      "u007",
+      "u004"
+    ],
+    "display": "학생03"
+  },
+  {
+    "user_id": "u004",
+    "school": "건국대",
+    "major": "기계공학부",
+    "college": "공과대학",
+    "year": 3,
+    "self_report": {
+      "O": 3,
+      "C": 4,
+      "E": 2,
+      "A": 4,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.175,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "마라톤",
+      "요리",
+      "헬스"
+    ],
+    "interest_weights": {
+      "운동": 1.315,
+      "요리": 1.0
+    },
+    "tags": [
+      "운동",
+      "요리"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.75,
+    "history": [
+      "g_r1_00"
+    ],
+    "met": [
+      "u001",
+      "u007",
+      "u003"
+    ],
+    "display": "학생04"
+  },
+  {
+    "user_id": "u005",
+    "school": "서울여대",
+    "major": "데이터사이언스학과",
+    "college": "과학기술융합대학",
+    "year": 2,
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 2,
+      "A": 4,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.1625,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "캐글",
+      "데이터 분석",
+      "소설"
+    ],
+    "interest_weights": {
+      "기술": 1.0,
+      "독서": 1.0,
+      "학술": 0.5425
+    },
+    "tags": [
+      "기술",
+      "독서"
+    ],
+    "interest_vec": [],
+    "beta": 0.65,
+    "confidence": 0.85,
+    "history": [
+      "g_r1_01"
+    ],
+    "met": [
+      "u002",
+      "u008",
+      "u006"
+    ],
+    "display": "학생05"
+  },
+  {
+    "user_id": "u006",
+    "school": "동국대",
+    "major": "법학과",
+    "college": "법과대학",
+    "year": 4,
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 5,
+      "A": 2,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.1875,
+      "E": -0.1875,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "토론",
+      "역사"
+    ],
+    "interest_weights": {
+      "학술": 1.3375,
+      "독서": 1.0
+    },
+    "tags": [
+      "학술",
+      "독서"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.85,
+    "history": [
+      "g_r1_01"
+    ],
+    "met": [
+      "u002",
+      "u008",
+      "u005"
+    ],
+    "display": "학생06"
+  },
+  {
+    "user_id": "u007",
+    "school": "중앙대",
+    "major": "공연영상창작학부",
+    "college": "예술대학",
+    "year": 1,
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 4,
+      "A": 4,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": 0.175,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "음악 작곡",
+      "베이스 연주"
+    ],
+    "interest_weights": {
+      "음악": 1.315,
+      "창작": 0.565
+    },
+    "tags": [
+      "음악"
+    ],
+    "interest_vec": [],
+    "beta": 0.35,
+    "confidence": 0.85,
+    "history": [
+      "g_r1_00"
+    ],
+    "met": [
+      "u001",
+      "u004",
+      "u003"
+    ],
+    "display": "학생07"
+  },
+  {
+    "user_id": "u008",
+    "school": "한양대",
+    "major": "컴퓨터소프트웨어학부",
+    "college": "공과대학",
+    "year": 3,
+    "self_report": {
+      "O": 3,
+      "C": 4,
+      "E": 3,
+      "A": 3,
+      "N": 3
+    },
+    "behavior": {
+      "O": 0.0,
+      "C": 0.0,
+      "E": -0.1875,
+      "A": 0.0,
+      "N": 0.0
+    },
+    "interests": [
+      "오픈소스 개발",
+      "백패킹",
+      "코딩"
+    ],
+    "interest_weights": {
+      "기술": 1.3375,
+      "여행": 1.0,
+      "창작": 0.5875
+    },
+    "tags": [
+      "기술",
+      "여행"
+    ],
+    "interest_vec": [],
+    "beta": 0.5,
+    "confidence": 0.82,
+    "history": [
+      "g_r1_01"
+    ],
+    "met": [
+      "u002",
+      "u005",
+      "u006"
+    ],
+    "display": "학생08"
+  }
+]
