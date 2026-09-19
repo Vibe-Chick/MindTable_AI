@@ -1,4 +1,4 @@
-# 겸상 (Venn) — 백엔드
+# 겸상 — 백엔드
 
 의존성 없음. Python 3.8+ stdlib만. `pip install` 불필요.
 
