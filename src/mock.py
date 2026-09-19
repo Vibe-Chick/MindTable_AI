@@ -11,7 +11,8 @@ import random
 import sys
 
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
-from schema import AXES, BETA_INIT, new_profile, validate_profile  # noqa: E402
+from schema import (AXES, BETA_INIT, BETA_MAX, BETA_MIN,  # noqa: E402
+                    new_profile, validate_profile)
 
 SCHOOLS = {
     "숭실대": [("IT대학", "소프트웨어학부"), ("IT대학", "전자정보공학부"),
@@ -43,6 +44,25 @@ THEME_NAMES = list(THEMES)
 FIRST = ["지원", "서연", "민준", "하은", "도윤", "수빈", "예준", "지우", "현우",
          "다은", "준서", "소율", "시우", "유진", "건우", "채원", "태윤", "나연"]
 
+# 전공 → 관심사 성향. 실제 데이터에는 이 상관이 존재한다.
+# 이걸 넣지 않으면 유사도와 다양성이 서로 부딪히지 않아서, 최적화기가
+# 쉬운 문제를 푸는 셈이 되고 벤치마크 숫자가 과대평가된다.
+MAJOR_AFFINITY = [
+    (("소프트웨어", "컴퓨터", "전자", "데이터"), ["기술", "게임"]),
+    (("경영",),                                 ["여행", "요리"]),
+    (("미술", "공연영상", "예술"),               ["영상", "음악"]),
+    (("철학", "사학", "영어영문", "법학"),        ["독서", "영상"]),
+    (("기계", "화학"),                          ["운동", "기술"]),
+    (("수의", "수학", "미디어"),                 ["운동", "독서"]),
+]
+
+
+def _affinity(major):
+    for keys, themes in MAJOR_AFFINITY:
+        if any(k in major for k in keys):
+            return themes
+    return THEME_NAMES
+
 
 def gen(n=60, seed=42):
     rng = random.Random(seed)
@@ -51,8 +71,10 @@ def gen(n=60, seed=42):
         school = rng.choice(list(SCHOOLS))
         college, major = rng.choice(SCHOOLS[school])
 
-        # 주 테마 2개에서 관심사를 뽑는다 (교집합이 생기도록)
-        main, sub = rng.sample(THEME_NAMES, 2)
+        # 주 테마는 전공 성향에서 65% 확률로, 나머지는 무작위
+        aff = _affinity(major)
+        main = rng.choice(aff) if rng.random() < 0.65 else rng.choice(THEME_NAMES)
+        sub = rng.choice([t for t in THEME_NAMES if t != main])
         interests = rng.sample(THEMES[main], 2) + [rng.choice(THEMES[sub])]
 
         # 성격: 정규분포 비슷하게, 1~5 정수
@@ -70,6 +92,19 @@ def gen(n=60, seed=42):
         )
         p["name"] = rng.choice(FIRST)          # 데모 화면용 표시명
         p["theme"] = main                      # 검증용. 실제 파이프라인엔 없음
+
+        # --- 숨은 정답 (시뮬레이션 전용) ------------------------------
+        # 자기보고가 틀린 사람을 20% 심어둔다. 보정 루프가 이걸 찾아내는지가
+        # 곧 "설문은 1회차에만 맞다"는 주장의 검증이다.
+        true = dict(self_report)
+        if rng.random() < 0.35:
+            ax = rng.choice(AXES)
+            shift = rng.choice([-2, -1, -1, 1, 1, 2])
+            true[ax] = max(1, min(5, true[ax] + shift))
+            p["_mismatch"] = ax
+        p["_true"] = true
+        p["_beta_true"] = round(
+            max(BETA_MIN, min(BETA_MAX, rng.gauss(0.5, 0.18))), 3)
         p["confidence"] = round(rng.uniform(0.55, 0.95), 2)
         p["beta"] = BETA_INIT
         profiles.append(p)

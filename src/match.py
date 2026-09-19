@@ -43,19 +43,28 @@ def diversity(members):
     return 0.5 * maj + 0.3 * col + 0.2 * sch
 
 
-def score_group(idx, profiles, sim):
+def score_group(idx, profiles, sim, with_penalty=True):
+    """그룹 점수.
+
+    with_penalty=False 는 '반복 매칭 페널티를 뺀 순수 품질'이다.
+    페널티는 회차가 갈수록 누적되므로, 회차 간 비교(만족도 곡선)에는
+    반드시 with_penalty=False 를 써야 한다. 안 그러면 프로필이 좋아져도
+    곡선이 내려간다.
+    """
     members = [profiles[i] for i in idx]
     if len(idx) < 2:
         return 0.0
     pairs = list(combinations(idx, 2))
     interest = sum(sim[i][j] for i, j in pairs) / len(pairs)
     beta = sum(p["beta"] for p in members) / len(members)
+    quality = (ALPHA * interest
+               + beta * diversity(members)
+               + GAMMA * complement(members))
+    if not with_penalty:
+        return quality
     repeat = sum(1 for i, j in pairs
                  if profiles[j]["user_id"] in profiles[i].get("met", []))
-    return (ALPHA * interest
-            + beta * diversity(members)
-            + GAMMA * complement(members)
-            - DELTA_REPEAT * repeat)
+    return quality - DELTA_REPEAT * repeat
 
 
 def total(groups, profiles, sim):
