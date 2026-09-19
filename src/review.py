@@ -100,8 +100,10 @@ def apply_topics(p, worked, dead, conf=1.0):
     for k in [k for k, v in w.items() if v < INTEREST_DROP]:
         del w[k]
 
-    # interests 는 표시용. 가중 상위 3개를 유지한다.
-    p["interests"] = [k for k, _ in sorted(w.items(), key=lambda kv: -kv[1])][:3]
+    # interest_weights 의 키는 '태그'다. interests(표시용 자유 키워드)는
+    # 절대 건드리지 않는다 — 카드의 아이스브레이커 품질이 여기서 나온다.
+    # ("홈서버, 재즈 LP" 가 "기술, 음악" 으로 바뀌면 질문이 흐려진다)
+    p["tags"] = [k for k, _ in sorted(w.items(), key=lambda kv: -kv[1])]
     return p
 
 
