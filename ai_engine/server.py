@@ -118,6 +118,44 @@ class MatchGroupResult(BaseModel):
 class MatchRunResponse(BaseModel):
     groups: List[MatchGroupResult]
     leftover: List[Dict[str, Any]]
+    # 조용히 품질만 망가지는 입력을 호출자에게 알린다. 서버 로그만으로는
+    # 프론트엔드가 볼 수 없어서 응답 본문에 싣는다. 빈 배열이면 정상.
+    warnings: List[str] = Field(default_factory=list)
+
+
+def _check_candidate_inputs(flat_users: List[Dict[str, Any]]) -> List[str]:
+    """유사도 계산을 무력화하는 입력을 찾아낸다.
+
+    왜 필요한가: matching.py 의 유사도는 전적으로 interest_weights(고정 TAGS 공간)
+    위에서 계산된다. tags 와 interest_weights 가 둘 다 비어 오면 그 사용자는
+    모든 상대와 유사도 0 이 되어 사실상 무작위 배정된다. **에러가 나지 않고
+    매칭 품질만 조용히 무너지는** 종류라 호출자가 알아채기 어렵다.
+
+    schemas.TAGS 에 없는 태그도 같은 이유로 무시되므로 함께 경고한다.
+    """
+    warnings: List[str] = []
+    valid = set(schemas.TAGS)
+
+    no_tags = [u.get("name") or u.get("user_id") or "?"
+               for u in flat_users
+               if not (u.get("interest_weights") or u.get("tags"))]
+    if no_tags:
+        warnings.append(
+            "tags/interest_weights 가 비어 있는 후보 %d명: %s. "
+            "이 사용자들은 관심사 유사도가 0으로 계산되어 사실상 무작위 배정된다. "
+            "프로필 추출(/profile/extract) 결과의 tags 를 그대로 실어 보낼 것."
+            % (len(no_tags), ", ".join(map(str, no_tags[:10]))))
+
+    unknown = sorted({t
+                      for u in flat_users
+                      for t in list(u.get("tags") or []) + list((u.get("interest_weights") or {}).keys())
+                      if t not in valid})
+    if unknown:
+        warnings.append(
+            "TAGS 목록에 없는 태그가 무시됐다: %s. 허용값은 %s."
+            % (", ".join(unknown[:10]), ", ".join(schemas.TAGS)))
+
+    return warnings
 
 
 def _candidate_to_matching_dict(candidate: api_models.MatchCandidate) -> Dict[str, Any]:
@@ -181,6 +219,10 @@ def run_match_endpoint(request: api_models.MatchRunRequest) -> MatchRunResponse:
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))
 
+    input_warnings = _check_candidate_inputs(flat_users)
+    for w in input_warnings:
+        logger.warning(f"[/match/run] {w}")
+
     match_history = store.get_match_history()
     try:
         results = matching.run_matching_pipeline(
@@ -205,7 +247,8 @@ def run_match_endpoint(request: api_models.MatchRunRequest) -> MatchRunResponse:
         )
         for g in results
     ]
-    return MatchRunResponse(groups=groups, leftover=leftover)
+    return MatchRunResponse(groups=groups, leftover=leftover,
+                            warnings=input_warnings)
 
 
 # =====================================================================
