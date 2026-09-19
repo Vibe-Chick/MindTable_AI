@@ -56,14 +56,14 @@ def synth_delta(p, rng):
 
 
 def synth_q4(p, group_members, rng):
-    """그룹의 실제 다양성이 본인 취향보다 높았나 낮았나."""
+    """그룹의 실제 다양성이 본인이 편한 수준보다 높았나 낮았나."""
     d = match.diversity(group_members)
-    pref = p["_beta_true"]
+    ideal = p["_div_ideal"]
     if rng.random() < 0.15:
         return review.Q4_SAME                 # 응답 잡음
-    if d > pref + 0.12:
+    if d > ideal + 0.08:
         return review.Q4_MORE_SIMILAR
-    if d < pref - 0.12:
+    if d < ideal - 0.08:
         return review.Q4_MORE_DIFFERENT
     return review.Q4_SAME
 
@@ -90,19 +90,36 @@ def truth_error(profiles, only=None):
 
 
 def true_satisfaction(groups, profiles, sim):
-    """실제로 좋은 자리였나 = 숨은 정답 벡터로 계산한 그룹 점수."""
+    """실제로 좋은 자리였나 — 숨은 정답만으로 계산한다.
+
+    주의: 예전 구현은 shadow 의 beta(학습된 값)를 가중치로 썼다. 그러면 보정으로
+    beta 가 내려간 쪽이 자동으로 낮은 점수를 받아, 대조 실험이 성립하지 않았다.
+    지표는 두 조건에서 동일해야 하므로 _true / _div_ideal 만 쓴다.
+
+      품질 = 관심사 유사도 + 성격 보완도(정답 벡터) + 다양성 적합도
+      다양성 적합도 = 1 - |실제 다양성 - 본인이 편한 수준|
+    """
     shadow = []
     for p in profiles:
         q = copy.deepcopy(p)
         q["self_report"] = dict(p["_true"])
         q["behavior"] = {a: 0.0 for a in AXES}
         shadow.append(q)
-    # 페널티 제외 — 회차 간 비교 가능한 순수 품질만
-    return sum(match.score_group(g, shadow, sim, with_penalty=False)
-               for g in groups) / len(groups)
+
+    tot = 0.0
+    for g in groups:
+        members = [shadow[i] for i in g]
+        pairs = [(g[a], g[b]) for a in range(len(g))
+                 for b in range(a + 1, len(g))]
+        interest = sum(sim[i][j] for i, j in pairs) / len(pairs)
+        d = match.diversity(members)
+        fit = sum(1.0 - abs(d - profiles[i]["_div_ideal"]) for i in g) / len(g)
+        tot += interest + match.GAMMA * match.complement(members) + fit
+    return tot / len(groups)
 
 
-def run(profiles, rounds=3, seed=1):
+def run(profiles, rounds=3, seed=1, correct=True):
+    """correct=False 면 델타를 적용하지 않는다 (대조군)."""
     rng = random.Random(seed)
     sim = embed.similarity_matrix(profiles)
     history, snapshots = [], []
@@ -134,6 +151,8 @@ def run(profiles, rounds=3, seed=1):
                 p = profiles[i]
                 if rng.random() < 0.12:        # 리뷰 미제출 12%
                     continue
+                if not correct:
+                    continue
                 review.apply_delta(p, synth_delta(p, rng),
                                    synth_q4(p, members, rng))
 
@@ -147,6 +166,31 @@ def run(profiles, rounds=3, seed=1):
                            / len(profiles), 3),
     })
     return history, snapshots, profiles
+
+
+def ablation(profiles, rounds=3, seed=1):
+    """보정 ON/OFF 대조 실험.
+
+    왜 필요한가: 회차별 만족도 곡선은 그냥 내려간다. 60명 고정 풀에서
+    반복 매칭을 피하다 보면 좋은 조합이 소진되기 때문이다 (조합 고갈).
+    이건 보정의 성능과 무관하다.
+
+    따라서 보정의 가치는 '곡선이 올라가는가'가 아니라
+    '같은 회차에서 보정한 쪽이 안 한 쪽보다 나은가'로 측정해야 한다.
+    """
+    on, _, _ = run(copy.deepcopy(profiles), rounds, seed, correct=True)
+    off, _, _ = run(copy.deepcopy(profiles), rounds, seed, correct=False)
+    rows = []
+    for a, b in zip(on[:-1], off[:-1]):
+        gap = a["true_satisfaction"] - b["true_satisfaction"]
+        rows.append({
+            "round": a["round"],
+            "corrected": a["true_satisfaction"],
+            "frozen": b["true_satisfaction"],
+            "gap": round(gap, 4),
+            "gap_pct": round(gap / abs(b["true_satisfaction"]) * 100, 2),
+        })
+    return rows
 
 
 if __name__ == "__main__":
@@ -183,6 +227,13 @@ if __name__ == "__main__":
         assert BETA_MIN - 1e-9 <= p["beta"] <= BETA_MAX + 1e-9, \
             "beta 범위 이탈: %s=%r" % (p["user_id"], p["beta"])
     print("OK: behavior 클리핑, beta 범위 유지")
+
+    print("\n=== 보정 ON/OFF 대조 (같은 회차 비교) ===")
+    print("round  보정함     보정안함   차이      %")
+    for r in ablation(json.load(open(path, encoding="utf-8")), rounds):
+        print("  %-4d %9.4f %10.4f %+8.4f %+7.2f%%"
+              % (r["round"], r["corrected"], r["frozen"],
+                 r["gap"], r["gap_pct"]))
 
     mism = [p for p in final if "_mismatch" in p]
     print("\n자기보고가 틀렸던 %d명 중 상위 5명의 보정 결과:" % len(mism))

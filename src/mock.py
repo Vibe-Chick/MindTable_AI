@@ -103,8 +103,11 @@ def gen(n=60, seed=42):
             true[ax] = max(1, min(5, true[ax] + shift))
             p["_mismatch"] = ax
         p["_true"] = true
-        p["_beta_true"] = round(
-            max(BETA_MIN, min(BETA_MAX, rng.gauss(0.5, 0.18))), 3)
+        # 이 사람이 실제로 편안해하는 '그룹 다양성 수준'.
+        # beta(목적함수 가중치)와는 다른 개념이다. diversity()가 돌려주는
+        # 값과 같은 척도(0~1)여야 q4 신호가 의미를 갖는다.
+        p["_div_ideal"] = round(
+            max(0.45, min(1.0, rng.gauss(0.82, 0.12))), 3)
         p["confidence"] = round(rng.uniform(0.55, 0.95), 2)
         p["beta"] = BETA_INIT
         profiles.append(p)
