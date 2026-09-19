@@ -1,0 +1,29 @@
+{
+  "tag": "extract:u007",
+  "model": "claude-haiku-4-5",
+  "prompt": "[Q1] 낯선 사람들과 있을 때 vs 혼자 있을 때, 언제 에너지가 더 차오르나요?\n사람들이랑요. 근데 공연 끝나고 나면 완전히 방전돼서 이틀은 혼자 있어야 해요.\n\n[Q2] 요즘 새로 관심 생긴 주제나 해본 낯선 경험이 있나요?\n밴드에서 베이스를 치는데 작년부터 곡을 직접 써보고 있어요. 잘 안 되지만 재밌어요.\n\n[Q3] 낯선 사람과 얘기하다 어색해지면 보통 어떻게 푸나요?\n저는 상대방 얘기를 계속 되물어봐요. 제 얘기부터 하면 부담스러워할 것 같아서요.\n\n[Q4/강제선택] 그룹에서 편한 역할: 분위기 맞추는 역할\n",
+  "result": {
+    "agreeableness": 4,
+    "agreeableness_quote": "제 얘기부터 하면 부담스러워할 것 같아서요",
+    "confidence": 0.85,
+    "conscientiousness": 3,
+    "conscientiousness_quote": "",
+    "extraversion": 4,
+    "extraversion_quote": "사람들이랑요. 근데 공연 끝나고 나면 완전히 방전돼서",
+    "interest_quotes": [
+      "작년부터 곡을 직접 써보고 있어요",
+      "밴드에서 베이스를 치는데"
+    ],
+    "interests": [
+      "음악 작곡",
+      "베이스 연주"
+    ],
+    "neuroticism": 3,
+    "neuroticism_quote": "",
+    "openness": 4,
+    "openness_quote": "작년부터 곡을 직접 써보고 있어요",
+    "tags": [
+      "음악"
+    ]
+  }
+}

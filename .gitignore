@@ -1,17 +1,5 @@
-.env
-cache/
 .DS_Store
+.env
 __pycache__/
 *.pyc
-
-# 실제 응답과 그 파생물 — 학생들의 자유서술·이름이 들어간다. 커밋 금지.
-data/responses.csv
-data/profiles.json
-data/profiles_r*.json
-data/profiles_before_r*.json
-data/reviews_r*.json
-out/groups_real*.json
-out/profiles_r*.json
-out/profiles_final.json
-
-# 프론트엔드용 샘플은 out/sample/ 에 익명화해서 둔다 (anonymize.py)
+node_modules/

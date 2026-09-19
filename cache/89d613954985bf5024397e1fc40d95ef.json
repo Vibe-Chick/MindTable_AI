@@ -1,0 +1,32 @@
+{
+  "tag": "extract:u004",
+  "model": "claude-haiku-4-5",
+  "prompt": "[Q1] 낯선 사람들과 있을 때 vs 혼자 있을 때, 언제 에너지가 더 차오르나요?\n혼자요. 근데 운동할 때는 사람들이랑 같이 하는 게 좋아요. 헬스장에서 만난 사람들이랑은 말이 잘 통해요.\n\n[Q2] 요즘 새로 관심 생긴 주제나 해본 낯선 경험이 있나요?\n작년부터 마라톤 준비하고 있어요. 기록이 눈에 보이게 줄어드는 게 좋아서요. 요리도 시작했는데 닭가슴살 질려서 어쩔 수 없이 배웠어요.\n\n[Q3] 낯선 사람과 얘기하다 어색해지면 보통 어떻게 푸나요?\n질문을 많이 해요. 제가 말하는 것보단 듣는 게 편해서요.\n\n[Q4/강제선택] 그룹에서 편한 역할: 분위기 맞추는 역할\n",
+  "result": {
+    "agreeableness": 4,
+    "agreeableness_quote": "제가 말하는 것보단 듣는 게 편해서요",
+    "confidence": 0.75,
+    "conscientiousness": 4,
+    "conscientiousness_quote": "기록이 눈에 보이게 줄어드는 게 좋아서요",
+    "extraversion": 2,
+    "extraversion_quote": "혼자요. 근데 운동할 때는 사람들이랑 같이 하는 게 좋아요",
+    "interest_quotes": [
+      "작년부터 마라톤 준비하고 있어요",
+      "요리도 시작했는데",
+      "헬스장에서 만난 사람들이랑은 말이 잘 통해요"
+    ],
+    "interests": [
+      "마라톤",
+      "요리",
+      "헬스"
+    ],
+    "neuroticism": 3,
+    "neuroticism_quote": "",
+    "openness": 3,
+    "openness_quote": "",
+    "tags": [
+      "운동",
+      "요리"
+    ]
+  }
+}
