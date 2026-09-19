@@ -1,0 +1,6 @@
+cache/
+data/responses.csv
+data/reviews_*.json
+.env
+__pycache__/
+*.pyc

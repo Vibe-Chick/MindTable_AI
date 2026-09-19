@@ -1,0 +1,149 @@
+"""겸상(Venn) — 데이터 계약.
+
+이 파일이 팀 전체의 인터페이스다. 여기 정의가 바뀌면 extract / match / review가
+전부 영향을 받는다. 변경할 때는 반드시 팀에 공지할 것.
+
+튜닝 상수도 전부 여기에만 둔다. 다른 파일에 숫자를 박지 말 것.
+"""
+
+# --- Big Five 축 ---
+AXES = ("O", "C", "E", "A", "N")
+AXIS_KR = {
+    "O": "개방성", "C": "성실성", "E": "외향성",
+    "A": "우호성", "N": "신경성",
+}
+
+SCORE_MIN, SCORE_MAX = 1, 5
+
+# --- 편성 ---
+GROUP_SIZE = 4          # To Do.md의 3~4인과 불일치. 4인으로 통일 결정 시 유지
+ALPHA = 1.0             # 관심사 유사도 가중
+GAMMA = 0.5             # 성격 보완도 가중
+DELTA_REPEAT = 0.8      # 반복 매칭 페널티
+EPSILON = 0.25          # 탐색 비율: 그룹당 1명은 유사도 하위 풀에서 충원
+
+LOCAL_SEARCH_MAX_ITER = 500   # 최적해 불필요. 랜덤보다 낫다는 것만 보이면 됨
+
+# --- 개인별 다양성 선호도 (리뷰 4번 문항으로 학습) ---
+BETA_INIT = 0.5
+BETA_STEP = 0.15
+BETA_MIN, BETA_MAX = 0.1, 0.9
+
+# --- 보정 루프 ---
+LR = 0.5                # 델타 학습률
+BEHAVIOR_CLIP = 1.5     # 누적 보정 상한. 없으면 3회차에 척도 밖으로 발산한다
+DIVERGENCE_THRESHOLD = 1.0   # 자기보고 vs 보정 괴리 하이라이트 기준
+
+
+def clamp(v, lo, hi):
+    return max(lo, min(hi, v))
+
+
+def new_profile(user_id, school, major, college, year,
+                self_report=None, interests=None):
+    """빈 프로필 생성. behavior는 항상 0에서 시작한다."""
+    return {
+        "user_id": user_id,
+        "school": school,
+        "major": major,
+        "college": college,
+        "year": year,
+        # 설문 1회차 결과. 이후 절대 수정하지 않는다 (발표 시각화의 기준선)
+        "self_report": self_report or {a: 3 for a in AXES},
+        # 리뷰로 누적되는 보정값
+        "behavior": {a: 0.0 for a in AXES},
+        "interests": interests or [],
+        "interest_vec": [],
+        "beta": BETA_INIT,
+        "confidence": 0.0,
+        "history": [],          # 참여한 group_id
+        "met": [],              # 같은 자리에 앉았던 user_id (반복 페널티용)
+    }
+
+
+def effective(p):
+    """실제 매칭에 쓰이는 벡터 = 자기보고 + 행동 보정."""
+    return {
+        a: clamp(p["self_report"][a] + p["behavior"][a], SCORE_MIN, SCORE_MAX)
+        for a in AXES
+    }
+
+
+def divergence(p):
+    """자기보고와 보정 후의 축별 괴리. 발표 5번 장면의 재료."""
+    eff = effective(p)
+    return {a: eff[a] - p["self_report"][a] for a in AXES}
+
+
+def max_divergence(p):
+    d = divergence(p)
+    a = max(d, key=lambda k: abs(d[k]))
+    return a, d[a]
+
+
+def validate_profile(p):
+    """스키마 위반을 조용히 넘기지 않는다. 실패는 즉시 터뜨린다."""
+    errs = []
+    for f in ("user_id", "school", "major", "college", "year",
+              "self_report", "behavior", "interests", "beta", "confidence"):
+        if f not in p:
+            errs.append(f"missing field: {f}")
+    if errs:
+        return errs
+    for a in AXES:
+        v = p["self_report"].get(a)
+        if not isinstance(v, int) or not (SCORE_MIN <= v <= SCORE_MAX):
+            errs.append(f"self_report.{a} invalid: {v!r}")
+        b = p["behavior"].get(a)
+        if not isinstance(b, (int, float)) or abs(b) > BEHAVIOR_CLIP + 1e-9:
+            errs.append(f"behavior.{a} out of clip: {b!r}")
+    if not (BETA_MIN - 1e-9 <= p["beta"] <= BETA_MAX + 1e-9):
+        errs.append(f"beta out of range: {p['beta']!r}")
+    if not (0.0 <= p["confidence"] <= 1.0):
+        errs.append(f"confidence out of range: {p['confidence']!r}")
+    return errs
+
+
+# --- LLM 구조화 출력 스키마 ---------------------------------------------
+
+EXTRACTION_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "openness":          {"type": "integer", "minimum": 1, "maximum": 5},
+        "conscientiousness": {"type": "integer", "minimum": 1, "maximum": 5},
+        "extraversion":      {"type": "integer", "minimum": 1, "maximum": 5},
+        "agreeableness":     {"type": "integer", "minimum": 1, "maximum": 5},
+        "neuroticism":       {"type": "integer", "minimum": 1, "maximum": 5},
+        "interests": {
+            "type": "array", "items": {"type": "string"},
+            "minItems": 3, "maxItems": 3,
+        },
+        "evidence":   {"type": "string"},   # 근거 인용. 질의응답 대비
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    },
+    "required": ["openness", "conscientiousness", "extraversion",
+                 "agreeableness", "neuroticism", "interests",
+                 "evidence", "confidence"],
+}
+
+_DELTA = {"type": "number", "enum": [-1, -0.5, 0, 0.5, 1]}
+
+DELTA_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "openness": _DELTA, "conscientiousness": _DELTA,
+        "extraversion": _DELTA, "agreeableness": _DELTA,
+        "neuroticism": _DELTA,
+        "evidence":   {"type": "string"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    },
+    "required": ["openness", "conscientiousness", "extraversion",
+                 "agreeableness", "neuroticism", "evidence", "confidence"],
+}
+
+LONG_TO_AXIS = {
+    "openness": "O", "conscientiousness": "C", "extraversion": "E",
+    "agreeableness": "A", "neuroticism": "N",
+}
