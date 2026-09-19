@@ -10,11 +10,14 @@
     LLM_MODEL     모델 ID
     LLM_API_KEY   API 키
     LLM_CACHE_ONLY=1   캐시에 없으면 에러. 무대 시연 때 반드시 켠다.
+    LLM_STUB=1         API 없이 스키마에 맞는 가짜 응답 생성. 개발 전용.
+                       결과를 캐시에 쓰지 않으므로 실제 실행을 오염시키지 않는다.
 """
 import hashlib
 import json
 import os
 import random
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -27,6 +30,8 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 PROVIDER = os.environ.get("LLM_PROVIDER", "openai").lower()
 API_KEY = os.environ.get("LLM_API_KEY", "")
 CACHE_ONLY = os.environ.get("LLM_CACHE_ONLY", "") == "1"
+STUB = os.environ.get("LLM_STUB", "") == "1"
+_stub_warned = False
 
 # 모델 ID는 벤더 페이지에서 확인 후 환경변수로 덮어쓸 것
 DEFAULT_MODEL = {
@@ -115,10 +120,51 @@ def _build(prompt, schema, system, temp):
     raise LLMError("unknown LLM_PROVIDER: " + PROVIDER)
 
 
+_STUB_WORDS = ["등산", "홈서버", "재즈", "베이킹", "독립영화", "보드게임",
+               "배낭여행", "클라이밍", "사진", "철학"]
+
+
+def _stub_value(spec, seed):
+    """스키마를 만족하는 결정적 가짜 값. 개발용."""
+    rnd = random.Random(seed)
+    t = spec.get("type")
+    if "enum" in spec:
+        return rnd.choice(spec["enum"])
+    if t == "integer":
+        return rnd.randint(spec.get("minimum", 1), spec.get("maximum", 5))
+    if t == "number":
+        lo, hi = spec.get("minimum", 0.0), spec.get("maximum", 1.0)
+        return round(rnd.uniform(lo, hi), 2)
+    if t == "boolean":
+        return rnd.random() < 0.5
+    if t == "array":
+        n = spec.get("minItems", 3)
+        item = spec.get("items", {})
+        if item.get("type") == "string":
+            return rnd.sample(_STUB_WORDS, min(n, len(_STUB_WORDS)))
+        return [_stub_value(item, seed + i) for i in range(n)]
+    return "(stub)"
+
+
+def _stub(prompt, schema, seed):
+    global _stub_warned
+    if not _stub_warned:
+        sys.stderr.write(
+            "\n*** LLM_STUB=1 — 가짜 응답입니다. 결과 수치를 신뢰하지 마세요. ***\n\n")
+        _stub_warned = True
+    props = schema.get("properties", {})
+    return {k: _stub_value(v, seed + i)
+            for i, (k, v) in enumerate(sorted(props.items()))}
+
+
 def call(prompt, schema, system=None, temp=0.0, tag=""):
     """구조화 출력 1회. 캐시 히트면 API를 건드리지 않는다."""
     key = _cache_key({"p": prompt, "s": schema, "sys": system,
                       "t": temp, "m": MODEL, "v": PROVIDER})
+    if STUB:
+        # 캐시에 쓰지 않는다. 가짜 응답이 실제 실행에 섞이면 안 된다.
+        return _stub(prompt, schema, int(key[:8], 16))
+
     path = _cache_path(key)
     if os.path.exists(path):
         with open(path, encoding="utf-8") as f:

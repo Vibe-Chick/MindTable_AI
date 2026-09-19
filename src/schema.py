@@ -154,3 +154,17 @@ LONG_TO_AXIS = {
     "openness": "O", "conscientiousness": "C", "extraversion": "E",
     "agreeableness": "A", "neuroticism": "N",
 }
+
+
+CARD_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "reason": {"type": "string"},          # 왜 이 조합인지 한 줄
+        "icebreakers": {
+            "type": "array", "items": {"type": "string"},
+            "minItems": 3, "maxItems": 3,
+        },
+    },
+    "required": ["reason", "icebreakers"],
+}

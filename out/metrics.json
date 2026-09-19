@@ -1,0 +1,111 @@
+{
+  "n_users": 60,
+  "n_groups": 15,
+  "objective": {
+    "random": 14.3122,
+    "greedy": 17.367,
+    "local_search": 18.8096
+  },
+  "objective_gain_vs_random_pct": 31.4,
+  "local_search_iters": 501,
+  "carry_over": 0,
+  "rounds": [
+    {
+      "round": 1,
+      "objective": 18.794,
+      "true_satisfaction": 1.2484,
+      "err_all": 0.0733,
+      "err_mismatch": 0.2316,
+      "err_ok": 0.0,
+      "leftover": 0,
+      "mean_beta": 0.5
+    },
+    {
+      "round": 2,
+      "objective": 16.521,
+      "true_satisfaction": 1.0895,
+      "err_all": 0.081,
+      "err_mismatch": 0.2061,
+      "err_ok": 0.023,
+      "leftover": 0,
+      "mean_beta": 0.395
+    },
+    {
+      "round": 3,
+      "objective": 13.844,
+      "true_satisfaction": 0.9168,
+      "err_all": 0.0864,
+      "err_mismatch": 0.191,
+      "err_ok": 0.0379,
+      "leftover": 0,
+      "mean_beta": 0.287
+    },
+    {
+      "round": 4,
+      "objective": null,
+      "true_satisfaction": null,
+      "err_all": 0.0963,
+      "err_mismatch": 0.1872,
+      "err_ok": 0.0541,
+      "leftover": null,
+      "mean_beta": 0.205
+    }
+  ],
+  "satisfaction_curve": [
+    1.2484,
+    1.0895,
+    0.9168
+  ],
+  "divergence_top": [
+    {
+      "user_id": "u019",
+      "name": "소율",
+      "axis": "C",
+      "self_report": 3,
+      "effective": 4.36,
+      "delta": 1.36
+    },
+    {
+      "user_id": "u034",
+      "name": "채원",
+      "axis": "E",
+      "self_report": 2,
+      "effective": 3.0,
+      "delta": 1.0
+    },
+    {
+      "user_id": "u040",
+      "name": "다은",
+      "axis": "C",
+      "self_report": 2,
+      "effective": 1.12,
+      "delta": -0.88
+    },
+    {
+      "user_id": "u013",
+      "name": "건우",
+      "axis": "N",
+      "self_report": 1,
+      "effective": 1.85,
+      "delta": 0.85
+    },
+    {
+      "user_id": "u009",
+      "name": "도윤",
+      "axis": "A",
+      "self_report": 3,
+      "effective": 3.54,
+      "delta": 0.54
+    },
+    {
+      "user_id": "u056",
+      "name": "도윤",
+      "axis": "E",
+      "self_report": 3,
+      "effective": 2.49,
+      "delta": -0.51
+    }
+  ],
+  "reliability": null,
+  "cards_without_llm": 0
+}
