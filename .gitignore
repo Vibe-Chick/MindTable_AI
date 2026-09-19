@@ -1,5 +1,18 @@
 .DS_Store
 .env
+**/.env
+cache/
+**/cache/
 __pycache__/
 *.pyc
 node_modules/
+
+# 실제 응답과 파생물 — 학생들의 자유서술·이름이 들어간다. 커밋 금지.
+backend/data/responses.csv
+backend/data/profiles.json
+backend/data/profiles_r*.json
+backend/data/profiles_before_r*.json
+backend/data/reviews_r*.json
+backend/out/groups_real*.json
+backend/out/profiles_r*.json
+backend/out/profiles_final.json
