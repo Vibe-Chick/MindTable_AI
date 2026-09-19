@@ -1,13 +1,13 @@
 # 프론트엔드 계약
 
-백엔드는 서버가 아니다. **`backend/out/` 의 정적 JSON 파일이 API다.**
+백엔드는 서버가 아니다. **`AI/out/` 의 정적 JSON 파일이 API다.**
 파이프라인을 돌리면 이 파일들이 갱신된다. fetch 해서 그리면 된다.
 
-샘플: **`backend/out/sample/`** (익명화됨). 이 구조 그대로 실데이터가 들어온다.
+샘플: **`AI/out/sample/`** (익명화됨). 이 구조 그대로 실데이터가 들어온다.
 
 ---
 
-## backend/out/sample/groups.json
+## AI/out/sample/groups.json
 
 ```jsonc
 {
@@ -45,7 +45,7 @@
 
 ---
 
-## backend/out/sample/profiles.json
+## AI/out/sample/profiles.json
 
 ```jsonc
 [{
@@ -87,7 +87,7 @@
 
 ---
 
-## backend/out/metrics.json
+## AI/out/metrics.json
 
 발표 숫자의 **단일 출처**. 슬라이드에 손으로 옮겨 적지 말 것.
 
@@ -108,7 +108,7 @@
 }
 ```
 
-`backend/out/baseline_r1.json` 은 **랜덤 편성** 결과다. 알고리즘 편성과 나란히
+`AI/out/baseline_r1.json` 은 **랜덤 편성** 결과다. 알고리즘 편성과 나란히
 띄우는 대조 화면이 데모의 핵심 장면이므로 반드시 구현할 것.
 
 ---
