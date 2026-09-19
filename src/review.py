@@ -16,7 +16,9 @@ import llm                                                   # noqa: E402
 import prompts                                               # noqa: E402
 from schema import (BEHAVIOR_CLIP, BEHAVIOR_DECAY, BETA_MAX,  # noqa
                     BETA_MIN, BETA_STEP, DELTA_SCHEMA,
-                    DIVERGENCE_THRESHOLD, LONG_TO_AXIS, LR,
+                    DIVERGENCE_THRESHOLD, INTEREST_DECAY, INTEREST_DOWN,
+                    INTEREST_DROP, INTEREST_MAX, INTEREST_MIN,
+                    INTEREST_NEW, INTEREST_UP, LONG_TO_AXIS, LR,
                     clamp, effective, max_divergence)
 
 Q4_MORE_SIMILAR = "더 비슷"
@@ -56,10 +58,50 @@ def apply_delta(p, delta, q4=None):
         d = float(delta.get(long, 0.0) or 0.0)
         b = p["behavior"][ax] * (1.0 - BEHAVIOR_DECAY) + LR * conf * d
         p["behavior"][ax] = clamp(b, -BEHAVIOR_CLIP, BEHAVIOR_CLIP)
+    apply_topics(p, delta.get("worked_topics") or [],
+                 delta.get("dead_topics") or [], conf)
+
     if q4 == Q4_MORE_SIMILAR:
         p["beta"] = clamp(p["beta"] - BETA_STEP, BETA_MIN, BETA_MAX)
     elif q4 == Q4_MORE_DIFFERENT:
         p["beta"] = clamp(p["beta"] + BETA_STEP, BETA_MIN, BETA_MAX)
+    return p
+
+
+def apply_topics(p, worked, dead, conf=1.0):
+    """실제로 통한 주제 / 죽은 주제로 관심사 가중을 갱신한다.
+
+    설문에 쓴 관심사는 '자기가 생각하는 나'이고, 여기서 들어오는 신호는
+    '실제 자리에서 일어난 일'이다. 이 둘이 갈리는 게 자기보고 편향의
+    가장 눈에 보이는 형태다.
+
+    가중치는 1.0 쪽으로 천천히 수축한다(INTEREST_DECAY). 없으면 한 번
+    언급된 주제가 영구히 프로필을 지배한다.
+    """
+    w = p.setdefault("interest_weights",
+                     {k: 1.0 for k in p.get("interests", [])})
+
+    for k in list(w):                       # 1.0 쪽으로 수축
+        w[k] += (1.0 - w[k]) * INTEREST_DECAY
+
+    for t in worked:
+        t = t.strip()
+        if not t:
+            continue
+        cur = w.get(t, INTEREST_NEW)
+        w[t] = clamp(cur + INTEREST_UP * conf, INTEREST_MIN, INTEREST_MAX)
+
+    for t in dead:
+        t = t.strip()
+        if t in w:
+            w[t] = clamp(w[t] - INTEREST_DOWN * conf,
+                         INTEREST_MIN, INTEREST_MAX)
+
+    for k in [k for k, v in w.items() if v < INTEREST_DROP]:
+        del w[k]
+
+    # interests 는 표시용. 가중 상위 3개를 유지한다.
+    p["interests"] = [k for k, _ in sorted(w.items(), key=lambda kv: -kv[1])][:3]
     return p
 
 

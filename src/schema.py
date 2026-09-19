@@ -41,6 +41,16 @@ BEHAVIOR_DECAY = 0.10   # 회차마다 기존 보정을 감쇠시킨다.
 DELTA_DEADBAND = 0.60   # 이 미만의 신호는 0으로. 1회차 잡음에 반응하지 않는다
 DIVERGENCE_THRESHOLD = 1.0   # 자기보고 vs 보정 괴리 하이라이트 기준
 
+# --- 관심사 학습 (리뷰 R1/R2에서) ---
+# 설문에 '쓴' 관심사와 식사 자리에서 '실제로 통한' 주제는 다르다.
+# 후자를 반영해야 유사도 항(가중치 ALPHA=1.0, 목적함수 최대항)이 움직인다.
+INTEREST_UP = 0.45       # 대화가 터진 주제 가중 상승
+INTEREST_DOWN = 0.30     # 죽은 주제 가중 하락
+INTEREST_DECAY = 0.08    # 회차마다 1쪽으로 수축 (성격 보정의 감쇠와 같은 역할)
+INTEREST_NEW = 0.6       # 설문에 없던 주제가 처음 등장할 때 초기 가중
+INTEREST_MIN, INTEREST_MAX = 0.0, 2.0
+INTEREST_DROP = 0.05     # 이 미만이면 목록에서 제거
+
 
 def clamp(v, lo, hi):
     return max(lo, min(hi, v))
@@ -60,6 +70,8 @@ def new_profile(user_id, school, major, college, year,
         # 리뷰로 누적되는 보정값
         "behavior": {a: 0.0 for a in AXES},
         "interests": interests or [],
+        # 설문 키워드는 가중 1.0에서 시작한다. 리뷰가 이 가중을 움직인다.
+        "interest_weights": {k: 1.0 for k in (interests or [])},
         "interest_vec": [],
         "beta": BETA_INIT,
         "confidence": 0.0,
@@ -135,6 +147,8 @@ EXTRACTION_SCHEMA = {
 }
 
 _DELTA = {"type": "number", "enum": [-1, -0.5, 0, 0.5, 1]}
+_TOPICS = {"type": "array", "items": {"type": "string"},
+           "minItems": 0, "maxItems": 3}
 
 DELTA_SCHEMA = {
     "type": "object",
@@ -143,11 +157,16 @@ DELTA_SCHEMA = {
         "openness": _DELTA, "conscientiousness": _DELTA,
         "extraversion": _DELTA, "agreeableness": _DELTA,
         "neuroticism": _DELTA,
+        # 실제로 대화가 터진 주제 / 죽은 주제.
+        # 이게 유사도 행렬을 갱신한다 — 보정이 지배적 항에 닿는 유일한 경로.
+        "worked_topics": _TOPICS,
+        "dead_topics":   _TOPICS,
         "evidence":   {"type": "string"},
         "confidence": {"type": "number", "minimum": 0, "maximum": 1},
     },
     "required": ["openness", "conscientiousness", "extraversion",
-                 "agreeableness", "neuroticism", "evidence", "confidence"],
+                 "agreeableness", "neuroticism", "worked_topics",
+                 "dead_topics", "evidence", "confidence"],
 }
 
 LONG_TO_AXIS = {

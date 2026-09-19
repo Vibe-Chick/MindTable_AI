@@ -36,6 +36,23 @@ def quantize(x):
     return min(STEPS, key=lambda s: abs(s - x))
 
 
+def synth_topics(p, rng):
+    """리뷰에서 나올 '실제로 통한 주제 / 죽은 주제'를 만든다."""
+    true_kw = p.get("_true_interests", [])
+    worked, dead = [], []
+    for k in true_kw:
+        if rng.random() < 0.45:            # 매 자리에서 다 나오진 않는다
+            worked.append(k)
+    w = p.get("interest_weights") or {}
+    stale = [k for k, v in sorted(w.items(), key=lambda kv: -kv[1])
+             if k not in true_kw]
+    if stale and rng.random() < 0.35:
+        dead.append(stale[0])
+    if rng.random() < 0.15 and w:          # 오관측
+        worked.append(rng.choice(list(w)))
+    return worked[:3], dead[:3]
+
+
 def synth_delta(p, rng):
     """숨은 정답과 현재 벡터의 차이를 잡음 섞어 관측한 것처럼 만든다.
 
@@ -50,6 +67,9 @@ def synth_delta(p, rng):
         raw = gap * OBS_GAIN + rng.gauss(0, OBS_NOISE)
         out[long] = quantize(raw)
         strength = max(strength, abs(raw))
+    worked, dead = synth_topics(p, rng)
+    out["worked_topics"] = worked
+    out["dead_topics"] = dead
     out["evidence"] = "(simulated)"
     out["confidence"] = round(min(1.0, strength), 3)
     return out
@@ -73,6 +93,18 @@ def _err(p):
     return sum(abs(eff[a] - p["_true"][a]) for a in AXES) / len(AXES)
 
 
+def topic_error(profiles):
+    """설문/학습된 관심사가 '실제로 통하는 주제'와 얼마나 어긋나 있나."""
+    tot = 0.0
+    for p in profiles:
+        true_kw = set(p.get("_true_interests") or [])
+        w = p.get("interest_weights") or {}
+        s_all = sum(w.values()) or 1.0
+        hit = sum(v for k, v in w.items() if k in true_kw)
+        tot += 1.0 - hit / s_all
+    return tot / len(profiles)
+
+
 def truth_error(profiles, only=None):
     """현재 벡터가 숨은 정답에서 얼마나 떨어져 있나 (낮을수록 좋다).
 
@@ -87,6 +119,19 @@ def truth_error(profiles, only=None):
     if not ps:
         return 0.0
     return sum(_err(p) for p in ps) / len(ps)
+
+
+def true_sim_matrix(profiles):
+    """숨은 정답 관심사로 만든 유사도 행렬. 평가 전용, 회차와 무관하게 고정."""
+    shadow = []
+    for p in profiles:
+        q = copy.deepcopy(p)
+        kw = p.get("_true_interests") or p["interests"]
+        q["interest_weights"] = {k: 1.0 for k in kw}
+        q["interests"] = list(kw)
+        q["interest_vec"] = []
+        shadow.append(q)
+    return embed.similarity_matrix(shadow, mode="synthetic")
 
 
 def true_satisfaction(groups, profiles, sim):
@@ -112,7 +157,7 @@ def true_satisfaction(groups, profiles, sim):
         pairs = [(g[a], g[b]) for a in range(len(g))
                  for b in range(a + 1, len(g))]
         interest = sum(sim[i][j] for i, j in pairs) / len(pairs)
-        d = match.diversity(members)
+        d = match.diversity(members)  # noqa
         fit = sum(1.0 - abs(d - profiles[i]["_div_ideal"]) for i in g) / len(g)
         tot += interest + match.GAMMA * match.complement(members) + fit
     return tot / len(groups)
@@ -121,10 +166,12 @@ def true_satisfaction(groups, profiles, sim):
 def run(profiles, rounds=3, seed=1, correct=True):
     """correct=False 면 델타를 적용하지 않는다 (대조군)."""
     rng = random.Random(seed)
-    sim = embed.similarity_matrix(profiles)
+    tsim = true_sim_matrix(profiles)      # 평가용, 고정
     history, snapshots = [], []
 
     for r in range(1, rounds + 1):
+        # 관심사 가중이 회차마다 바뀌므로 유사도를 매번 다시 만든다
+        sim = embed.similarity_matrix(profiles)
         groups, leftover = match.greedy(profiles, sim, explore=True, seed=r)
         groups, obj, _ = match.local_search(groups, profiles, sim)
 
@@ -133,10 +180,11 @@ def run(profiles, rounds=3, seed=1, correct=True):
             "round": r,
             "objective": round(obj, 3),
             "true_satisfaction": round(true_satisfaction(groups, profiles,
-                                                         sim), 4),
+                                                         tsim), 4),
             "err_all": round(truth_error(profiles), 4),
             "err_mismatch": round(truth_error(profiles, "mismatch"), 4),
             "err_ok": round(truth_error(profiles, "ok"), 4),
+            "topic_err": round(topic_error(profiles), 4),
             "leftover": len(leftover),
             "mean_beta": round(sum(p["beta"] for p in profiles)
                                / len(profiles), 3),
@@ -161,6 +209,7 @@ def run(profiles, rounds=3, seed=1, correct=True):
         "err_all": round(truth_error(profiles), 4),
         "err_mismatch": round(truth_error(profiles, "mismatch"), 4),
         "err_ok": round(truth_error(profiles, "ok"), 4),
+        "topic_err": round(topic_error(profiles), 4),
         "leftover": None,
         "mean_beta": round(sum(p["beta"] for p in profiles)
                            / len(profiles), 3),
@@ -199,15 +248,17 @@ if __name__ == "__main__":
     profiles = json.load(open(path, encoding="utf-8"))
     hist, snaps, final = run(profiles, rounds)
 
-    print("round  objective  true_sat   err_all  err_mismatch  err_ok  beta")
+    print("round  objective  true_sat  err_mismatch  err_ok  topic_err")
     for h in hist:
-        print("  %-4s %9s %9s %9.4f %13.4f %7.4f %5.3f"
+        print("  %-4s %9s %9s %13.4f %7.4f %10.4f"
               % (h["round"],
                  "-" if h["objective"] is None else "%.3f" % h["objective"],
                  "-" if h["true_satisfaction"] is None
                  else "%.4f" % h["true_satisfaction"],
-                 h["err_all"], h["err_mismatch"], h["err_ok"],
-                 h["mean_beta"]))
+                 h["err_mismatch"], h["err_ok"], h["topic_err"]))
+    t0, t1 = hist[0]["topic_err"], hist[-1]["topic_err"]
+    print("\n관심사 오차  %.4f → %.4f  (%+.1f%%)"
+          % (t0, t1, (t1 - t0) / t0 * 100))
 
     m0, m1 = hist[0]["err_mismatch"], hist[-1]["err_mismatch"]
     o0, o1 = hist[0]["err_ok"], hist[-1]["err_ok"]

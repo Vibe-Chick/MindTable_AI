@@ -7,9 +7,9 @@
     "college": "이과대학",
     "year": 3,
     "interests": [
-      "철학",
+      "소설",
       "에세이",
-      "일본영화"
+      "철학"
     ],
     "self_report": {
       "O": 2,
@@ -19,459 +19,372 @@
       "N": 4
     },
     "effective": {
-      "O": 2.0,
+      "O": 1.84,
       "C": 1,
       "E": 4.0,
       "A": 3.0,
       "N": 4.0
     },
     "beta": 0.2,
-    "confidence": 0.84
+    "confidence": 0.73
   },
   {
     "user_id": "u002",
-    "name": "소율",
-    "school": "동국대",
-    "major": "미술학부",
-    "college": "예술대학",
-    "year": 1,
-    "interests": [
-      "작곡",
-      "재즈",
-      "국내여행"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 4,
-      "A": 5,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 2.15,
-      "E": 4.0,
-      "A": 4.85,
-      "N": 3.15
-    },
-    "beta": 0.35,
-    "confidence": 0.79
-  },
-  {
-    "user_id": "u003",
-    "name": "민준",
-    "school": "숭실대",
-    "major": "영어영문학과",
-    "college": "인문대학",
-    "year": 2,
-    "interests": [
-      "영화제",
-      "독립영화",
-      "등산"
-    ],
-    "self_report": {
-      "O": 2,
-      "C": 2,
-      "E": 2,
-      "A": 2,
-      "N": 4
-    },
-    "effective": {
-      "O": 2.0,
-      "C": 1.51,
-      "E": 1.87,
-      "A": 2.0,
-      "N": 3.75
-    },
-    "beta": 0.2,
-    "confidence": 0.9
-  },
-  {
-    "user_id": "u004",
-    "name": "수빈",
-    "school": "건국대",
-    "major": "철학과",
-    "college": "문과대학",
-    "year": 1,
-    "interests": [
-      "독립영화",
-      "영화제",
-      "자작PC"
-    ],
-    "self_report": {
-      "O": 2,
-      "C": 2,
-      "E": 3,
-      "A": 3,
-      "N": 2
-    },
-    "effective": {
-      "O": 1.86,
-      "C": 2.0,
-      "E": 3.0,
-      "A": 3.0,
-      "N": 2.0
-    },
-    "beta": 0.2,
-    "confidence": 0.66
-  },
-  {
-    "user_id": "u005",
-    "name": "채원",
-    "school": "동국대",
-    "major": "미술학부",
-    "college": "예술대학",
-    "year": 1,
-    "interests": [
-      "재즈",
-      "밴드",
-      "보드게임"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 5,
-      "A": 4,
-      "N": 2
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 2.0,
-      "E": 5,
-      "A": 3.83,
-      "N": 2.0
-    },
-    "beta": 0.1,
-    "confidence": 0.92
-  },
-  {
-    "user_id": "u006",
-    "name": "민준",
-    "school": "건국대",
-    "major": "화학공학부",
-    "college": "공과대학",
-    "year": 2,
-    "interests": [
-      "주짓수",
-      "등산",
-      "역사"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 2,
-      "A": 3,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 2.0,
-      "E": 2.0,
-      "A": 3.0,
-      "N": 3.0
-    },
-    "beta": 0.35,
-    "confidence": 0.89
-  },
-  {
-    "user_id": "u007",
-    "name": "나연",
-    "school": "중앙대",
-    "major": "공연영상창작학부",
-    "college": "예술대학",
-    "year": 1,
-    "interests": [
-      "재즈",
-      "LP수집",
-      "자전거여행"
-    ],
-    "self_report": {
-      "O": 2,
-      "C": 2,
-      "E": 3,
-      "A": 4,
-      "N": 4
-    },
-    "effective": {
-      "O": 2.0,
-      "C": 2.46,
-      "E": 3.0,
-      "A": 4.0,
-      "N": 4.0
-    },
-    "beta": 0.35,
-    "confidence": 0.86
-  },
-  {
-    "user_id": "u008",
-    "name": "도윤",
+    "name": "현우",
     "school": "한양대",
     "major": "기계공학부",
     "college": "공과대학",
-    "year": 1,
-    "interests": [
-      "클라이밍",
-      "헬스",
-      "맛집탐방"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 4,
-      "A": 4,
-      "N": 4
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 2.0,
-      "E": 3.83,
-      "A": 4.0,
-      "N": 4.0
-    },
-    "beta": 0.1,
-    "confidence": 0.61
-  },
-  {
-    "user_id": "u009",
-    "name": "도윤",
-    "school": "서울여대",
-    "major": "데이터사이언스학과",
-    "college": "과학기술융합대학",
     "year": 3,
     "interests": [
-      "보드게임",
-      "FPS",
-      "헬스"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 4,
-      "E": 3,
-      "A": 3,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 4.0,
-      "E": 3.17,
-      "A": 3.54,
-      "N": 3.0
-    },
-    "beta": 0.1,
-    "confidence": 0.62
-  },
-  {
-    "user_id": "u010",
-    "name": "지우",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 1,
-    "interests": [
-      "작곡",
-      "LP수집",
-      "역사"
-    ],
-    "self_report": {
-      "O": 2,
-      "C": 3,
-      "E": 3,
-      "A": 3,
-      "N": 2
-    },
-    "effective": {
-      "O": 1.85,
-      "C": 3.0,
-      "E": 2.61,
-      "A": 3.0,
-      "N": 1.6
-    },
-    "beta": 0.35,
-    "confidence": 0.58
-  },
-  {
-    "user_id": "u011",
-    "name": "하은",
-    "school": "숭실대",
-    "major": "경영학부",
-    "college": "경영대학",
-    "year": 1,
-    "interests": [
-      "자전거여행",
-      "국내여행",
+      "리눅스",
+      "역사",
       "보안"
     ],
     "self_report": {
       "O": 4,
       "C": 5,
-      "E": 2,
+      "E": 3,
       "A": 3,
-      "N": 3
+      "N": 4
     },
     "effective": {
       "O": 4.0,
-      "C": 4.83,
-      "E": 2.0,
-      "A": 2.85,
-      "N": 3.0
+      "C": 5,
+      "E": 3.0,
+      "A": 2.96,
+      "N": 4.0
     },
-    "beta": 0.35,
-    "confidence": 0.72
+    "beta": 0.5,
+    "confidence": 0.58
   },
   {
-    "user_id": "u012",
-    "name": "건우",
-    "school": "건국대",
-    "major": "수의예과",
-    "college": "수의과대학",
-    "year": 1,
-    "interests": [
-      "수영",
-      "헬스",
-      "일본영화"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 4,
-      "E": 2,
-      "A": 3,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 4.0,
-      "E": 2.0,
-      "A": 3.0,
-      "N": 3.0
-    },
-    "beta": 0.1,
-    "confidence": 0.89
-  },
-  {
-    "user_id": "u013",
-    "name": "건우",
-    "school": "숭실대",
-    "major": "소프트웨어학부",
-    "college": "IT대학",
+    "user_id": "u003",
+    "name": "소율",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
     "year": 2,
     "interests": [
-      "러닝",
-      "등산",
-      "애니메이션"
+      "철학",
+      "소설",
+      "역사"
     ],
     "self_report": {
       "O": 2,
-      "C": 3,
-      "E": 3,
+      "C": 2,
+      "E": 5,
       "A": 3,
-      "N": 1
+      "N": 4
     },
     "effective": {
       "O": 2.0,
-      "C": 3.0,
-      "E": 3.0,
+      "C": 2.0,
+      "E": 4.85,
       "A": 3.0,
-      "N": 1.85
+      "N": 4.0
     },
     "beta": 0.35,
     "confidence": 0.84
   },
   {
-    "user_id": "u014",
-    "name": "민준",
+    "user_id": "u004",
+    "name": "준서",
     "school": "중앙대",
-    "major": "소프트웨어학부",
-    "college": "소프트웨어대학",
-    "year": 3,
+    "major": "경영학부",
+    "college": "경영경제대학",
+    "year": 4,
     "interests": [
-      "오픈소스",
-      "보안",
+      "국내여행",
+      "사진",
       "배낭여행"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 2,
+      "E": 3,
+      "A": 3,
+      "N": 4
+    },
+    "effective": {
+      "O": 4.0,
+      "C": 2.0,
+      "E": 3.0,
+      "A": 3.63,
+      "N": 3.55
+    },
+    "beta": 0.2,
+    "confidence": 0.61
+  },
+  {
+    "user_id": "u005",
+    "name": "유진",
+    "school": "동국대",
+    "major": "미술학부",
+    "college": "예술대학",
+    "year": 1,
+    "interests": [
+      "작곡",
+      "공연관람",
+      "LP수집"
     ],
     "self_report": {
       "O": 3,
       "C": 3,
-      "E": 2,
-      "A": 2,
+      "E": 1,
+      "A": 3,
       "N": 3
     },
     "effective": {
       "O": 3.0,
       "C": 3.0,
-      "E": 2.0,
-      "A": 2.0,
+      "E": 1,
+      "A": 2.86,
       "N": 3.0
     },
-    "beta": 0.1,
-    "confidence": 0.58
+    "beta": 0.2,
+    "confidence": 0.65
   },
   {
-    "user_id": "u015",
-    "name": "지우",
-    "school": "숭실대",
-    "major": "전자정보공학부",
-    "college": "IT대학",
-    "year": 2,
+    "user_id": "u006",
+    "name": "수빈",
+    "school": "서울여대",
+    "major": "데이터사이언스학과",
+    "college": "과학기술융합대학",
+    "year": 3,
     "interests": [
-      "보안",
-      "홈서버",
-      "사진"
+      "역사",
+      "독립영화",
+      "소설"
     ],
     "self_report": {
       "O": 4,
       "C": 4,
-      "E": 2,
+      "E": 1,
+      "A": 4,
+      "N": 4
+    },
+    "effective": {
+      "O": 4.35,
+      "C": 4.0,
+      "E": 1,
+      "A": 4.17,
+      "N": 4.0
+    },
+    "beta": 0.1,
+    "confidence": 0.7
+  },
+  {
+    "user_id": "u007",
+    "name": "민준",
+    "school": "중앙대",
+    "major": "공연영상창작학부",
+    "college": "예술대학",
+    "year": 3,
+    "interests": [
+      "주짓수",
+      "러닝",
+      "등산"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 4,
+      "E": 5,
       "A": 3,
       "N": 3
     },
     "effective": {
       "O": 4.0,
       "C": 4.0,
-      "E": 2.0,
-      "A": 3.0,
+      "E": 5,
+      "A": 1.77,
       "N": 3.0
     },
     "beta": 0.5,
     "confidence": 0.81
   },
   {
-    "user_id": "u016",
-    "name": "수빈",
-    "school": "건국대",
-    "major": "철학과",
-    "college": "문과대학",
-    "year": 2,
+    "user_id": "u008",
+    "name": "준서",
+    "school": "서울여대",
+    "major": "데이터사이언스학과",
+    "college": "과학기술융합대학",
+    "year": 1,
     "interests": [
-      "애니메이션",
-      "일본영화",
-      "클라이밍"
+      "FPS",
+      "방탈출",
+      "보드게임"
     ],
     "self_report": {
       "O": 2,
-      "C": 3,
-      "E": 4,
+      "C": 4,
+      "E": 2,
       "A": 4,
-      "N": 4
+      "N": 2
     },
     "effective": {
       "O": 2.0,
-      "C": 3.0,
-      "E": 4.0,
-      "A": 4.0,
-      "N": 3.85
+      "C": 4.41,
+      "E": 2.0,
+      "A": 3.77,
+      "N": 1.59
     },
-    "beta": 0.2,
-    "confidence": 0.77
+    "beta": 0.5,
+    "confidence": 0.8
   },
   {
-    "user_id": "u017",
-    "name": "예준",
-    "school": "한양대",
-    "major": "미디어커뮤니케이션학과",
-    "college": "사회과학대학",
+    "user_id": "u009",
+    "name": "유진",
+    "school": "중앙대",
+    "major": "소프트웨어학부",
+    "college": "소프트웨어대학",
+    "year": 2,
+    "interests": [
+      "국내여행",
+      "자전거여행",
+      "사진"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 4,
+      "A": 5,
+      "N": 2
+    },
+    "effective": {
+      "O": 3.5,
+      "C": 2.0,
+      "E": 4.0,
+      "A": 5,
+      "N": 2.0
+    },
+    "beta": 0.35,
+    "confidence": 0.9
+  },
+  {
+    "user_id": "u010",
+    "name": "나연",
+    "school": "숭실대",
+    "major": "소프트웨어학부",
+    "college": "IT대학",
+    "year": 2,
+    "interests": [
+      "인디게임",
+      "보드게임",
+      "철학"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 4,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "effective": {
+      "O": 3.0,
+      "C": 4.0,
+      "E": 2.0,
+      "A": 3.0,
+      "N": 2.16
+    },
+    "beta": 0.5,
+    "confidence": 0.74
+  },
+  {
+    "user_id": "u011",
+    "name": "채원",
+    "school": "중앙대",
+    "major": "경영학부",
+    "college": "경영경제대학",
+    "year": 4,
+    "interests": [
+      "홈서버",
+      "오픈소스",
+      "보안"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 2,
+      "E": 3,
+      "A": 4,
+      "N": 3
+    },
+    "effective": {
+      "O": 4.2,
+      "C": 2.0,
+      "E": 2.41,
+      "A": 4.0,
+      "N": 3.0
+    },
+    "beta": 0.35,
+    "confidence": 0.85
+  },
+  {
+    "user_id": "u012",
+    "name": "서연",
+    "school": "숭실대",
+    "major": "소프트웨어학부",
+    "college": "IT대학",
     "year": 3,
     "interests": [
-      "주짓수",
+      "보안",
+      "러닝",
+      "오픈소스"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 4,
+      "A": 2,
+      "N": 4
+    },
+    "effective": {
+      "O": 3.0,
+      "C": 3.0,
+      "E": 4.0,
+      "A": 2.0,
+      "N": 4.16
+    },
+    "beta": 0.5,
+    "confidence": 0.92
+  },
+  {
+    "user_id": "u013",
+    "name": "하은",
+    "school": "중앙대",
+    "major": "공연영상창작학부",
+    "college": "예술대학",
+    "year": 3,
+    "interests": [
+      "자작PC",
+      "홈서버",
+      "라즈베리파이"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 2,
+      "E": 5,
+      "A": 2,
+      "N": 4
+    },
+    "effective": {
+      "O": 2.38,
+      "C": 2.42,
+      "E": 5,
+      "A": 2.0,
+      "N": 4.0
+    },
+    "beta": 0.35,
+    "confidence": 0.66
+  },
+  {
+    "user_id": "u014",
+    "name": "예준",
+    "school": "건국대",
+    "major": "수의예과",
+    "college": "수의과대학",
+    "year": 3,
+    "interests": [
+      "역사",
       "헬스",
       "소설"
     ],
@@ -486,168 +399,139 @@
       "O": 3.0,
       "C": 3.0,
       "E": 3.0,
-      "A": 3.17,
+      "A": 3.15,
       "N": 2.0
     },
-    "beta": 0.2,
-    "confidence": 0.63
-  },
-  {
-    "user_id": "u018",
-    "name": "나연",
-    "school": "동국대",
-    "major": "법학과",
-    "college": "법과대학",
-    "year": 2,
-    "interests": [
-      "일본영화",
-      "영화제",
-      "롤"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 3,
-      "A": 3,
-      "N": 4
-    },
-    "effective": {
-      "O": 2.81,
-      "C": 3.0,
-      "E": 3.0,
-      "A": 3.0,
-      "N": 4.0
-    },
     "beta": 0.35,
-    "confidence": 0.77
+    "confidence": 0.91
   },
   {
-    "user_id": "u019",
-    "name": "소율",
+    "user_id": "u015",
+    "name": "도윤",
     "school": "숭실대",
     "major": "소프트웨어학부",
     "college": "IT대학",
     "year": 1,
     "interests": [
-      "홈서버",
-      "라즈베리파이",
-      "사진"
+      "FPS",
+      "러닝",
+      "방탈출"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 3,
+      "A": 2,
+      "N": 3
+    },
+    "effective": {
+      "O": 2.59,
+      "C": 2.0,
+      "E": 3.0,
+      "A": 2.0,
+      "N": 2.8
+    },
+    "beta": 0.2,
+    "confidence": 0.6
+  },
+  {
+    "user_id": "u016",
+    "name": "수빈",
+    "school": "한양대",
+    "major": "컴퓨터소프트웨어학부",
+    "college": "공과대학",
+    "year": 1,
+    "interests": [
+      "러닝",
+      "재즈",
+      "등산"
     ],
     "self_report": {
       "O": 2,
-      "C": 3,
-      "E": 4,
-      "A": 3,
-      "N": 5
+      "C": 4,
+      "E": 5,
+      "A": 1,
+      "N": 3
     },
     "effective": {
       "O": 2.0,
-      "C": 4.36,
-      "E": 4.0,
-      "A": 3.0,
-      "N": 5
+      "C": 4.0,
+      "E": 5,
+      "A": 1,
+      "N": 2.85
     },
-    "beta": 0.1,
-    "confidence": 0.59
+    "beta": 0.35,
+    "confidence": 0.84
   },
   {
-    "user_id": "u020",
-    "name": "현우",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
+    "user_id": "u017",
+    "name": "지우",
+    "school": "한양대",
+    "major": "컴퓨터소프트웨어학부",
+    "college": "공과대학",
     "year": 1,
     "interests": [
-      "자작PC",
-      "오픈소스",
-      "애니메이션"
+      "인디게임",
+      "재즈",
+      "리눅스"
     ],
     "self_report": {
       "O": 4,
-      "C": 3,
-      "E": 2,
-      "A": 5,
-      "N": 4
-    },
-    "effective": {
-      "O": 4.45,
-      "C": 3.23,
-      "E": 2.0,
-      "A": 5,
-      "N": 4.38
-    },
-    "beta": 0.2,
-    "confidence": 0.9
-  },
-  {
-    "user_id": "u021",
-    "name": "태윤",
-    "school": "건국대",
-    "major": "화학공학부",
-    "college": "공과대학",
-    "year": 4,
-    "interests": [
-      "라즈베리파이",
-      "자작PC",
-      "밴드"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 2,
-      "A": 5,
-      "N": 4
-    },
-    "effective": {
-      "O": 4.0,
-      "C": 3.0,
-      "E": 2.0,
-      "A": 4.86,
-      "N": 4.0
-    },
-    "beta": 0.1,
-    "confidence": 0.94
-  },
-  {
-    "user_id": "u022",
-    "name": "예준",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 2,
-    "interests": [
-      "다큐멘터리",
-      "독립영화",
-      "재즈"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 4,
+      "C": 2,
       "E": 3,
-      "A": 2,
+      "A": 5,
       "N": 2
     },
     "effective": {
-      "O": 4.0,
-      "C": 3.77,
+      "O": 4.2,
+      "C": 2.64,
       "E": 3.0,
-      "A": 1.55,
-      "N": 2.0
+      "A": 4.82,
+      "N": 1.8
     },
-    "beta": 0.1,
-    "confidence": 0.76
+    "beta": 0.5,
+    "confidence": 0.81
   },
   {
-    "user_id": "u023",
+    "user_id": "u018",
+    "name": "태윤",
+    "school": "건국대",
+    "major": "수의예과",
+    "college": "수의과대학",
+    "year": 2,
+    "interests": [
+      "북클럽",
+      "역사",
+      "배낭여행"
+    ],
+    "self_report": {
+      "O": 1,
+      "C": 2,
+      "E": 4,
+      "A": 3,
+      "N": 2
+    },
+    "effective": {
+      "O": 1.36,
+      "C": 1.77,
+      "E": 3.64,
+      "A": 2.55,
+      "N": 1.77
+    },
+    "beta": 0.5,
+    "confidence": 0.92
+  },
+  {
+    "user_id": "u019",
     "name": "다은",
     "school": "서울여대",
     "major": "데이터사이언스학과",
     "college": "과학기술융합대학",
     "year": 4,
     "interests": [
-      "라즈베리파이",
+      "역사",
       "보안",
-      "역사"
+      "북클럽"
     ],
     "self_report": {
       "O": 3,
@@ -659,798 +543,653 @@
     "effective": {
       "O": 3.0,
       "C": 3.0,
-      "E": 3.85,
-      "A": 2.0,
-      "N": 3.13
+      "E": 4.0,
+      "A": 2.19,
+      "N": 3.0
     },
     "beta": 0.1,
-    "confidence": 0.63
+    "confidence": 0.78
   },
   {
-    "user_id": "u024",
-    "name": "건우",
-    "school": "동국대",
-    "major": "법학과",
-    "college": "법과대학",
-    "year": 2,
+    "user_id": "u020",
+    "name": "수빈",
+    "school": "건국대",
+    "major": "수의예과",
+    "college": "수의과대학",
+    "year": 4,
     "interests": [
-      "보안",
-      "라즈베리파이",
-      "자전거여행"
+      "에세이",
+      "홈카페",
+      "커피"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 3,
+      "E": 2,
+      "A": 3,
+      "N": 1
+    },
+    "effective": {
+      "O": 2.0,
+      "C": 3.0,
+      "E": 2.0,
+      "A": 3.0,
+      "N": 1
+    },
+    "beta": 0.1,
+    "confidence": 0.88
+  },
+  {
+    "user_id": "u021",
+    "name": "시우",
+    "school": "중앙대",
+    "major": "공연영상창작학부",
+    "college": "예술대학",
+    "year": 4,
+    "interests": [
+      "영화제",
+      "자작PC",
+      "일본영화"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 3,
+      "A": 2,
+      "N": 4
+    },
+    "effective": {
+      "O": 4.0,
+      "C": 3.0,
+      "E": 3.13,
+      "A": 2.0,
+      "N": 4.0
+    },
+    "beta": 0.2,
+    "confidence": 0.64
+  },
+  {
+    "user_id": "u022",
+    "name": "태윤",
+    "school": "동국대",
+    "major": "미술학부",
+    "college": "예술대학",
+    "year": 3,
+    "interests": [
+      "독립영화",
+      "애니메이션",
+      "일본영화"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 4,
+      "A": 3,
+      "N": 5
+    },
+    "effective": {
+      "O": 3.0,
+      "C": 1.82,
+      "E": 4.0,
+      "A": 3.0,
+      "N": 5
+    },
+    "beta": 0.35,
+    "confidence": 0.89
+  },
+  {
+    "user_id": "u023",
+    "name": "도윤",
+    "school": "건국대",
+    "major": "철학과",
+    "college": "문과대학",
+    "year": 1,
+    "interests": [
+      "공연관람",
+      "LP수집",
+      "인디게임"
     ],
     "self_report": {
       "O": 3,
       "C": 3,
       "E": 3,
       "A": 4,
-      "N": 2
+      "N": 3
+    },
+    "effective": {
+      "O": 3.41,
+      "C": 3.82,
+      "E": 3.0,
+      "A": 4.0,
+      "N": 3.15
+    },
+    "beta": 0.8,
+    "confidence": 0.74
+  },
+  {
+    "user_id": "u024",
+    "name": "나연",
+    "school": "숭실대",
+    "major": "전자정보공학부",
+    "college": "IT대학",
+    "year": 2,
+    "interests": [
+      "에세이",
+      "철학",
+      "북클럽"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 2,
+      "A": 4,
+      "N": 4
     },
     "effective": {
       "O": 3.0,
       "C": 3.0,
-      "E": 3.0,
-      "A": 4.15,
-      "N": 2.0
+      "E": 2.0,
+      "A": 4.0,
+      "N": 4.0
     },
     "beta": 0.1,
     "confidence": 0.64
   },
   {
     "user_id": "u025",
-    "name": "지우",
+    "name": "유진",
     "school": "건국대",
-    "major": "수의예과",
-    "college": "수의과대학",
+    "major": "철학과",
+    "college": "문과대학",
+    "year": 1,
+    "interests": [
+      "위스키",
+      "홈카페",
+      "다큐멘터리"
+    ],
+    "self_report": {
+      "O": 5,
+      "C": 2,
+      "E": 1,
+      "A": 3,
+      "N": 2
+    },
+    "effective": {
+      "O": 5,
+      "C": 2.15,
+      "E": 1.31,
+      "A": 2.69,
+      "N": 2.0
+    },
+    "beta": 0.35,
+    "confidence": 0.68
+  },
+  {
+    "user_id": "u026",
+    "name": "지원",
+    "school": "건국대",
+    "major": "철학과",
+    "college": "문과대학",
     "year": 1,
     "interests": [
       "주짓수",
       "등산",
-      "작곡"
-    ],
-    "self_report": {
-      "O": 5,
-      "C": 4,
-      "E": 3,
-      "A": 4,
-      "N": 3
-    },
-    "effective": {
-      "O": 5,
-      "C": 4.0,
-      "E": 3.0,
-      "A": 4.17,
-      "N": 3.17
-    },
-    "beta": 0.1,
-    "confidence": 0.79
-  },
-  {
-    "user_id": "u026",
-    "name": "지우",
-    "school": "숭실대",
-    "major": "영어영문학과",
-    "college": "인문대학",
-    "year": 2,
-    "interests": [
-      "북클럽",
-      "에세이",
-      "자전거여행"
+      "북클럽"
     ],
     "self_report": {
       "O": 3,
-      "C": 4,
+      "C": 3,
       "E": 4,
       "A": 3,
-      "N": 3
+      "N": 5
     },
     "effective": {
       "O": 3.0,
-      "C": 4.15,
-      "E": 3.78,
+      "C": 3.0,
+      "E": 4.0,
       "A": 3.0,
-      "N": 3.45
+      "N": 5
     },
-    "beta": 0.2,
-    "confidence": 0.57
+    "beta": 0.65,
+    "confidence": 0.6
   },
   {
     "user_id": "u027",
-    "name": "채원",
-    "school": "중앙대",
-    "major": "소프트웨어학부",
-    "college": "소프트웨어대학",
-    "year": 4,
-    "interests": [
-      "방탈출",
-      "FPS",
-      "자전거여행"
-    ],
-    "self_report": {
-      "O": 2,
-      "C": 2,
-      "E": 1,
-      "A": 3,
-      "N": 1
-    },
-    "effective": {
-      "O": 2.0,
-      "C": 2.0,
-      "E": 1,
-      "A": 3.0,
-      "N": 1
-    },
-    "beta": 0.1,
-    "confidence": 0.85
-  },
-  {
-    "user_id": "u028",
-    "name": "시우",
-    "school": "동국대",
-    "major": "법학과",
-    "college": "법과대학",
-    "year": 1,
-    "interests": [
-      "인디게임",
-      "FPS",
-      "자전거여행"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 3,
-      "A": 4,
-      "N": 3
-    },
-    "effective": {
-      "O": 4.0,
-      "C": 3.0,
-      "E": 3.14,
-      "A": 3.86,
-      "N": 3.0
-    },
-    "beta": 0.1,
-    "confidence": 0.83
-  },
-  {
-    "user_id": "u029",
     "name": "지원",
-    "school": "숭실대",
-    "major": "영어영문학과",
-    "college": "인문대학",
-    "year": 2,
-    "interests": [
-      "일본영화",
-      "다큐멘터리",
-      "커피"
-    ],
-    "self_report": {
-      "O": 2,
-      "C": 4,
-      "E": 3,
-      "A": 3,
-      "N": 4
-    },
-    "effective": {
-      "O": 2.0,
-      "C": 4.0,
-      "E": 3.0,
-      "A": 3.16,
-      "N": 3.84
-    },
-    "beta": 0.2,
-    "confidence": 0.67
-  },
-  {
-    "user_id": "u030",
-    "name": "나연",
-    "school": "건국대",
-    "major": "철학과",
-    "college": "문과대학",
-    "year": 1,
-    "interests": [
-      "철학",
-      "역사",
-      "LP수집"
-    ],
-    "self_report": {
-      "O": 2,
-      "C": 3,
-      "E": 2,
-      "A": 2,
-      "N": 3
-    },
-    "effective": {
-      "O": 2.0,
-      "C": 3.0,
-      "E": 2.0,
-      "A": 2.41,
-      "N": 3.0
-    },
-    "beta": 0.2,
-    "confidence": 0.78
-  },
-  {
-    "user_id": "u031",
-    "name": "현우",
-    "school": "숭실대",
-    "major": "소프트웨어학부",
-    "college": "IT대학",
-    "year": 2,
-    "interests": [
-      "리눅스",
-      "자작PC",
-      "보드게임"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 4,
-      "E": 2,
-      "A": 3,
-      "N": 4
-    },
-    "effective": {
-      "O": 3.18,
-      "C": 4.0,
-      "E": 2.18,
-      "A": 3.0,
-      "N": 4.0
-    },
-    "beta": 0.2,
-    "confidence": 0.74
-  },
-  {
-    "user_id": "u032",
-    "name": "예준",
     "school": "동국대",
-    "major": "미술학부",
-    "college": "예술대학",
-    "year": 3,
-    "interests": [
-      "재즈",
-      "공연관람",
-      "일본영화"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 4,
-      "A": 3,
-      "N": 4
-    },
-    "effective": {
-      "O": 3.58,
-      "C": 3.0,
-      "E": 4.0,
-      "A": 3.0,
-      "N": 4.0
-    },
-    "beta": 0.5,
-    "confidence": 0.65
-  },
-  {
-    "user_id": "u033",
-    "name": "민준",
-    "school": "한양대",
-    "major": "기계공학부",
-    "college": "공과대학",
+    "major": "수학과",
+    "college": "이과대학",
     "year": 1,
     "interests": [
-      "러닝",
-      "헬스",
-      "보드게임"
-    ],
-    "self_report": {
-      "O": 1,
-      "C": 2,
-      "E": 1,
-      "A": 2,
-      "N": 1
-    },
-    "effective": {
-      "O": 1,
-      "C": 1.83,
-      "E": 1.15,
-      "A": 1.85,
-      "N": 1
-    },
-    "beta": 0.2,
-    "confidence": 0.88
-  },
-  {
-    "user_id": "u034",
-    "name": "채원",
-    "school": "중앙대",
-    "major": "소프트웨어학부",
-    "college": "소프트웨어대학",
-    "year": 2,
-    "interests": [
-      "맛집탐방",
-      "베이킹",
-      "방탈출"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 2,
-      "A": 3,
-      "N": 2
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 2.0,
-      "E": 3.0,
-      "A": 3.0,
-      "N": 2.0
-    },
-    "beta": 0.1,
-    "confidence": 0.91
-  },
-  {
-    "user_id": "u035",
-    "name": "민준",
-    "school": "건국대",
-    "major": "수의예과",
-    "college": "수의과대학",
-    "year": 1,
-    "interests": [
-      "주짓수",
-      "헬스",
-      "에세이"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 2,
-      "A": 3,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 2.0,
-      "E": 2.0,
-      "A": 3.0,
-      "N": 2.82
-    },
-    "beta": 0.2,
-    "confidence": 0.85
-  },
-  {
-    "user_id": "u036",
-    "name": "태윤",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 1,
-    "interests": [
-      "독립영화",
-      "다큐멘터리",
-      "롤"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 5,
-      "E": 2,
-      "A": 5,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.14,
-      "C": 5,
-      "E": 2.0,
-      "A": 5,
-      "N": 3.0
-    },
-    "beta": 0.2,
-    "confidence": 0.58
-  },
-  {
-    "user_id": "u037",
-    "name": "나연",
-    "school": "동국대",
-    "major": "법학과",
-    "college": "법과대학",
-    "year": 2,
-    "interests": [
-      "북클럽",
-      "에세이",
-      "자전거여행"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 3,
-      "A": 4,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 2.59,
-      "E": 3.0,
-      "A": 4.0,
-      "N": 3.0
-    },
-    "beta": 0.2,
-    "confidence": 0.72
-  },
-  {
-    "user_id": "u038",
-    "name": "채원",
-    "school": "동국대",
-    "major": "미술학부",
-    "college": "예술대학",
-    "year": 1,
-    "interests": [
-      "작곡",
-      "공연관람",
-      "자작PC"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 4,
-      "A": 4,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 3.0,
-      "E": 4.0,
-      "A": 4.18,
-      "N": 3.18
-    },
-    "beta": 0.35,
-    "confidence": 0.79
-  },
-  {
-    "user_id": "u039",
-    "name": "하은",
-    "school": "숭실대",
-    "major": "전자정보공학부",
-    "college": "IT대학",
-    "year": 2,
-    "interests": [
-      "FPS",
-      "보드게임",
-      "영화제"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 4,
-      "A": 3,
-      "N": 4
-    },
-    "effective": {
-      "O": 2.69,
-      "C": 3.0,
-      "E": 4.0,
-      "A": 3.0,
-      "N": 4.0
-    },
-    "beta": 0.35,
-    "confidence": 0.78
-  },
-  {
-    "user_id": "u040",
-    "name": "다은",
-    "school": "건국대",
-    "major": "철학과",
-    "college": "문과대학",
-    "year": 3,
-    "interests": [
-      "역사",
-      "북클럽",
-      "클라이밍"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 2,
-      "E": 4,
-      "A": 4,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.08,
-      "C": 1.12,
-      "E": 4.0,
-      "A": 4.0,
-      "N": 3.0
-    },
-    "beta": 0.1,
-    "confidence": 0.77
-  },
-  {
-    "user_id": "u041",
-    "name": "하은",
-    "school": "건국대",
-    "major": "수의예과",
-    "college": "수의과대학",
-    "year": 4,
-    "interests": [
-      "주짓수",
-      "수영",
-      "롤"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 2,
-      "A": 2,
-      "N": 3
-    },
-    "effective": {
-      "O": 4.0,
-      "C": 3.0,
-      "E": 2.43,
-      "A": 2.0,
-      "N": 3.0
-    },
-    "beta": 0.1,
-    "confidence": 0.63
-  },
-  {
-    "user_id": "u042",
-    "name": "건우",
-    "school": "중앙대",
-    "major": "경영학부",
-    "college": "경영경제대학",
-    "year": 2,
-    "interests": [
-      "자작PC",
-      "보안",
-      "일본영화"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 4,
-      "E": 3,
-      "A": 2,
-      "N": 4
-    },
-    "effective": {
-      "O": 4.17,
-      "C": 3.65,
-      "E": 3.0,
-      "A": 2.0,
-      "N": 3.65
-    },
-    "beta": 0.1,
-    "confidence": 0.87
-  },
-  {
-    "user_id": "u043",
-    "name": "다은",
-    "school": "동국대",
-    "major": "미술학부",
-    "college": "예술대학",
-    "year": 3,
-    "interests": [
-      "재즈",
-      "밴드",
-      "홈카페"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 2,
-      "E": 3,
-      "A": 3,
-      "N": 2
-    },
-    "effective": {
-      "O": 3.84,
-      "C": 2.0,
-      "E": 3.0,
-      "A": 3.14,
-      "N": 2.0
-    },
-    "beta": 0.35,
-    "confidence": 0.74
-  },
-  {
-    "user_id": "u044",
-    "name": "지원",
-    "school": "한양대",
-    "major": "미디어커뮤니케이션학과",
-    "college": "사회과학대학",
-    "year": 4,
-    "interests": [
-      "에세이",
-      "북클럽",
-      "커피"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 3,
-      "E": 2,
-      "A": 3,
-      "N": 3
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 3.0,
-      "E": 2.0,
-      "A": 3.0,
-      "N": 3.14
-    },
-    "beta": 0.2,
-    "confidence": 0.82
-  },
-  {
-    "user_id": "u045",
-    "name": "준서",
-    "school": "한양대",
-    "major": "미디어커뮤니케이션학과",
-    "college": "사회과학대학",
-    "year": 2,
-    "interests": [
-      "주짓수",
+      "등산",
       "수영",
       "위스키"
     ],
     "self_report": {
-      "O": 3,
+      "O": 4,
       "C": 4,
-      "E": 2,
-      "A": 2,
+      "E": 3,
+      "A": 3,
       "N": 4
     },
     "effective": {
-      "O": 3.0,
-      "C": 3.82,
-      "E": 2.13,
-      "A": 2.0,
-      "N": 4.0
+      "O": 4.0,
+      "C": 3.83,
+      "E": 3.0,
+      "A": 3.0,
+      "N": 3.67
     },
     "beta": 0.1,
-    "confidence": 0.89
+    "confidence": 0.58
   },
   {
-    "user_id": "u046",
-    "name": "나연",
+    "user_id": "u028",
+    "name": "채원",
+    "school": "동국대",
+    "major": "미술학부",
+    "college": "예술대학",
+    "year": 2,
+    "interests": [
+      "공연관람",
+      "LP수집",
+      "밴드"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 2,
+      "A": 3,
+      "N": 2
+    },
+    "effective": {
+      "O": 2.58,
+      "C": 2.0,
+      "E": 2.66,
+      "A": 3.0,
+      "N": 2.42
+    },
+    "beta": 0.35,
+    "confidence": 0.62
+  },
+  {
+    "user_id": "u029",
+    "name": "시우",
+    "school": "서울여대",
+    "major": "사학과",
+    "college": "인문대학",
+    "year": 3,
+    "interests": [
+      "보안",
+      "위스키",
+      "애니메이션"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 2,
+      "E": 5,
+      "A": 4,
+      "N": 3
+    },
+    "effective": {
+      "O": 4.0,
+      "C": 2.0,
+      "E": 5,
+      "A": 4.0,
+      "N": 3.0
+    },
+    "beta": 0.65,
+    "confidence": 0.66
+  },
+  {
+    "user_id": "u030",
+    "name": "지우",
+    "school": "서울여대",
+    "major": "사학과",
+    "college": "인문대학",
+    "year": 2,
+    "interests": [
+      "철학",
+      "북클럽",
+      "수영"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 3,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "effective": {
+      "O": 2.0,
+      "C": 3.0,
+      "E": 1.5,
+      "A": 3.0,
+      "N": 3.0
+    },
+    "beta": 0.2,
+    "confidence": 0.77
+  },
+  {
+    "user_id": "u031",
+    "name": "예준",
     "school": "한양대",
     "major": "컴퓨터소프트웨어학부",
     "college": "공과대학",
     "year": 1,
     "interests": [
-      "커피",
-      "베이킹",
-      "북클럽"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 4,
-      "A": 4,
-      "N": 4
-    },
-    "effective": {
-      "O": 4.0,
-      "C": 3.0,
-      "E": 4.0,
-      "A": 3.88,
-      "N": 4.0
-    },
-    "beta": 0.1,
-    "confidence": 0.57
-  },
-  {
-    "user_id": "u047",
-    "name": "지우",
-    "school": "서울여대",
-    "major": "사학과",
-    "college": "인문대학",
-    "year": 4,
-    "interests": [
-      "애니메이션",
-      "일본영화",
-      "철학"
+      "캠핑",
+      "사진",
+      "라즈베리파이"
     ],
     "self_report": {
       "O": 3,
       "C": 3,
       "E": 3,
-      "A": 5,
+      "A": 3,
+      "N": 2
+    },
+    "effective": {
+      "O": 3.0,
+      "C": 3.0,
+      "E": 3.0,
+      "A": 2.59,
+      "N": 2.0
+    },
+    "beta": 0.1,
+    "confidence": 0.88
+  },
+  {
+    "user_id": "u032",
+    "name": "하은",
+    "school": "한양대",
+    "major": "기계공학부",
+    "college": "공과대학",
+    "year": 2,
+    "interests": [
+      "보안",
+      "오픈소스",
+      "러닝"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 5,
+      "E": 2,
+      "A": 3,
+      "N": 4
+    },
+    "effective": {
+      "O": 3.0,
+      "C": 4.5,
+      "E": 2.0,
+      "A": 3.0,
+      "N": 4.0
+    },
+    "beta": 0.5,
+    "confidence": 0.69
+  },
+  {
+    "user_id": "u033",
+    "name": "하은",
+    "school": "숭실대",
+    "major": "경영학부",
+    "college": "경영대학",
+    "year": 1,
+    "interests": [
+      "수영",
+      "방탈출",
+      "롤"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 4,
+      "E": 3,
+      "A": 3,
+      "N": 2
+    },
+    "effective": {
+      "O": 4.0,
+      "C": 4.0,
+      "E": 3.0,
+      "A": 3.0,
+      "N": 2.0
+    },
+    "beta": 0.35,
+    "confidence": 0.7
+  },
+  {
+    "user_id": "u034",
+    "name": "수빈",
+    "school": "건국대",
+    "major": "철학과",
+    "college": "문과대학",
+    "year": 1,
+    "interests": [
+      "공연관람",
+      "LP수집",
+      "밴드"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 3,
+      "A": 2,
       "N": 3
     },
     "effective": {
       "O": 3.0,
       "C": 3.0,
-      "E": 3.0,
-      "A": 5,
+      "E": 3.39,
+      "A": 2.0,
       "N": 3.0
     },
     "beta": 0.35,
-    "confidence": 0.67
-  },
-  {
-    "user_id": "u048",
-    "name": "나연",
-    "school": "숭실대",
-    "major": "영어영문학과",
-    "college": "인문대학",
-    "year": 2,
-    "interests": [
-      "소설",
-      "철학",
-      "LP수집"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 3,
-      "A": 2,
-      "N": 2
-    },
-    "effective": {
-      "O": 3.57,
-      "C": 3.21,
-      "E": 3.0,
-      "A": 2.0,
-      "N": 2.0
-    },
-    "beta": 0.35,
-    "confidence": 0.75
-  },
-  {
-    "user_id": "u049",
-    "name": "채원",
-    "school": "중앙대",
-    "major": "소프트웨어학부",
-    "college": "소프트웨어대학",
-    "year": 3,
-    "interests": [
-      "방탈출",
-      "FPS",
-      "홈서버"
-    ],
-    "self_report": {
-      "O": 3,
-      "C": 4,
-      "E": 1,
-      "A": 1,
-      "N": 2
-    },
-    "effective": {
-      "O": 3.0,
-      "C": 4.0,
-      "E": 1,
-      "A": 1,
-      "N": 2.0
-    },
-    "beta": 0.5,
-    "confidence": 0.7
-  },
-  {
-    "user_id": "u050",
-    "name": "도윤",
-    "school": "한양대",
-    "major": "기계공학부",
-    "college": "공과대학",
-    "year": 4,
-    "interests": [
-      "LP수집",
-      "밴드",
-      "자전거여행"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 3,
-      "A": 1,
-      "N": 2
-    },
-    "effective": {
-      "O": 4.0,
-      "C": 3.0,
-      "E": 3.14,
-      "A": 1,
-      "N": 2.0
-    },
-    "beta": 0.2,
     "confidence": 0.56
   },
   {
-    "user_id": "u051",
+    "user_id": "u035",
+    "name": "도윤",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
+    "year": 2,
+    "interests": [
+      "에세이",
+      "철학",
+      "역사"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 2,
+      "E": 3,
+      "A": 3,
+      "N": 3
+    },
+    "effective": {
+      "O": 2.0,
+      "C": 2.0,
+      "E": 3.45,
+      "A": 3.0,
+      "N": 3.0
+    },
+    "beta": 0.35,
+    "confidence": 0.6
+  },
+  {
+    "user_id": "u036",
+    "name": "지원",
+    "school": "동국대",
+    "major": "법학과",
+    "college": "법과대학",
+    "year": 4,
+    "interests": [
+      "커피",
+      "자전거여행",
+      "맛집탐방"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "effective": {
+      "O": 3.0,
+      "C": 3.0,
+      "E": 2.0,
+      "A": 3.0,
+      "N": 3.0
+    },
+    "beta": 0.5,
+    "confidence": 0.74
+  },
+  {
+    "user_id": "u037",
+    "name": "다은",
+    "school": "동국대",
+    "major": "법학과",
+    "college": "법과대학",
+    "year": 2,
+    "interests": [
+      "리눅스",
+      "배낭여행",
+      "보안"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 3,
+      "E": 3,
+      "A": 3,
+      "N": 3
+    },
+    "effective": {
+      "O": 2.0,
+      "C": 3.0,
+      "E": 3.0,
+      "A": 3.17,
+      "N": 2.84
+    },
+    "beta": 0.65,
+    "confidence": 0.59
+  },
+  {
+    "user_id": "u038",
+    "name": "예준",
+    "school": "한양대",
+    "major": "컴퓨터소프트웨어학부",
+    "college": "공과대학",
+    "year": 1,
+    "interests": [
+      "보드게임",
+      "방탈출",
+      "롤"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 3,
+      "E": 2,
+      "A": 3,
+      "N": 2
+    },
+    "effective": {
+      "O": 2.84,
+      "C": 2.62,
+      "E": 2.0,
+      "A": 3.0,
+      "N": 1.62
+    },
+    "beta": 0.1,
+    "confidence": 0.94
+  },
+  {
+    "user_id": "u039",
+    "name": "다은",
+    "school": "서울여대",
+    "major": "데이터사이언스학과",
+    "college": "과학기술융합대학",
+    "year": 4,
+    "interests": [
+      "롤",
+      "배낭여행",
+      "보드게임"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 5,
+      "E": 5,
+      "A": 4,
+      "N": 3
+    },
+    "effective": {
+      "O": 2.84,
+      "C": 5,
+      "E": 5,
+      "A": 4.0,
+      "N": 3.0
+    },
+    "beta": 0.1,
+    "confidence": 0.73
+  },
+  {
+    "user_id": "u040",
+    "name": "채원",
+    "school": "중앙대",
+    "major": "경영학부",
+    "college": "경영경제대학",
+    "year": 3,
+    "interests": [
+      "캠핑",
+      "자전거여행",
+      "배낭여행"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 4,
+      "E": 3,
+      "A": 3,
+      "N": 3
+    },
+    "effective": {
+      "O": 2.0,
+      "C": 4.0,
+      "E": 3.0,
+      "A": 3.0,
+      "N": 3.0
+    },
+    "beta": 0.5,
+    "confidence": 0.77
+  },
+  {
+    "user_id": "u041",
+    "name": "시우",
+    "school": "서울여대",
+    "major": "사학과",
+    "college": "인문대학",
+    "year": 2,
+    "interests": [
+      "방탈출",
+      "일본영화",
+      "다큐멘터리"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 4,
+      "E": 2,
+      "A": 3,
+      "N": 1
+    },
+    "effective": {
+      "O": 2.0,
+      "C": 4.0,
+      "E": 2.0,
+      "A": 3.0,
+      "N": 1
+    },
+    "beta": 0.5,
+    "confidence": 0.6
+  },
+  {
+    "user_id": "u042",
     "name": "시우",
     "school": "서울여대",
     "major": "사학과",
@@ -1469,133 +1208,104 @@
       "N": 1
     },
     "effective": {
-      "O": 3.0,
+      "O": 2.83,
       "C": 2.0,
-      "E": 2.52,
-      "A": 3.16,
+      "E": 3.0,
+      "A": 3.0,
       "N": 1
     },
-    "beta": 0.2,
-    "confidence": 0.89
+    "beta": 0.35,
+    "confidence": 0.8
   },
   {
-    "user_id": "u052",
-    "name": "하은",
-    "school": "동국대",
-    "major": "미술학부",
-    "college": "예술대학",
-    "year": 1,
+    "user_id": "u043",
+    "name": "다은",
+    "school": "건국대",
+    "major": "수의예과",
+    "college": "수의과대학",
+    "year": 4,
     "interests": [
-      "LP수집",
-      "재즈",
-      "에세이"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 4,
-      "E": 5,
-      "A": 2,
-      "N": 3
-    },
-    "effective": {
-      "O": 4.0,
-      "C": 4.0,
-      "E": 4.84,
-      "A": 2.0,
-      "N": 3.0
-    },
-    "beta": 0.2,
-    "confidence": 0.83
-  },
-  {
-    "user_id": "u053",
-    "name": "지우",
-    "school": "숭실대",
-    "major": "소프트웨어학부",
-    "college": "IT대학",
-    "year": 2,
-    "interests": [
-      "라즈베리파이",
-      "오픈소스",
-      "LP수집"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 4,
-      "E": 2,
-      "A": 2,
-      "N": 3
-    },
-    "effective": {
-      "O": 4.0,
-      "C": 4.0,
-      "E": 2.41,
-      "A": 2.0,
-      "N": 3.0
-    },
-    "beta": 0.1,
-    "confidence": 0.78
-  },
-  {
-    "user_id": "u054",
-    "name": "현우",
-    "school": "중앙대",
-    "major": "경영학부",
-    "college": "경영경제대학",
-    "year": 2,
-    "interests": [
-      "베이킹",
-      "커피",
-      "라즈베리파이"
+      "헬스",
+      "자작PC",
+      "FPS"
     ],
     "self_report": {
       "O": 3,
-      "C": 3,
+      "C": 2,
+      "E": 4,
+      "A": 4,
+      "N": 4
+    },
+    "effective": {
+      "O": 3.0,
+      "C": 2.0,
+      "E": 4.0,
+      "A": 4.0,
+      "N": 4.0
+    },
+    "beta": 0.2,
+    "confidence": 0.7
+  },
+  {
+    "user_id": "u044",
+    "name": "건우",
+    "school": "중앙대",
+    "major": "소프트웨어학부",
+    "college": "소프트웨어대학",
+    "year": 2,
+    "interests": [
+      "보안",
+      "자작PC",
+      "홈서버"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 2,
+      "E": 3,
+      "A": 5,
+      "N": 4
+    },
+    "effective": {
+      "O": 4.5,
+      "C": 2.0,
+      "E": 3.0,
+      "A": 5,
+      "N": 4.14
+    },
+    "beta": 0.65,
+    "confidence": 0.58
+  },
+  {
+    "user_id": "u045",
+    "name": "다은",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
+    "year": 4,
+    "interests": [
+      "롤",
+      "보드게임",
+      "캠핑"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 4,
       "E": 2,
       "A": 3,
       "N": 2
     },
     "effective": {
-      "O": 3.0,
-      "C": 3.0,
+      "O": 3.4,
+      "C": 4.0,
       "E": 2.0,
-      "A": 3.15,
-      "N": 2.01
+      "A": 3.0,
+      "N": 1.62
     },
     "beta": 0.1,
-    "confidence": 0.67
+    "confidence": 0.86
   },
   {
-    "user_id": "u055",
-    "name": "채원",
-    "school": "건국대",
-    "major": "철학과",
-    "college": "문과대학",
-    "year": 1,
-    "interests": [
-      "독립영화",
-      "영화제",
-      "캠핑"
-    ],
-    "self_report": {
-      "O": 5,
-      "C": 3,
-      "E": 3,
-      "A": 3,
-      "N": 4
-    },
-    "effective": {
-      "O": 4.55,
-      "C": 3.0,
-      "E": 3.0,
-      "A": 3.0,
-      "N": 4.0
-    },
-    "beta": 0.2,
-    "confidence": 0.91
-  },
-  {
-    "user_id": "u056",
+    "user_id": "u046",
     "name": "도윤",
     "school": "중앙대",
     "major": "공연영상창작학부",
@@ -1603,8 +1313,8 @@
     "year": 4,
     "interests": [
       "밴드",
-      "작곡",
-      "철학"
+      "공연관람",
+      "작곡"
     ],
     "self_report": {
       "O": 2,
@@ -1614,129 +1324,419 @@
       "N": 2
     },
     "effective": {
-      "O": 2.0,
+      "O": 2.19,
       "C": 2.0,
-      "E": 2.49,
-      "A": 1.65,
+      "E": 2.62,
+      "A": 2.0,
       "N": 2.0
     },
-    "beta": 0.1,
-    "confidence": 0.85
+    "beta": 0.8,
+    "confidence": 0.86
   },
   {
-    "user_id": "u057",
-    "name": "건우",
+    "user_id": "u047",
+    "name": "시우",
+    "school": "한양대",
+    "major": "미디어커뮤니케이션학과",
+    "college": "사회과학대학",
+    "year": 1,
+    "interests": [
+      "역사",
+      "철학",
+      "롤"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 3,
+      "E": 4,
+      "A": 2,
+      "N": 3
+    },
+    "effective": {
+      "O": 4.0,
+      "C": 2.86,
+      "E": 4.0,
+      "A": 2.0,
+      "N": 3.0
+    },
+    "beta": 0.2,
+    "confidence": 0.56
+  },
+  {
+    "user_id": "u048",
+    "name": "민준",
+    "school": "서울여대",
+    "major": "데이터사이언스학과",
+    "college": "과학기술융합대학",
+    "year": 4,
+    "interests": [
+      "FPS",
+      "롤",
+      "베이킹"
+    ],
+    "self_report": {
+      "O": 3,
+      "C": 2,
+      "E": 1,
+      "A": 2,
+      "N": 2
+    },
+    "effective": {
+      "O": 3.0,
+      "C": 2.0,
+      "E": 1,
+      "A": 2.35,
+      "N": 2.0
+    },
+    "beta": 0.65,
+    "confidence": 0.61
+  },
+  {
+    "user_id": "u049",
+    "name": "유진",
+    "school": "숭실대",
+    "major": "경영학부",
+    "college": "경영대학",
+    "year": 1,
+    "interests": [
+      "영화제",
+      "다큐멘터리",
+      "수영"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 3,
+      "E": 3,
+      "A": 1,
+      "N": 2
+    },
+    "effective": {
+      "O": 2.0,
+      "C": 3.0,
+      "E": 3.0,
+      "A": 1,
+      "N": 2.0
+    },
+    "beta": 0.5,
+    "confidence": 0.56
+  },
+  {
+    "user_id": "u050",
+    "name": "민준",
+    "school": "한양대",
+    "major": "기계공학부",
+    "college": "공과대학",
+    "year": 2,
+    "interests": [
+      "클라이밍",
+      "FPS",
+      "헬스"
+    ],
+    "self_report": {
+      "O": 1,
+      "C": 2,
+      "E": 2,
+      "A": 4,
+      "N": 3
+    },
+    "effective": {
+      "O": 1,
+      "C": 2.0,
+      "E": 2.0,
+      "A": 4.0,
+      "N": 3.0
+    },
+    "beta": 0.5,
+    "confidence": 0.86
+  },
+  {
+    "user_id": "u051",
+    "name": "도윤",
     "school": "중앙대",
     "major": "소프트웨어학부",
     "college": "소프트웨어대학",
     "year": 1,
     "interests": [
-      "방탈출",
-      "FPS",
-      "홈카페"
+      "공연관람",
+      "재즈",
+      "LP수집"
     ],
     "self_report": {
       "O": 3,
       "C": 5,
-      "E": 1,
+      "E": 3,
       "A": 3,
       "N": 3
     },
     "effective": {
       "O": 3.0,
       "C": 5,
-      "E": 1,
-      "A": 2.79,
-      "N": 2.57
+      "E": 3.0,
+      "A": 3.0,
+      "N": 3.0
     },
     "beta": 0.1,
-    "confidence": 0.61
+    "confidence": 0.56
   },
   {
-    "user_id": "u058",
-    "name": "시우",
+    "user_id": "u052",
+    "name": "지우",
     "school": "중앙대",
     "major": "공연영상창작학부",
     "college": "예술대학",
     "year": 3,
     "interests": [
-      "에세이",
+      "인디게임",
+      "FPS",
+      "LP수집"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 3,
+      "E": 1,
+      "A": 3,
+      "N": 3
+    },
+    "effective": {
+      "O": 2.0,
+      "C": 3.0,
+      "E": 1,
+      "A": 3.0,
+      "N": 3.0
+    },
+    "beta": 0.1,
+    "confidence": 0.81
+  },
+  {
+    "user_id": "u053",
+    "name": "준서",
+    "school": "숭실대",
+    "major": "소프트웨어학부",
+    "college": "IT대학",
+    "year": 3,
+    "interests": [
+      "북클럽",
       "역사",
-      "보드게임"
+      "LP수집"
     ],
     "self_report": {
       "O": 3,
       "C": 3,
-      "E": 2,
+      "E": 3,
+      "A": 3,
+      "N": 3
+    },
+    "effective": {
+      "O": 3.17,
+      "C": 3.0,
+      "E": 3.0,
+      "A": 3.14,
+      "N": 3.0
+    },
+    "beta": 0.65,
+    "confidence": 0.79
+  },
+  {
+    "user_id": "u054",
+    "name": "도윤",
+    "school": "숭실대",
+    "major": "소프트웨어학부",
+    "college": "IT대학",
+    "year": 2,
+    "interests": [
+      "LP수집",
+      "커피",
+      "밴드"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 4,
+      "E": 3,
       "A": 3,
       "N": 2
     },
     "effective": {
-      "O": 2.55,
-      "C": 3.0,
-      "E": 1.77,
-      "A": 3.0,
-      "N": 2.17
-    },
-    "beta": 0.2,
-    "confidence": 0.93
-  },
-  {
-    "user_id": "u059",
-    "name": "하은",
-    "school": "숭실대",
-    "major": "전자정보공학부",
-    "college": "IT대학",
-    "year": 2,
-    "interests": [
-      "인디게임",
-      "보드게임",
-      "커피"
-    ],
-    "self_report": {
-      "O": 4,
-      "C": 3,
-      "E": 3,
-      "A": 3,
-      "N": 4
-    },
-    "effective": {
-      "O": 4.0,
-      "C": 3.0,
+      "O": 1.85,
+      "C": 3.62,
       "E": 3.0,
       "A": 3.0,
-      "N": 3.65
+      "N": 2.0
     },
-    "beta": 0.1,
-    "confidence": 0.71
+    "beta": 0.35,
+    "confidence": 0.72
   },
   {
-    "user_id": "u060",
-    "name": "지우",
-    "school": "한양대",
-    "major": "미디어커뮤니케이션학과",
-    "college": "사회과학대학",
+    "user_id": "u055",
+    "name": "다은",
+    "school": "동국대",
+    "major": "미술학부",
+    "college": "예술대학",
     "year": 2,
     "interests": [
-      "철학",
-      "북클럽",
-      "베이킹"
+      "독립영화",
+      "일본영화",
+      "배낭여행"
     ],
     "self_report": {
-      "O": 4,
-      "C": 2,
+      "O": 1,
+      "C": 4,
       "E": 4,
       "A": 3,
       "N": 3
     },
     "effective": {
-      "O": 4.0,
-      "C": 2.0,
+      "O": 1,
+      "C": 4.0,
       "E": 4.0,
       "A": 3.0,
       "N": 3.0
     },
     "beta": 0.2,
-    "confidence": 0.59
+    "confidence": 0.74
+  },
+  {
+    "user_id": "u056",
+    "name": "현우",
+    "school": "숭실대",
+    "major": "경영학부",
+    "college": "경영대학",
+    "year": 4,
+    "interests": [
+      "캠핑",
+      "사진",
+      "배낭여행"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 1,
+      "E": 4,
+      "A": 2,
+      "N": 3
+    },
+    "effective": {
+      "O": 3.83,
+      "C": 1,
+      "E": 4.37,
+      "A": 2.0,
+      "N": 3.0
+    },
+    "beta": 0.5,
+    "confidence": 0.62
+  },
+  {
+    "user_id": "u057",
+    "name": "민준",
+    "school": "중앙대",
+    "major": "공연영상창작학부",
+    "college": "예술대학",
+    "year": 3,
+    "interests": [
+      "영화제",
+      "오픈소스",
+      "방탈출"
+    ],
+    "self_report": {
+      "O": 2,
+      "C": 3,
+      "E": 2,
+      "A": 3,
+      "N": 3
+    },
+    "effective": {
+      "O": 1.6,
+      "C": 3.0,
+      "E": 2.0,
+      "A": 3.0,
+      "N": 3.0
+    },
+    "beta": 0.5,
+    "confidence": 0.58
+  },
+  {
+    "user_id": "u058",
+    "name": "지우",
+    "school": "건국대",
+    "major": "수의예과",
+    "college": "수의과대학",
+    "year": 1,
+    "interests": [
+      "철학",
+      "역사",
+      "공연관람"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 4,
+      "E": 3,
+      "A": 4,
+      "N": 2
+    },
+    "effective": {
+      "O": 4.0,
+      "C": 4.0,
+      "E": 3.0,
+      "A": 4.0,
+      "N": 2.0
+    },
+    "beta": 0.35,
+    "confidence": 0.93
+  },
+  {
+    "user_id": "u059",
+    "name": "서연",
+    "school": "중앙대",
+    "major": "경영학부",
+    "college": "경영경제대학",
+    "year": 2,
+    "interests": [
+      "자전거여행",
+      "캠핑",
+      "러닝"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 4,
+      "E": 3,
+      "A": 4,
+      "N": 3
+    },
+    "effective": {
+      "O": 4.0,
+      "C": 4.0,
+      "E": 3.0,
+      "A": 4.43,
+      "N": 3.14
+    },
+    "beta": 0.2,
+    "confidence": 0.72
+  },
+  {
+    "user_id": "u060",
+    "name": "지우",
+    "school": "건국대",
+    "major": "수의예과",
+    "college": "수의과대학",
+    "year": 1,
+    "interests": [
+      "소설",
+      "북클럽",
+      "헬스"
+    ],
+    "self_report": {
+      "O": 4,
+      "C": 5,
+      "E": 2,
+      "A": 3,
+      "N": 2
+    },
+    "effective": {
+      "O": 4.0,
+      "C": 5,
+      "E": 2.0,
+      "A": 3.0,
+      "N": 2.0
+    },
+    "beta": 0.5,
+    "confidence": 0.85
   }
 ]

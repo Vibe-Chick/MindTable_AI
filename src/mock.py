@@ -106,6 +106,16 @@ def gen(n=60, seed=42):
         # 이 사람이 실제로 편안해하는 '그룹 다양성 수준'.
         # beta(목적함수 가중치)와는 다른 개념이다. diversity()가 돌려주는
         # 값과 같은 척도(0~1)여야 q4 신호가 의미를 갖는다.
+        # 설문에 쓴 관심사와 '실제로 말이 터지는' 테마가 다른 사람 35%.
+        # 리뷰의 worked_topics 가 이걸 드러내야 한다.
+        if rng.random() < 0.35:
+            p["_true_theme"] = rng.choice([t for t in THEME_NAMES if t != main])
+            p["_topic_mismatch"] = True
+        else:
+            p["_true_theme"] = main
+        # 실제로 말이 터지는 주제들 (숨은 정답)
+        p["_true_interests"] = rng.sample(THEMES[p["_true_theme"]], 3)
+
         p["_div_ideal"] = round(
             max(0.45, min(1.0, rng.gauss(0.82, 0.12))), 3)
         p["confidence"] = round(rng.uniform(0.55, 0.95), 2)

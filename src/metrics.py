@@ -75,6 +75,16 @@ def collect(history, bench, profiles, cards, manual_path=None):
         "divergence_top": div[:10],
         "reliability": (reliability(manual_path, profiles)
                         if manual_path else None),
+        "topic_error_curve": [h.get("topic_err") for h in history
+                              if h.get("topic_err") is not None],
+        "interest_drift": [
+            {"user_id": p["user_id"], "name": p.get("name", ""),
+             "survey": sorted((p.get("interest_weights") or {}),
+                              key=lambda k: -(p["interest_weights"][k]))[:3],
+             "weights": {k: round(v, 2) for k, v in
+                         sorted((p.get("interest_weights") or {}).items(),
+                                key=lambda kv: -kv[1])[:5]}}
+            for p in profiles[:10]],
         "cards_without_llm": sum(1 for c in cards if not c.get("reason")),
     }
 
