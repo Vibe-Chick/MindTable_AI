@@ -11,7 +11,7 @@ import random
 import sys
 
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
-from schema import (AXES, BETA_INIT, BETA_MAX, BETA_MIN,  # noqa: E402
+from schema import (AXES, BETA_INIT, BETA_MAX, BETA_MIN, TAGS,  # noqa: E402
                     new_profile, validate_profile)
 
 SCHOOLS = {
@@ -83,12 +83,14 @@ def gen(n=60, seed=42):
             v = round(rng.gauss(3.0, 0.9))
             self_report[a] = max(1, min(5, v))
 
+        tags = [main] + ([sub] if rng.random() < 0.5 else [])
         p = new_profile(
             user_id="u%03d" % (i + 1),
             school=school, major=major, college=college,
             year=rng.choice([1, 1, 2, 2, 3, 4]),
             self_report=self_report,
             interests=interests,
+            tags=[t for t in tags if t in TAGS],
         )
         p["name"] = rng.choice(FIRST)          # 데모 화면용 표시명
         p["theme"] = main                      # 검증용. 실제 파이프라인엔 없음
@@ -115,6 +117,7 @@ def gen(n=60, seed=42):
             p["_true_theme"] = main
         # 실제로 말이 터지는 주제들 (숨은 정답)
         p["_true_interests"] = rng.sample(THEMES[p["_true_theme"]], 3)
+        p["_true_tags"] = [p["_true_theme"]]
 
         p["_div_ideal"] = round(
             max(0.45, min(1.0, rng.gauss(0.82, 0.12))), 3)

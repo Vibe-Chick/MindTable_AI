@@ -14,7 +14,7 @@ import sys
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 import llm                                                    # noqa: E402
 import prompts                                                # noqa: E402
-from schema import (EXTRACTION_SCHEMA, LONG_TO_AXIS,          # noqa: E402
+from schema import (EXTRACTION_SCHEMA, LONG_TO_AXIS, TAGS,     # noqa: E402
                     new_profile, validate_profile)
 
 # 구글폼 export 헤더 → 내부 키. 폼 확정되면 여기만 고친다.
@@ -97,7 +97,8 @@ def extract_one(row, uid):
         college=row[COLMAP["college"]].strip(),
         year=int(row[COLMAP["year"]] or 1),
         self_report=scores,
-        interests=interests)
+        interests=interests,
+        tags=[t for t in (out.get("tags") or []) if t in TAGS])
     p["name"] = row[COLMAP["name"]].strip()
     p["confidence"] = float(out["confidence"])
     p["evidence"] = evidence
@@ -148,7 +149,13 @@ def main():
              if p.get("dropped")]
     nkw = [len(p["interests"]) for p in profiles]
     if any(n == 0 for n in nkw):
-        sys.stderr.write("!! 관심사 0개인 프로필 있음 — 유사도 계산 불가\n")
+        sys.stderr.write("!! 관심사 0개인 프로필 있음\n")
+    from collections import Counter
+    tc = Counter(t for p in profiles for t in p.get("tags", []))
+    sys.stderr.write("태그 분포: %r\n" % dict(tc.most_common()))
+    notag = [p["user_id"] for p in profiles if not p.get("tags")]
+    if notag:
+        sys.stderr.write("!! 태그 0개 — 유사도 계산 불가: %r\n" % notag)
     sys.stderr.write("추출 %d/%d 성공\n" % (len(profiles), len(rows)))
     sys.stderr.write("confidence<0.5: %d건 %r\n" % (len(low), low[:10]))
     sys.stderr.write("관심사 개수 분포: %r\n"

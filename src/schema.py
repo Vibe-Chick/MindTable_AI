@@ -41,6 +41,15 @@ BEHAVIOR_DECAY = 0.10   # 회차마다 기존 보정을 감쇠시킨다.
 DELTA_DEADBAND = 0.60   # 이 미만의 신호는 0으로. 1회차 잡음에 반응하지 않는다
 DIVERGENCE_THRESHOLD = 1.0   # 자기보고 vs 보정 괴리 하이라이트 기준
 
+# --- 관심사 태그 (유사도 계산의 실제 공간) ---
+# 자유 키워드만 쓰면 "클라이밍"과 "등산"이 남남이 된다. 임베딩이 없는
+# 환경(국민대 게이트웨이에 임베딩 모델 없음)에서는 유사도가 0으로 붕괴한다.
+# 그래서 고정 태그로 투영한 공간에서 유사도를 계산한다.
+#   - tags     : 유사도 계산용 (겹친다)
+#   - interests: 카드 표시용 자유 키워드 (구체적이다)
+TAGS = ("운동", "여행", "요리", "음악", "영상", "독서",
+        "게임", "기술", "학술", "창작", "봉사", "재테크")
+
 # --- 관심사 학습 (리뷰 R1/R2에서) ---
 # 설문에 '쓴' 관심사와 식사 자리에서 '실제로 통한' 주제는 다르다.
 # 후자를 반영해야 유사도 항(가중치 ALPHA=1.0, 목적함수 최대항)이 움직인다.
@@ -57,7 +66,7 @@ def clamp(v, lo, hi):
 
 
 def new_profile(user_id, school, major, college, year,
-                self_report=None, interests=None):
+                self_report=None, interests=None, tags=None):
     """빈 프로필 생성. behavior는 항상 0에서 시작한다."""
     return {
         "user_id": user_id,
@@ -69,9 +78,11 @@ def new_profile(user_id, school, major, college, year,
         "self_report": self_report or {a: 3 for a in AXES},
         # 리뷰로 누적되는 보정값
         "behavior": {a: 0.0 for a in AXES},
-        "interests": interests or [],
-        # 설문 키워드는 가중 1.0에서 시작한다. 리뷰가 이 가중을 움직인다.
-        "interest_weights": {k: 1.0 for k in (interests or [])},
+        "interests": interests or [],          # 표시용 자유 키워드
+        # 태그별 가중. 설문 태그는 1.0에서 시작하고 리뷰가 이 값을 움직인다.
+        # 유사도는 전적으로 이 벡터로 계산한다.
+        "interest_weights": {t: 1.0 for t in (tags or [])},
+        "tags": list(tags or []),
         "interest_vec": [],
         "beta": BETA_INIT,
         "confidence": 0.0,
@@ -145,6 +156,10 @@ EXTRACTION_SCHEMA = {
         # interests 와 같은 길이. 각 키워드의 근거 인용.
         "interest_quotes": {"type": "array", "items": {"type": "string"},
                             "minItems": 1, "maxItems": 4},
+        # 고정 태그로의 투영. 유사도는 이걸로 계산한다.
+        "tags": {"type": "array",
+                 "items": {"type": "string", "enum": list(TAGS)},
+                 "minItems": 1, "maxItems": 3},
         "confidence": {"type": "number", "minimum": 0, "maximum": 1},
     },
     "required": ["openness", "openness_quote",
@@ -152,11 +167,12 @@ EXTRACTION_SCHEMA = {
                  "extraversion", "extraversion_quote",
                  "agreeableness", "agreeableness_quote",
                  "neuroticism", "neuroticism_quote",
-                 "interests", "interest_quotes", "confidence"],
+                 "interests", "interest_quotes", "tags", "confidence"],
 }
 
 _DELTA = {"type": "number", "enum": [-1, -0.5, 0, 0.5, 1]}
-_TOPICS = {"type": "array", "items": {"type": "string"},
+_TOPICS = {"type": "array",
+           "items": {"type": "string", "enum": list(TAGS)},
            "minItems": 0, "maxItems": 3}
 
 DELTA_SCHEMA = {

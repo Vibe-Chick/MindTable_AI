@@ -37,15 +37,15 @@ def quantize(x):
 
 
 def synth_topics(p, rng):
-    """리뷰에서 나올 '실제로 통한 주제 / 죽은 주제'를 만든다."""
-    true_kw = p.get("_true_interests", [])
+    """리뷰에서 나올 '실제로 통한 태그 / 죽은 태그'를 만든다."""
+    true_tags = p.get("_true_tags", [])
     worked, dead = [], []
-    for k in true_kw:
-        if rng.random() < 0.45:            # 매 자리에서 다 나오진 않는다
-            worked.append(k)
+    for t in true_tags:
+        if rng.random() < 0.6:
+            worked.append(t)
     w = p.get("interest_weights") or {}
-    stale = [k for k, v in sorted(w.items(), key=lambda kv: -kv[1])
-             if k not in true_kw]
+    stale = [t for t, v in sorted(w.items(), key=lambda kv: -kv[1])
+             if t not in true_tags]
     if stale and rng.random() < 0.35:
         dead.append(stale[0])
     if rng.random() < 0.15 and w:          # 오관측
@@ -94,10 +94,10 @@ def _err(p):
 
 
 def topic_error(profiles):
-    """설문/학습된 관심사가 '실제로 통하는 주제'와 얼마나 어긋나 있나."""
+    """학습된 태그 가중이 '실제로 통하는 태그'와 얼마나 어긋나 있나."""
     tot = 0.0
     for p in profiles:
-        true_kw = set(p.get("_true_interests") or [])
+        true_kw = set(p.get("_true_tags") or [])
         w = p.get("interest_weights") or {}
         s_all = sum(w.values()) or 1.0
         hit = sum(v for k, v in w.items() if k in true_kw)
@@ -126,12 +126,12 @@ def true_sim_matrix(profiles):
     shadow = []
     for p in profiles:
         q = copy.deepcopy(p)
-        kw = p.get("_true_interests") or p["interests"]
-        q["interest_weights"] = {k: 1.0 for k in kw}
-        q["interests"] = list(kw)
+        tg = p.get("_true_tags") or p.get("tags") or []
+        q["interest_weights"] = {t: 1.0 for t in tg}
+        q["tags"] = list(tg)
         q["interest_vec"] = []
         shadow.append(q)
-    return embed.similarity_matrix(shadow, mode="synthetic")
+    return embed.similarity_matrix(shadow, mode="tags")
 
 
 def true_satisfaction(groups, profiles, sim):

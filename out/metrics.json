@@ -2,307 +2,258 @@
   "n_users": 60,
   "n_groups": 15,
   "objective": {
-    "random": 12.8679,
-    "greedy": 15.4257,
-    "local_search": 17.3388
+    "random": 13.6119,
+    "greedy": 17.1206,
+    "local_search": 20.4375
   },
-  "objective_gain_vs_random_pct": 34.7,
+  "objective_gain_vs_random_pct": 50.1,
   "local_search_iters": 501,
   "carry_over": 0,
   "rounds": [
     {
       "round": 1,
-      "objective": 17.457,
-      "true_satisfaction": 1.3758,
-      "err_all": 0.0867,
-      "err_mismatch": 0.2476,
+      "objective": 18.287,
+      "true_satisfaction": 1.3335,
+      "err_all": 0.1,
+      "err_mismatch": 0.2143,
       "err_ok": 0.0,
-      "topic_err": 0.7222,
+      "topic_err": 0.4667,
       "leftover": 0,
       "mean_beta": 0.5
     },
     {
       "round": 2,
-      "objective": 15.641,
-      "true_satisfaction": 1.336,
-      "err_all": 0.0931,
-      "err_mismatch": 0.2484,
-      "err_ok": 0.0095,
-      "topic_err": 0.5455,
+      "objective": 18.228,
+      "true_satisfaction": 1.5102,
+      "err_all": 0.1116,
+      "err_mismatch": 0.2185,
+      "err_ok": 0.0181,
+      "topic_err": 0.3853,
       "leftover": 0,
-      "mean_beta": 0.453
+      "mean_beta": 0.458
     },
     {
       "round": 3,
-      "objective": 15.044,
-      "true_satisfaction": 1.4445,
-      "err_all": 0.0991,
-      "err_mismatch": 0.2445,
-      "err_ok": 0.0209,
-      "topic_err": 0.4767,
+      "objective": 15.282,
+      "true_satisfaction": 1.4976,
+      "err_all": 0.1137,
+      "err_mismatch": 0.1903,
+      "err_ok": 0.0466,
+      "topic_err": 0.3525,
       "leftover": 0,
-      "mean_beta": 0.392
+      "mean_beta": 0.4
     },
     {
       "round": 4,
       "objective": null,
       "true_satisfaction": null,
-      "err_all": 0.1054,
-      "err_mismatch": 0.2317,
-      "err_ok": 0.0374,
-      "topic_err": 0.4176,
+      "err_all": 0.1223,
+      "err_mismatch": 0.204,
+      "err_ok": 0.0508,
+      "topic_err": 0.3027,
       "leftover": null,
-      "mean_beta": 0.364
+      "mean_beta": 0.37
     }
   ],
   "satisfaction_curve": [
-    1.3758,
-    1.336,
-    1.4445
+    1.3335,
+    1.5102,
+    1.4976
   ],
   "divergence_top": [
     {
-      "user_id": "u007",
-      "name": "민준",
-      "axis": "A",
-      "self_report": 3,
-      "effective": 1.77,
-      "delta": -1.23
+      "user_id": "u012",
+      "name": "시우",
+      "axis": "E",
+      "self_report": 2,
+      "effective": 2.86,
+      "delta": 0.86
     },
     {
-      "user_id": "u010",
+      "user_id": "u048",
+      "name": "시우",
+      "axis": "O",
+      "self_report": 2,
+      "effective": 2.67,
+      "delta": 0.67
+    },
+    {
+      "user_id": "u034",
+      "name": "건우",
+      "axis": "E",
+      "self_report": 3,
+      "effective": 3.6,
+      "delta": 0.6
+    },
+    {
+      "user_id": "u001",
       "name": "나연",
       "axis": "N",
-      "self_report": 3,
-      "effective": 2.16,
-      "delta": -0.84
+      "self_report": 4,
+      "effective": 4.56,
+      "delta": 0.56
     },
     {
-      "user_id": "u023",
-      "name": "도윤",
-      "axis": "C",
-      "self_report": 3,
-      "effective": 3.82,
-      "delta": 0.82
-    },
-    {
-      "user_id": "u028",
-      "name": "채원",
-      "axis": "E",
-      "self_report": 2,
-      "effective": 2.66,
-      "delta": 0.66
-    },
-    {
-      "user_id": "u017",
+      "user_id": "u029",
       "name": "지우",
-      "axis": "C",
-      "self_report": 2,
-      "effective": 2.64,
-      "delta": 0.64
-    },
-    {
-      "user_id": "u004",
-      "name": "준서",
-      "axis": "A",
+      "axis": "N",
       "self_report": 3,
-      "effective": 3.63,
-      "delta": 0.63
-    },
-    {
-      "user_id": "u011",
-      "name": "채원",
-      "axis": "E",
-      "self_report": 3,
-      "effective": 2.41,
-      "delta": -0.59
+      "effective": 2.48,
+      "delta": -0.52
     },
     {
       "user_id": "u009",
-      "name": "유진",
-      "axis": "O",
-      "self_report": 3,
-      "effective": 3.5,
+      "name": "지우",
+      "axis": "N",
+      "self_report": 4,
+      "effective": 4.5,
       "delta": 0.5
     },
     {
-      "user_id": "u030",
-      "name": "지우",
-      "axis": "E",
-      "self_report": 2,
-      "effective": 1.5,
+      "user_id": "u028",
+      "name": "준서",
+      "axis": "O",
+      "self_report": 4,
+      "effective": 3.5,
       "delta": -0.5
     },
     {
-      "user_id": "u032",
-      "name": "하은",
+      "user_id": "u038",
+      "name": "현우",
       "axis": "C",
-      "self_report": 5,
-      "effective": 4.5,
+      "self_report": 3,
+      "effective": 2.5,
       "delta": -0.5
+    },
+    {
+      "user_id": "u040",
+      "name": "도윤",
+      "axis": "O",
+      "self_report": 4,
+      "effective": 4.5,
+      "delta": 0.5
     }
   ],
   "reliability": null,
   "topic_error_curve": [
-    0.7222,
-    0.5455,
-    0.4767,
-    0.4176
+    0.4667,
+    0.3853,
+    0.3525,
+    0.3027
   ],
   "interest_drift": [
     {
       "user_id": "u001",
-      "name": "지원",
+      "name": "나연",
       "survey": [
-        "소설",
-        "에세이",
-        "철학"
+        "요리",
+        "독서"
       ],
       "weights": {
-        "소설": 1.38,
-        "에세이": 1.29,
-        "철학": 1.16,
-        "일본영화": 1.0
+        "요리": 0.89,
+        "독서": 0.56
       }
     },
     {
       "user_id": "u002",
-      "name": "현우",
+      "name": "나연",
       "survey": [
-        "리눅스",
-        "역사",
-        "보안"
+        "게임"
       ],
       "weights": {
-        "리눅스": 1.24,
-        "역사": 1.0,
-        "보안": 0.99,
-        "라즈베리파이": 0.84
+        "게임": 1.31
       }
     },
     {
       "user_id": "u003",
-      "name": "소율",
+      "name": "지우",
       "survey": [
-        "철학",
-        "소설",
-        "역사"
+        "영상"
       ],
       "weights": {
-        "철학": 1.28,
-        "소설": 1.0,
-        "역사": 0.91,
-        "베이킹": 0.81
+        "영상": 1.82
       }
     },
     {
       "user_id": "u004",
-      "name": "준서",
+      "name": "현우",
       "survey": [
-        "국내여행",
-        "사진",
-        "배낭여행"
+        "요리",
+        "여행"
       ],
       "weights": {
-        "국내여행": 1.0,
-        "사진": 1.0,
-        "배낭여행": 1.0,
-        "철학": 1.0,
-        "캠핑": 0.73
+        "요리": 0.87,
+        "여행": 0.74
       }
     },
     {
       "user_id": "u005",
-      "name": "유진",
+      "name": "하은",
       "survey": [
-        "작곡",
-        "공연관람",
-        "LP수집"
+        "영상"
       ],
       "weights": {
-        "작곡": 1.26,
-        "공연관람": 1.13,
-        "LP수집": 1.0,
-        "국내여행": 0.82
+        "영상": 1.26
       }
     },
     {
       "user_id": "u006",
-      "name": "수빈",
+      "name": "준서",
       "survey": [
-        "역사",
-        "독립영화",
-        "소설"
+        "기술",
+        "요리"
       ],
       "weights": {
-        "역사": 1.2,
-        "독립영화": 1.0,
-        "소설": 0.8,
-        "영화제": 0.79,
-        "철학": 0.77
+        "기술": 0.84,
+        "요리": 0.62
       }
     },
     {
       "user_id": "u007",
-      "name": "민준",
+      "name": "예준",
       "survey": [
-        "주짓수",
-        "러닝",
-        "등산"
+        "게임"
       ],
       "weights": {
-        "주짓수": 1.46,
-        "러닝": 1.38,
-        "등산": 1.04,
-        "헬스": 1.0,
-        "수영": 1.0
+        "게임": 1.27
       }
     },
     {
       "user_id": "u008",
-      "name": "준서",
+      "name": "현우",
       "survey": [
-        "FPS",
-        "방탈출",
-        "보드게임"
+        "여행",
+        "기술",
+        "영상"
       ],
       "weights": {
-        "FPS": 1.74,
-        "방탈출": 1.38,
-        "보드게임": 1.01,
-        "독립영화": 0.79,
-        "인디게임": 0.75
+        "여행": 0.9,
+        "기술": 0.82,
+        "영상": 0.78
       }
     },
     {
       "user_id": "u009",
-      "name": "유진",
+      "name": "지우",
       "survey": [
-        "국내여행",
-        "자전거여행",
-        "사진"
+        "기술"
       ],
       "weights": {
-        "국내여행": 1.67,
-        "자전거여행": 1.05,
-        "사진": 1.0,
-        "헬스": 0.86
+        "기술": 0.7
       }
     },
     {
       "user_id": "u010",
-      "name": "나연",
+      "name": "지원",
       "survey": [
-        "인디게임",
-        "보드게임",
-        "철학"
+        "게임",
+        "영상",
+        "운동"
       ],
       "weights": {
-        "인디게임": 1.77,
-        "보드게임": 1.0,
-        "철학": 1.0,
-        "방탈출": 0.96,
-        "롤": 0.96
+        "게임": 1.05,
+        "영상": 0.98,
+        "운동": 0.84
       }
     }
   ],

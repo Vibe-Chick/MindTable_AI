@@ -103,43 +103,39 @@ def jaccard(p, q):
 
 
 def similarity_matrix(profiles, mode="auto"):
+    """태그 가중 벡터 기반. 임베딩이 있으면 키워드 임베딩을 가산한다.
+
+    태그 공간(12차원)은 밀집해 있어서 임베딩 없이도 유사도가 붕괴하지 않는다.
+    게이트웨이에 임베딩 모델이 없는 환경을 전제로 한 설계다.
+    """
+    base = _tag_similarity(profiles)
+    if mode == "tags" or not profiles[0].get("interest_vec"):
+        return base
     n = len(profiles)
-    if mode == "synthetic" or (mode == "auto" and "theme" in profiles[0]
-                               and not profiles[0].get("interest_vec")):  # noqa
-        sys.stderr.write(
-            "[embed] WARNING: synthetic similarity (mock 전용). "
-            "실제 데이터에는 from_api를 쓸 것.\n")
-        return _synthetic(profiles)
-    if profiles[0].get("interest_vec"):
-        return [[cosine(profiles[i]["interest_vec"], profiles[j]["interest_vec"])
-                 if i != j else 1.0 for j in range(n)] for i in range(n)]
-    sys.stderr.write("[embed] WARNING: jaccard 폴백 사용\n")
-    return [[jaccard(profiles[i], profiles[j]) if i != j else 1.0
-             for j in range(n)] for i in range(n)]
+    for i in range(n):
+        for j in range(i + 1, n):
+            e = cosine(profiles[i]["interest_vec"], profiles[j]["interest_vec"])
+            v = 0.6 * base[i][j] + 0.4 * max(0.0, e)
+            base[i][j] = base[j][i] = v
+    return base
 
 
-def _theme_vec(p, kw_theme, themes):
-    """키워드 가중을 테마 축으로 투영. 가중치 변화가 유사도에 반영된다."""
-    v = {t: 0.0 for t in themes}
-    for k, wt in _weights(p).items():
-        t = kw_theme.get(k)
-        if t:
-            v[t] += wt
-    return [v[t] for t in themes]
+def tag_vector(p):
+    """태그 가중 벡터. 유사도는 전적으로 이 공간에서 계산한다."""
+    from schema import TAGS
+    w = _weights(p)
+    return [w.get(t, 0.0) for t in TAGS]
 
 
-def _synthetic(profiles):
-    """mock 전용. 키워드 가중 → 테마 벡터 코사인 + 가중 자카드."""
-    import mock
-    themes = sorted(mock.THEMES)
-    kw_theme = {k: t for t, ks in mock.THEMES.items() for k in ks}
+def _tag_similarity(profiles):
     n = len(profiles)
-    tv = [_theme_vec(p, kw_theme, themes) for p in profiles]
+    vs = [tag_vector(p) for p in profiles]
     m = [[0.0] * n for _ in range(n)]
     for i in range(n):
         m[i][i] = 1.0
         for j in range(i + 1, n):
-            v = 0.7 * cosine(tv[i], tv[j]) + 0.3 * jaccard(profiles[i],
-                                                           profiles[j])
+            # 태그 코사인이 주(主), 자유 키워드 일치는 소폭 가산
+            v = 0.85 * cosine(vs[i], vs[j]) + 0.15 * jaccard(profiles[i],
+                                                             profiles[j])
             m[i][j] = m[j][i] = max(0.0, min(1.0, v))
     return m
