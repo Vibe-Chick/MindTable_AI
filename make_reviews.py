@@ -9,7 +9,7 @@ import os
 import sys
 
 rnd = int(sys.argv[1]) if len(sys.argv) > 1 else 1
-src = sys.argv[2] if len(sys.argv) > 2 else "out/groups_real.json"
+src = sys.argv[2] if len(sys.argv) > 2 else ("out/groups_real_r%d.json" % rnd)
 out = "data/reviews_r%d.json" % rnd
 
 g = json.load(open(src, encoding="utf-8"))

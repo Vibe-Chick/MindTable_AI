@@ -12,8 +12,9 @@ import embed      # noqa: E402
 import llm        # noqa: E402
 import match      # noqa: E402
 
+RND = int(sys.argv[1]) if len(sys.argv) > 1 else 1
 profiles = json.load(open("data/profiles.json", encoding="utf-8"))
-print("프로필 %d건" % len(profiles))
+print("%d회차 편성 — 프로필 %d건" % (RND, len(profiles)))
 
 if os.environ.get("EMBED_MODEL"):
     try:
@@ -29,11 +30,14 @@ print("편성  random=%.3f  greedy=%.3f  local=%.3f  (그룹 %d, 이월 %d)"
       % (o["random"], o["greedy"], o["local_search"],
          len(b["groups"]), b["leftover"]))
 
-cs = cards.build_all(b["groups"], profiles, 1)
+cs = cards.build_all(b["groups"], profiles, RND)
 os.makedirs("out", exist_ok=True)
-json.dump({"groups": [[profiles[i]["user_id"] for i in g] for g in b["groups"]],
-           "cards": cs}, open("out/groups_real.json", "w", encoding="utf-8"),
-          ensure_ascii=False, indent=2)
+payload = {"round": RND,
+           "groups": [[profiles[i]["user_id"] for i in g] for g in b["groups"]],
+           "objective": o, "cards": cs}
+for path in ("out/groups_real.json", "out/groups_real_r%d.json" % RND):
+    json.dump(payload, open(path, "w", encoding="utf-8"),
+              ensure_ascii=False, indent=2)
 
 for c in cs:
     print("\n" + "=" * 64)
